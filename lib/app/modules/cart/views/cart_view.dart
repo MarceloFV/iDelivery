@@ -1,3 +1,4 @@
+import 'package:delivery_app/app/global_widgets/custom_blue_button.dart';
 import 'package:delivery_app/app/modules/cart/widgets/adress_section.dart';
 import 'package:delivery_app/app/modules/cart/widgets/items_section.dart';
 import 'package:delivery_app/app/modules/cart/widgets/confirm_button.dart';
@@ -27,7 +28,10 @@ class CartView extends GetView<CartController> {
                   SizedBox(
                     height: 25,
                   ),
-                  ConfirmButton(),
+                  CustomBlueButton(
+                    text: 'Confirmar pedido',
+                    function: controller.onConfirmOrderPressed,
+                  ),
                 ],
               )
             ],

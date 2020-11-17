@@ -1,4 +1,5 @@
 import 'package:delivery_app/app/global_widgets/amount_selector.dart';
+import 'package:delivery_app/app/global_widgets/custom_blue_button.dart';
 import 'package:delivery_app/app/modules/product/controllers/product_controller.dart';
 import 'package:delivery_app/app/modules/product/widgets/description_section.dart';
 import 'package:delivery_app/app/modules/product/widgets/image_section.dart';
@@ -25,9 +26,9 @@ class ProductView extends GetView<ProductController> {
                     )),
               ),
               Expanded(
-                child: RaisedButton(
-                  onPressed: () => controller.onAddPressed(),
-                  child: Text("Adicionar"),
+                child: CustomBlueButton(
+                  function: controller.onAddPressed,
+                  text: "Adicionar",
                 ),
               )
             ],
@@ -83,47 +84,6 @@ class ProductView extends GetView<ProductController> {
             ),
             MessageSection(),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class CustomButton extends StatelessWidget {
-  final Function function;
-  final String text;
-  final Color color;
-  final Color textColor;
-  final Color splashColor;
-  final double fontSize;
-
-  CustomButton({
-    @required this.function,
-    @required this.text,
-    this.splashColor = Colors.blueGrey,
-    this.fontSize = 16,
-    this.color = Colors.blue,
-    this.textColor = Colors.white,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 50,
-      child: RaisedButton(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(18.0),
-          // side: BorderSide(color: Colors.red),
-        ),
-        splashColor: this.splashColor,
-        onPressed: () => this.function,
-        color: this.color,
-        child: Text(
-          this.text,
-          style: TextStyle(
-            color: this.textColor,
-            fontSize: this.fontSize,
-          ),
         ),
       ),
     );
