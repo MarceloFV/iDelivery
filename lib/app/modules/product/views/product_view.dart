@@ -25,9 +25,9 @@ class ProductView extends GetView<ProductController> {
                     )),
               ),
               Expanded(
-                child: CustomButton(
-                  function: controller.onAddToCartPressed,
-                  text: "Adicionar",
+                child: RaisedButton(
+                  onPressed: () => controller.onAddPressed(),
+                  child: Text("Adicionar"),
                 ),
               )
             ],

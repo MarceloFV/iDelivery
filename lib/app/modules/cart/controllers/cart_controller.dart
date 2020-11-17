@@ -15,21 +15,31 @@ class CartController extends GetxController {
 
   @override
   void onInit() {
-    _orderList.assignAll(orderListMocked);
+    // _orderList.assignAll(orderListMocked);
     super.onInit();
   }
 
-  onAmountRemovePressed(Order _order) {
-    //TODO: Implement removeAmount from order and update screen
+  void createOrder(ProductModel product, int amount) {
+    //TODO: Enviar ordem com o valor já como String, criar mascara aqui.
+    double value = product.value * amount;
+    Order order = Order(product: product, amount: amount, value: value);
+    _orderList.add(order);
+  }
+
+  void onAmountRemovePressed(Order _order) {
     var index = orderList.indexOf(_order);
     if (_order.amount > 1) _order.amount--;
     _orderList[index] = _order;
   }
 
-  onAmountAddPressed(Order _order) {
+  void onAmountAddPressed(Order _order) {
     var index = orderList.indexOf(_order);
     _order.amount++;
     _orderList[index] = _order;
+  }
+
+  void onRemoveOrderPressed(Order _order) {
+    orderList.remove(_order);
   }
 
   final _moneyTextController =
@@ -54,10 +64,6 @@ class CartController extends GetxController {
 
   String getUserCurrentAdress() {
     return '242nd St Tonganoxie, Kansas (KS), 66086';
-  }
-
-  onRemoveOrderPressed(Order _order) {
-    orderList.remove(_order);
   }
 }
 
