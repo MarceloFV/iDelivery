@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class OrderItem extends StatelessWidget {
-  // final Order order;
   final Order order;
 
   final controller = Get.find<CartController>();
@@ -30,13 +29,23 @@ class OrderItem extends StatelessWidget {
             subtitle: Text('x${order.amount.toString()}'),
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  AmountSelector(
-                    onAdd: controller.onAmountAddPressed,
-                    onRemove: () => controller.searchOrderIndex(order),
-                    amount: order.amount,
-                  )
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 4, left: 12),
+                    child: AmountSelector(
+                      onAdd: () => controller.onAmountAddPressed(order),
+                      onRemove: () => controller.onAmountRemovePressed(order),
+                      amount: order.amount,
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                    ),
+                    onPressed: () => controller.onRemoveOrderPressed(order),
+                  ),
                 ],
               ),
             ],

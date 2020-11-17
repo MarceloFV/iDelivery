@@ -21,7 +21,8 @@ class CartView extends GetView<CartController> {
                 children: [
                   FinalValueSection(
                     frete: controller.convertToMaskedText(controller.shipValue),
-                    total: controller.convertToMaskedText(controller.finalValue),
+                    total:
+                        controller.convertToMaskedText(controller.finalValue),
                   ),
                   SizedBox(
                     height: 25,
@@ -56,9 +57,7 @@ class CartView extends GetView<CartController> {
           SizedBox(
             height: 24,
           ),
-          ItemsSection(
-            orderList: controller.orderList,
-          ),
+          ItemsSection(),
           SizedBox(
             height: 20,
           ),

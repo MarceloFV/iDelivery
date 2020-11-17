@@ -19,12 +19,17 @@ class CartController extends GetxController {
     super.onInit();
   }
 
-  onAmountRemovePressed() {
-    print('remove');
+  onAmountRemovePressed(Order _order) {
+    //TODO: Implement removeAmount from order and update screen
+    var index = orderList.indexOf(_order);
+    if (_order.amount > 1) _order.amount--;
+    _orderList[index] = _order;
   }
 
-  onAmountAddPressed() {
-    print('add');
+  onAmountAddPressed(Order _order) {
+    var index = orderList.indexOf(_order);
+    _order.amount++;
+    _orderList[index] = _order;
   }
 
   final _moneyTextController =
@@ -51,15 +56,15 @@ class CartController extends GetxController {
     return '242nd St Tonganoxie, Kansas (KS), 66086';
   }
 
-  void searchOrderIndex(Order order) {
-    print(orderList.indexOf(order));
+  onRemoveOrderPressed(Order _order) {
+    orderList.remove(_order);
   }
 }
 
 class Order {
-  final ProductModel product;
-  final int amount;
-  final double value;
+  ProductModel product;
+  int amount;
+  double value;
 
   Order({this.product, this.amount, this.value});
 
