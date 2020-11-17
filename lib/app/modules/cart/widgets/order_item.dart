@@ -9,7 +9,7 @@ class OrderItem extends StatelessWidget {
 
   final controller = Get.find<CartController>();
 
-   OrderItem({Key key, this.order}) : super(key: key);
+  OrderItem({Key key, this.order}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,11 +27,16 @@ class OrderItem extends StatelessWidget {
           trailing: Text(controller.convertToMaskedText(order.value)),
           subtitle: Text(order.amount.toString()),
           children: [
-            AmountSelector(
-              onAdd: controller.onAmountAddPressed,
-              onRemove: () => controller.searchOrderIndex(order),
-              amount: order.amount,
-            )
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                AmountSelector(
+                  onAdd: controller.onAmountAddPressed,
+                  onRemove: () => controller.searchOrderIndex(order),
+                  amount: order.amount,
+                )
+              ],
+            ),
           ],
         ),
       ),
