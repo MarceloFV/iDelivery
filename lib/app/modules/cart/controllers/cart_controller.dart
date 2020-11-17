@@ -49,7 +49,6 @@ class CartController extends GetxController {
 
   String getUserCurrentAdress() {
     return '242nd St Tonganoxie, Kansas (KS), 66086';
-    // teste
   }
 
   void searchOrderIndex(Order order) {
