@@ -34,8 +34,6 @@ pubspec.lock
 .pub-cache/
 .pub/
 /build/
-/android/
-/ios/
 *.json
 
 # Web related
