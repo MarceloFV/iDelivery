@@ -10,20 +10,24 @@ class CartController extends GetxController {
   final _orderList = <Order>[].obs;
   List<Order> get orderList => _orderList;
 
+  final _productList = <ProductModel>[].obs;
+
   double get finalValue => 40;
   double get shipValue => 5;
 
   @override
   void onInit() {
+    //TODO: Adicionar um ever que monitora quando a lista de produtos é alterada, criando uma nova ordem
     // _orderList.assignAll(orderListMocked);
     super.onInit();
   }
 
   void createOrder(ProductModel product, int amount) {
     //TODO: Enviar ordem com o valor já como String, criar mascara aqui.
-    double value = product.value * amount;
-    Order order = Order(product: product, amount: amount, value: value);
-    _orderList.add(order);
+    // double value = product.value * amount;
+    // Order order = Order(product: product, amount: amount, value: value);
+    // _orderList.add(order);
+    _addProduct(product, amount);
   }
 
   void onAmountRemovePressed(Order _order) {
@@ -49,13 +53,27 @@ class CartController extends GetxController {
     return _moneyTextController.text;
   }
 
-  void addProduct(ProductModel product, int amount) {
-    Order _order = Order(
-      product: product,
-      amount: amount,
-      value: 0,
-    );
-    orderList.add(_order);
+  double _getOrderValue(ProductModel product, int amount) {
+    return (product.value * amount);
+  }
+
+  void _addProduct(ProductModel product, int amount) {
+    if (!_productList.contains(product)) {
+      _productList.add(product);
+      Order newOrder = Order(
+        product: product,
+        amount: amount,
+        value: _getOrderValue(product, amount),
+      );
+      orderList.add(newOrder);
+    } else {
+      orderList.forEach((o) {
+        if (o.product == product) {
+          o.amount += amount;
+          //TODO: Provavelmente vai dar um error aqui
+        }
+      });
+    }
   }
 
   void onBackPressed() {
@@ -67,6 +85,8 @@ class CartController extends GetxController {
   }
 
   onConfirmOrderPressed() {
+    // TODO: Implement confirmOrder
+    print('Order confirmada');
   }
 }
 
