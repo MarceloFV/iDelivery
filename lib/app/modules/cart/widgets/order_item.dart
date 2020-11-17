@@ -15,29 +15,32 @@ class OrderItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16.0),
       child: Card(
-        child: ExpansionTile(
-          leading: Image.network(order.product.imgUrl),
-          title: Text(
-            order.product.title,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
+        child: Theme(
+          data: Theme.of(context).copyWith(accentColor: Colors.black),
+          child: ExpansionTile(
+            leading: Image.network(order.product.imgUrl),
+            title: Text(
+              order.product.title,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
             ),
+            trailing: Text(controller.convertToMaskedText(order.value)),
+            subtitle: Text('x${order.amount.toString()}'),
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  AmountSelector(
+                    onAdd: controller.onAmountAddPressed,
+                    onRemove: () => controller.searchOrderIndex(order),
+                    amount: order.amount,
+                  )
+                ],
+              ),
+            ],
           ),
-          trailing: Text(controller.convertToMaskedText(order.value)),
-          subtitle: Text('x${order.amount.toString()}'),
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                AmountSelector(
-                  onAdd: controller.onAmountAddPressed,
-                  onRemove: () => controller.searchOrderIndex(order),
-                  amount: order.amount,
-                )
-              ],
-            ),
-          ],
         ),
       ),
     );
