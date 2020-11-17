@@ -1,3 +1,4 @@
+import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:get/get.dart';
 
 import 'package:delivery_app/app/data/models/product.dart';
@@ -8,6 +9,9 @@ class CartController extends GetxController {
 
   final _orderList = <Order>[].obs;
   List<Order> get orderList => _orderList;
+
+  double get finalValue => 40;
+  double get shipValue => 5;
 
   @override
   void onInit() {
@@ -21,6 +25,13 @@ class CartController extends GetxController {
 
   onAmountAddPressed() {
     print('add');
+  }
+
+  final _moneyTextController =
+      new MoneyMaskedTextController(leftSymbol: 'R\$ ');
+  String convertToMaskedText(double _value) {
+    _moneyTextController.updateValue(_value);
+    return _moneyTextController.text;
   }
 
   void addProduct(ProductModel product, int amount) {
@@ -42,7 +53,6 @@ class CartController extends GetxController {
 
   void searchOrderIndex(Order order) {
     print(orderList.indexOf(order));
-    
   }
 }
 
