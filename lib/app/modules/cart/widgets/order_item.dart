@@ -25,7 +25,7 @@ class OrderItem extends StatelessWidget {
             ),
           ),
           trailing: Text(controller.convertToMaskedText(order.value)),
-          subtitle: Text(order.amount.toString()),
+          subtitle: Text('x${order.amount.toString()}'),
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
