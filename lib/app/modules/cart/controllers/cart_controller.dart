@@ -15,11 +15,18 @@ class CartController extends GetxController {
   double get finalValue => 40;
   double get shipValue => 5;
 
+  Worker worker;
+
   @override
   void onInit() {
     //TODO: Adicionar um ever que monitora quando a lista de produtos é alterada, criando uma nova ordem
     // _orderList.assignAll(orderListMocked);
+    // worker = ever(_orderList, orderListChanged);
     super.onInit();
+  }
+
+  orderListChanged(changedOrderList) {
+    print('carai cebolao');
   }
 
   void createOrder(ProductModel product, int amount) {
@@ -31,13 +38,16 @@ class CartController extends GetxController {
   }
 
   void onAmountRemovePressed(Order _order) {
+    if (!(_order.amount > 1)) return;
     var index = orderList.indexOf(_order);
-    if (_order.amount > 1) _order.amount--;
+    _order.amount--;
+    _order.value -= _order.product.value;
     _orderList[index] = _order;
   }
 
   void onAmountAddPressed(Order _order) {
     var index = orderList.indexOf(_order);
+    _order.value += _order.product.value;
     _order.amount++;
     _orderList[index] = _order;
   }
