@@ -12,8 +12,10 @@ class CartController extends GetxController {
 
   final _productList = <ProductModel>[].obs;
 
-  double get finalValue => 40;
-  double get shipValue => 5;
+  final _finalValue = 0.0.obs;
+
+  double get finalValue => _finalValue.value;
+  double get shipValue => 5; // TODO: ADD ship value
 
   Worker worker;
 
@@ -21,20 +23,50 @@ class CartController extends GetxController {
   void onInit() {
     //TODO: Adicionar um ever que monitora quando a lista de produtos é alterada, criando uma nova ordem
     // _orderList.assignAll(orderListMocked);
-    // worker = ever(_orderList, orderListChanged);
+    worker = ever(_orderList, onOrderListChanged);
     super.onInit();
   }
 
-  orderListChanged(changedOrderList) {
-    print('carai cebolao');
+  onOrderListChanged(nOrderList) {
+    print('orderList changed');
+    var total = 0.0;
+    nOrderList.forEach((order) => total += order.value);
+    _finalValue.value = total + shipValue;
   }
 
-  void createOrder(ProductModel product, int amount) {
+  void addProductToCart(ProductModel product, int amount) {
     //TODO: Enviar ordem com o valor já como String, criar mascara aqui.
     // double value = product.value * amount;
     // Order order = Order(product: product, amount: amount, value: value);
     // _orderList.add(order);
-    _addProduct(product, amount);
+    if (_productList.contains(product)) {
+      _addExistingProduct(product, amount);
+    } else {
+      _addNewProduct(product, amount);
+    }
+  }
+
+  _addExistingProduct(ProductModel product, int amount) {
+    int index;
+    orderList.forEach(
+      (order) {
+        if (order.product == product) {
+          index = orderList.indexOf(order);
+        }
+      },
+    );
+    orderList[index].amount += amount;
+    orderList[index].value += product.value * amount;
+  }
+
+  _addNewProduct(ProductModel product, int amount) {
+    _productList.add(product);
+    Order order = Order(
+      product: product,
+      amount: amount,
+      value: (product.value * amount),
+    );
+    orderList.add(order);
   }
 
   void onAmountRemovePressed(Order _order) {
@@ -42,6 +74,7 @@ class CartController extends GetxController {
     var index = orderList.indexOf(_order);
     _order.amount--;
     _order.value -= _order.product.value;
+    print(_orderList);
     _orderList[index] = _order;
   }
 
@@ -53,6 +86,7 @@ class CartController extends GetxController {
   }
 
   void onRemoveOrderPressed(Order _order) {
+    _productList.remove(_order.product);
     orderList.remove(_order);
   }
 
@@ -61,29 +95,6 @@ class CartController extends GetxController {
   String convertToMaskedText(double _value) {
     _moneyTextController.updateValue(_value);
     return _moneyTextController.text;
-  }
-
-  double _getOrderValue(ProductModel product, int amount) {
-    return (product.value * amount);
-  }
-
-  void _addProduct(ProductModel product, int amount) {
-    if (!_productList.contains(product)) {
-      _productList.add(product);
-      Order newOrder = Order(
-        product: product,
-        amount: amount,
-        value: _getOrderValue(product, amount),
-      );
-      orderList.add(newOrder);
-    } else {
-      orderList.forEach((o) {
-        if (o.product == product) {
-          o.amount += amount;
-          //TODO: Provavelmente vai dar um error aqui
-        }
-      });
-    }
   }
 
   void onBackPressed() {

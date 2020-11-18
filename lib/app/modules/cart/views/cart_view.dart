@@ -61,10 +61,12 @@ class CartView extends GetView<CartController> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                FinalValueSection(
-                  frete: controller.convertToMaskedText(controller.shipValue),
-                  total: controller.convertToMaskedText(controller.finalValue),
-                ),
+                Obx(() => FinalValueSection(
+                      frete:
+                          controller.convertToMaskedText(controller.shipValue),
+                      total:
+                          controller.convertToMaskedText(controller.finalValue),
+                    )),
                 SizedBox(
                   height: 25,
                 ),

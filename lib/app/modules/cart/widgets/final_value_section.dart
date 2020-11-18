@@ -21,11 +21,14 @@ class FinalValueSection extends StatelessWidget {
               'Custo total:',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
             ),
-            Text(total,
-                style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.blue)),
+            Text(
+              total,
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w700,
+                color: Colors.blue,
+              ),
+            ),
           ],
         ),
       ],

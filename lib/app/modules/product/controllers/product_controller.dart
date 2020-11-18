@@ -29,7 +29,7 @@ class ProductController extends GetxController {
       cartController = Get.find<CartController>();
     else
       cartController = Get.put(CartController(), permanent: true);
-    cartController.createOrder(product, amount);
+    cartController.addProductToCart(product, amount);
   }
 
   void onCartPressed() {
