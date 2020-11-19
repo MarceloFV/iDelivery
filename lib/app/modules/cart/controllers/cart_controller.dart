@@ -1,3 +1,5 @@
+import 'package:delivery_app/app/controllers/app_controller.dart';
+import 'package:delivery_app/app/data/models/user.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:get/get.dart';
 
@@ -18,11 +20,15 @@ class CartController extends GetxController {
   double get shipValue => 5; // TODO: ADD ship value
 
   Worker worker;
+  UserModel user;
+  AppController appController = AppController();
 
   @override
   void onInit() {
+    user = appController.user;
     //TODO: Adicionar um ever que monitora quando a lista de produtos é alterada, criando uma nova ordem
     // _orderList.assignAll(orderListMocked);
+    print(user.toString());
     worker = ever(_orderList, onOrderListChanged);
     super.onInit();
   }

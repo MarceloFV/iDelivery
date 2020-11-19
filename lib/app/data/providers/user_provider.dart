@@ -31,6 +31,14 @@ class UserProvider {
     }
   }
 
+  // TODO: Deletar esse metodo
+  getUserMocked() {
+    return UserModel(
+      name: 'Marcelo',
+      adress: 'Praça Paris, 1, 39890-000'
+    );
+  }
+
   Future<UserCredential> _createUserWithEmailAndPassword(
       String email, String password) async {
     UserCredential userCredential = await firebaseAuth

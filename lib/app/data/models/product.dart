@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:delivery_app/app/data/models/store.dart';
+
 enum Category {
   icecream,
   cookie,
@@ -12,6 +14,7 @@ class ProductModel {
   String storeName;
   Category category;
   double value;
+  StoreModel store;
   // bool isFavorite;
   int likes; // Indica quantas pessoas clicaram no favorito
   DocumentReference storeReference;
@@ -26,6 +29,7 @@ class ProductModel {
     // this.isFavorite,
     this.likes,
     this.category,
+    this.store,
     this.storeReference,
     this.reference,
   });
@@ -40,6 +44,7 @@ class ProductModel {
           // isFavorite: snapshot.data()['isFavorite'],
           likes: snapshot.data()['likes'],
           value: snapshot.data()['value'],
+          store: snapshot.data()['store'],
           storeReference: snapshot.data()['storeReference'],
           reference: snapshot.reference);
 
@@ -51,6 +56,7 @@ class ProductModel {
       'storeName': storeName,
       'category': category,
       'value': value,
+      'store' : store,
       // 'isFavorite': isFavorite,
       'likes': likes,
       'storeReference': storeReference,

@@ -4,14 +4,15 @@ class UserModel {
   String name;
   String email;
   String phoneNumber;
+  String adress;
   bool isStore;
   DocumentReference reference;
-
 
   UserModel({
     this.name,
     this.email,
     this.phoneNumber,
+    this.adress,
     this.isStore = false,
     this.reference,
   });

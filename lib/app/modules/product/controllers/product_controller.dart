@@ -1,4 +1,5 @@
 import 'package:delivery_app/app/data/models/product.dart';
+import 'package:delivery_app/app/data/models/user.dart';
 import 'package:delivery_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:delivery_app/app/routes/app_pages.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
@@ -6,6 +7,7 @@ import 'package:get/get.dart';
 
 class ProductController extends GetxController {
   ProductModel product;
+  UserModel user;
 
   final _amount = 1.obs;
 
@@ -14,6 +16,7 @@ class ProductController extends GetxController {
   @override
   void onInit() {
     product = Get.arguments['product'];
+    user = Get.arguments['user'];
     super.onInit();
   }
 
@@ -33,7 +36,7 @@ class ProductController extends GetxController {
   }
 
   void onCartPressed() {
-    Get.toNamed(Routes.CART);
+    Get.toNamed(Routes.CART, arguments: {'user': user});
   }
 
   void onBackPressed() {
