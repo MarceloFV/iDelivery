@@ -1,5 +1,6 @@
 import 'package:delivery_app/app/data/models/user.dart';
 import 'package:delivery_app/app/global_controllers/app_controller.dart';
+import 'package:delivery_app/app/routes/app_pages.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:get/get.dart';
 
@@ -35,8 +36,10 @@ class CartController extends GetxController {
     _user = appController.user;
   }
 
-  String getUserDefaultAdress() {
-    return _user.adress ?? '';
+  String getFormatedUserDefaultAdress() {
+    Adress adress = _user.adress;
+
+    return "${adress.rua} n${adress.numero}, ${adress.bairro}, ${adress.cep}";
   }
 
   onOrderListChanged(nOrderList) {
@@ -114,6 +117,10 @@ class CartController extends GetxController {
   onConfirmOrderPressed() {
     // TODO: Implement confirmOrder
     print('Order confirmada');
+  }
+
+  void onAdressPressed() {
+    Get.toNamed(Routes.ADRESS, arguments: {'adress': _user.adress});
   }
 }
 

@@ -1,9 +1,15 @@
+import 'package:delivery_app/app/data/models/user.dart';
+import 'package:delivery_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AdressSection extends StatelessWidget {
   final String adress;
 
-  const AdressSection({Key key, this.adress}) : super(key: key);
+  AdressSection({Key key, this.adress}) : super(key: key);
+
+  final CartController controller = Get.find<CartController>();
+  
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -25,6 +31,7 @@ class AdressSection extends StatelessWidget {
         trailing: Icon(
           Icons.arrow_forward_ios,
         ),
+        onTap: controller.onAdressPressed,
       ),
     );
   }

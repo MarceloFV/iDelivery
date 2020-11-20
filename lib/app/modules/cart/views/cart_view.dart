@@ -1,3 +1,4 @@
+import 'package:delivery_app/app/global_widgets/custom_app_bar.dart';
 import 'package:delivery_app/app/global_widgets/custom_blue_button.dart';
 import 'package:delivery_app/app/modules/cart/widgets/adress_section.dart';
 import 'package:delivery_app/app/modules/cart/widgets/items_section.dart';
@@ -10,35 +11,20 @@ class CartView extends GetView<CartController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: _bottomNavBar(),
-      appBar: _appBar(),
+      appBar: CustomAppBar(
+        title: 'Seu carrinho está pronto',
+        onBackPressed: controller.onBackPressed,
+      ),
       body: _body(),
+      bottomNavigationBar: _bottomNavBar(),
     );
   }
 
-  _appBar() {
-    return AppBar(
-      elevation: 0,
-      backgroundColor: Colors.transparent,
-      title: Text(
-        'Seu carrinho está pronto',
-        style: TextStyle(color: Colors.black, fontSize: 16),
-      ),
-      leading: IconButton(
-        onPressed: () => controller.onBackPressed(),
-        icon: Icon(Icons.arrow_back_ios),
-        color: Colors.black,
-        iconSize: 12,
-      ),
-    );
-  }
-
-  _body() {
-    return ListView(
+  _body() => ListView(
       padding: EdgeInsets.symmetric(horizontal: 24),
       children: [
         AdressSection(
-          adress: controller.getUserDefaultAdress(),
+          adress: controller.getFormatedUserDefaultAdress(),
         ),
         SizedBox(
           height: 24,
@@ -49,10 +35,8 @@ class CartView extends GetView<CartController> {
         ),
       ],
     );
-  }
 
-  _bottomNavBar() {
-    return Container(
+  _bottomNavBar() => Container(
       height: 130,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -80,5 +64,4 @@ class CartView extends GetView<CartController> {
         ),
       ),
     );
-  }
 }

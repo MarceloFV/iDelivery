@@ -35,7 +35,8 @@ class UserProvider {
   getUserMocked() {
     return UserModel(
       name: 'Marcelo',
-      adress: 'Praça Paris, 1, 39890-000'
+      // 'Praça Paris, 1, 39890-000'
+      adress: Adress(bairro: 'Centro', numero: '1', cep: '39890-000', rua: 'Praça paris'),
     );
   }
 

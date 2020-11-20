@@ -11,17 +11,11 @@ class ProductModel {
   String imgUrl;
   String title;
   String description;
-  String storeName;
   Category category;
   double value;
-  StoreModel store;
-  /*
-  id da loja???
-  nome da loja,
-  valor do frete,
-
-
-  */
+  // String storeId;
+  String storeName;
+  // double storeShipPrice;
   // bool isFavorite;
   int likes; // Indica quantas pessoas clicaram no favorito
   DocumentReference storeReference;
@@ -36,7 +30,7 @@ class ProductModel {
     // this.isFavorite,
     this.likes,
     this.category,
-    this.store,
+    // this.storeId,
     this.storeReference,
     this.reference,
   });
@@ -51,7 +45,7 @@ class ProductModel {
           // isFavorite: snapshot.data()['isFavorite'],
           likes: snapshot.data()['likes'],
           value: snapshot.data()['value'],
-          store: snapshot.data()['store'],
+          // storeId: snapshot.data()['store'],
           storeReference: snapshot.data()['storeReference'],
           reference: snapshot.reference);
 
@@ -63,7 +57,7 @@ class ProductModel {
       'storeName': storeName,
       'category': category,
       'value': value,
-      'store' : store,
+      // 'store' : storeId,
       // 'isFavorite': isFavorite,
       'likes': likes,
       'storeReference': storeReference,

@@ -4,7 +4,7 @@ class UserModel {
   String name;
   String email;
   String phoneNumber;
-  String adress;
+  Adress adress;
   bool isStore;
   DocumentReference reference;
 
@@ -56,4 +56,14 @@ class UserModel {
       reference: reference ?? this.reference,
     );
   }
+}
+
+class Adress {
+  final String bairro;
+  final String rua;
+  final String numero;
+  final String cep;
+
+  Adress({this.bairro, this.rua, this.numero, this.cep});
+
 }
