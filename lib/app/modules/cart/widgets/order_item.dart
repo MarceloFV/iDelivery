@@ -25,8 +25,18 @@ class OrderItem extends StatelessWidget {
                 fontWeight: FontWeight.w700,
               ),
             ),
-            trailing: Text(controller.convertToMaskedText(order.value)),
-            subtitle: Text('x${order.amount.toString()}'),
+            trailing: Text(
+              controller.convertToMaskedText(order.value),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            subtitle: Text(
+              'x ${order.amount.toString()}',
+              style: TextStyle(
+                fontWeight: FontWeight.w300,
+              ),
+            ),
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

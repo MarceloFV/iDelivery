@@ -3,7 +3,7 @@ import 'package:delivery_app/app/data/repository/user_repository.dart';
 import 'package:get/get.dart';
 
 class AppController extends GetxController {
-//TODO: Remover isso daqui;
+//TODO: Passar o user atraves da spleshScreen ou do login/register
   UserRepository userRepository = UserRepository();
 
   UserModel _user;
@@ -12,11 +12,11 @@ class AppController extends GetxController {
 
   @override
   void onInit() {
-    
     user = _getUser();
     super.onInit();
   }
 
-  _getUser() => userRepository
-      .getUserMocked(); // TODO: Remover isso e passar pra pagina inicial do app
+  _getUser() {
+    return userRepository.getUserMocked();
+  } // TODO: Remover isso e passar pra pagina inicial do app
 }

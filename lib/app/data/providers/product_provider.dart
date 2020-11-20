@@ -51,25 +51,25 @@ class ProductProvider {
           imgUrl:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
           title: "LOJINHA",
-          storeName: "location",
+          storeName: "nome da loja",
           value: 20),
       ProductModel(
           imgUrl:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
           title: "TEM TITULO N PORRA",
-          storeName: "location",
+          storeName: "nome da loja",
           value: 20),
       ProductModel(
           imgUrl:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
           title: "title",
-          storeName: "location",
+          storeName: "nome da loja",
           value: 20),
       ProductModel(
           imgUrl:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
           title: "title",
-          storeName: "location",
+          storeName: "nome da loja",
           value: 20),
     ];
   }
@@ -109,13 +109,13 @@ class ProductProvider {
           imgUrl:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
           title: "title",
-          storeName: "location",
+          storeName: "nome da loja",
           value: 20),
       ProductModel(
           imgUrl:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
           title: "title",
-          storeName: "location",
+          storeName: "nome da loja",
           value: 20),
     ];
   }

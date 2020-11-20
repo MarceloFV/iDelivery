@@ -1,5 +1,5 @@
-import 'package:delivery_app/app/controllers/app_controller.dart';
 import 'package:delivery_app/app/data/models/user.dart';
+import 'package:delivery_app/app/global_controllers/app_controller.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:get/get.dart';
 
@@ -20,21 +20,26 @@ class CartController extends GetxController {
   double get shipValue => 5; // TODO: ADD ship value
 
   Worker worker;
-  UserModel user;
-  AppController appController = AppController();
+
+  AppController appController = Get.find<AppController>();
+  UserModel _user = UserModel();
 
   @override
   void onInit() {
-    user = appController.user;
-    //TODO: Adicionar um ever que monitora quando a lista de produtos é alterada, criando uma nova ordem
-    // _orderList.assignAll(orderListMocked);
-    print(user.toString());
+    _fetchUser();
     worker = ever(_orderList, onOrderListChanged);
     super.onInit();
   }
 
+  _fetchUser() {
+    _user = appController.user;
+  }
+
+  String getUserDefaultAdress() {
+    return _user.adress ?? '';
+  }
+
   onOrderListChanged(nOrderList) {
-    print('orderList changed');
     var total = 0.0;
     nOrderList.forEach((order) => total += order.value);
     _finalValue.value = total + shipValue;
@@ -80,7 +85,6 @@ class CartController extends GetxController {
     var index = orderList.indexOf(_order);
     _order.amount--;
     _order.value -= _order.product.value;
-    print(_orderList);
     _orderList[index] = _order;
   }
 
@@ -105,10 +109,6 @@ class CartController extends GetxController {
 
   void onBackPressed() {
     Get.back();
-  }
-
-  String getUserCurrentAdress() {
-    return '242nd St Tonganoxie, Kansas (KS), 66086';
   }
 
   onConfirmOrderPressed() {

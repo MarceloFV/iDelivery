@@ -37,7 +37,7 @@ class UserModel {
 
   @override
   String toString() {
-    return "'name': $name, 'email': $email, 'phoneNumber' : $phoneNumber, 'isStore': $isStore";
+    return "'name': $name, 'adress': $adress 'email': $email, 'phoneNumber' : $phoneNumber, 'isStore': $isStore";
   }
 
   UserModel copyWith({

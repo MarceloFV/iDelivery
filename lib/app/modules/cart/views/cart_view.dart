@@ -38,7 +38,7 @@ class CartView extends GetView<CartController> {
       padding: EdgeInsets.symmetric(horizontal: 24),
       children: [
         AdressSection(
-          adress: controller.getUserCurrentAdress(),
+          adress: controller.getUserDefaultAdress(),
         ),
         SizedBox(
           height: 24,

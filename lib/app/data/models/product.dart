@@ -15,6 +15,13 @@ class ProductModel {
   Category category;
   double value;
   StoreModel store;
+  /*
+  id da loja???
+  nome da loja,
+  valor do frete,
+
+
+  */
   // bool isFavorite;
   int likes; // Indica quantas pessoas clicaram no favorito
   DocumentReference storeReference;

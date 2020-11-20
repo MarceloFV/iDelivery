@@ -1,15 +1,13 @@
-import 'package:delivery_app/app/controllers/app_controller.dart';
 import 'package:delivery_app/app/data/models/category.dart';
 import 'package:delivery_app/app/data/models/product.dart';
 import 'package:delivery_app/app/data/models/user.dart';
 import 'package:delivery_app/app/data/repository/product_repository.dart';
-import 'package:delivery_app/app/data/repository/user_repository.dart';
+import 'package:delivery_app/app/global_controllers/app_controller.dart';
 import 'package:delivery_app/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   final ProductRepository productRepository = ProductRepository();
-  final UserRepository userRepository = UserRepository();
 
   final _popularProducts = List<ProductModel>().obs;
   List<ProductModel> get popularProducts => _popularProducts;
@@ -50,7 +48,7 @@ class HomeController extends GetxController {
   }
 
   gotoProductPage(ProductModel product) {
-    Get.toNamed(Routes.PRODUCT);
+    Get.toNamed(Routes.PRODUCT, arguments: {'product': product});
   }
 
   void gotoCartPage() {
