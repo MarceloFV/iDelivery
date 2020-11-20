@@ -30,9 +30,6 @@ class CartController extends GetxController {
   String get userAdress =>
       "${_adress.value.rua} n${_adress.value.numero}, ${_adress.value.bairro}, ${_adress.value.cep}";
 
-  // String get userAdress =>
-  // "${_user.value.adress.rua} n${_user.value.adress.numero}, ${_user.value.adress.bairro}, ${_user.value.adress.cep}";
-
   @override
   void onInit() {
     _fetchUser();
@@ -41,7 +38,7 @@ class CartController extends GetxController {
     super.onInit();
   }
 
-  updateShipValue(ProductModel product) {
+  _updateShipValue(ProductModel product) {
     bool isRepeated = false;
     _productList.forEach((p) {
       if (p.storeId == product.storeId) {
@@ -61,12 +58,6 @@ class CartController extends GetxController {
   _fetchUser() {
     _user.value = appController.user;
   }
-
-  // String getFormatedUserDefaultAdress() {
-  //   Adress adress = _user.value.adress;
-
-  //   return ;
-  // }
 
   onOrderListChanged(nOrderList) {
     var total = 0.0;
@@ -103,7 +94,7 @@ class CartController extends GetxController {
       value: (product.value * amount),
     );
     orderList.add(order);
-    updateShipValue(product);
+    _updateShipValue(product);
     _productList.add(product);
   }
 

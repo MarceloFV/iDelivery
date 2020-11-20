@@ -26,12 +26,20 @@ class ProductController extends GetxController {
   }
 
   void onAddPressed() {
+    Get.snackbar(
+      'Sucesso!',
+      'Produto adicionado ao carrinho',
+      backgroundColor: Colors.blue,
+      snackPosition: SnackPosition.BOTTOM,
+      dismissDirection: SnackDismissDirection.HORIZONTAL,
+    );
     var cartController;
     if (Get.isRegistered<CartController>())
       cartController = Get.find<CartController>();
     else
       cartController = Get.put(CartController(), permanent: true);
-    cartController.addProductToCart(product, messageTextController.text, amount);
+    cartController.addProductToCart(
+        product, messageTextController.text, amount);
   }
 
   void onCartPressed() {
