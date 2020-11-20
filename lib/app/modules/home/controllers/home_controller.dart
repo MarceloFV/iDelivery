@@ -4,6 +4,7 @@ import 'package:delivery_app/app/data/models/user.dart';
 import 'package:delivery_app/app/data/repository/product_repository.dart';
 import 'package:delivery_app/app/global_controllers/app_controller.dart';
 import 'package:delivery_app/app/routes/app_pages.dart';
+import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
@@ -52,7 +53,10 @@ class HomeController extends GetxController {
     Get.toNamed(Routes.CART);
   }
 
+  final _moneyTextController =
+      new MoneyMaskedTextController(leftSymbol: 'R\$ ');
   String maskedProductValue(double value) {
-    return value.toString();
+    _moneyTextController.updateValue(value);
+    return _moneyTextController.text;
   }
 }

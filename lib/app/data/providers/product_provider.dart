@@ -117,7 +117,7 @@ class ProductProvider {
                     "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
                 title: "title",
                 storeName: "nome da loja",
-                value: 20,
+                value: 25,
                 storeId: '23hiu32h1i2',
                 storeShipPrice: 3.0
               ),
@@ -126,7 +126,7 @@ class ProductProvider {
                     "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
                 title: "title",
                 storeName: "nome da loja",
-                value: 20,
+                value: 32,
                 storeId: '312321321',
                 storeShipPrice: 7.0
               ),
