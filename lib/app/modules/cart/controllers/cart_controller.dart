@@ -23,24 +23,38 @@ class CartController extends GetxController {
   Worker worker;
 
   AppController appController = Get.find<AppController>();
-  UserModel _user = UserModel();
+  final _user = UserModel().obs;
+
+  final _adress = Adress().obs;
+  String get userAdress =>
+      "${_adress.value.rua} n${_adress.value.numero}, ${_adress.value.bairro}, ${_adress.value.cep}";
+
+  // String get userAdress =>
+  // "${_user.value.adress.rua} n${_user.value.adress.numero}, ${_user.value.adress.bairro}, ${_user.value.adress.cep}";
 
   @override
   void onInit() {
     _fetchUser();
+    _adress.value = _user.value.adress;
     worker = ever(_orderList, onOrderListChanged);
     super.onInit();
   }
 
+  void onAdressPressed() async {
+    var val = await Get.toNamed(Routes.ADRESS,
+        arguments: {'adress': _user.value.adress});
+    if (val != null) _adress.value = val;
+  }
+
   _fetchUser() {
-    _user = appController.user;
+    _user.value = appController.user;
   }
 
-  String getFormatedUserDefaultAdress() {
-    Adress adress = _user.adress;
+  // String getFormatedUserDefaultAdress() {
+  //   Adress adress = _user.value.adress;
 
-    return "${adress.rua} n${adress.numero}, ${adress.bairro}, ${adress.cep}";
-  }
+  //   return ;
+  // }
 
   onOrderListChanged(nOrderList) {
     var total = 0.0;
@@ -48,7 +62,7 @@ class CartController extends GetxController {
     _finalValue.value = total + shipValue;
   }
 
-  void addProductToCart(ProductModel product, int amount) {
+  void addProductToCart(ProductModel product, String message, int amount) {
     //TODO: Enviar ordem com o valor já como String, criar mascara aqui.
     // double value = product.value * amount;
     // Order order = Order(product: product, amount: amount, value: value);
@@ -56,7 +70,7 @@ class CartController extends GetxController {
     if (_productList.contains(product)) {
       _addExistingProduct(product, amount);
     } else {
-      _addNewProduct(product, amount);
+      _addNewProduct(product, message, amount);
     }
   }
 
@@ -73,11 +87,12 @@ class CartController extends GetxController {
     orderList[index].value += product.value * amount;
   }
 
-  _addNewProduct(ProductModel product, int amount) {
+  _addNewProduct(ProductModel product, String message, int amount) {
     _productList.add(product);
     Order order = Order(
       product: product,
       amount: amount,
+      message: message,
       value: (product.value * amount),
     );
     orderList.add(order);
@@ -118,32 +133,32 @@ class CartController extends GetxController {
     // TODO: Implement confirmOrder
     print('Order confirmada');
   }
-
-  void onAdressPressed() {
-    Get.toNamed(Routes.ADRESS, arguments: {'adress': _user.adress});
-  }
 }
 
 class Order {
   ProductModel product;
+  String message;
   int amount;
   double value;
 
-  Order({this.product, this.amount, this.value});
+  Order({this.product, this.amount, this.message, this.value});
 
   Order copyWith({
     ProductModel product,
     int amount,
+    String message,
     double value,
   }) {
     return Order(
       product: product ?? this.product,
       amount: amount ?? this.amount,
+      message: message ?? this.message,
       value: value ?? this.value,
     );
   }
 }
 
+//TODO: Deletar a lista mockada
 final List<Order> orderListMocked = <Order>[
   Order(
     product: ProductModel(

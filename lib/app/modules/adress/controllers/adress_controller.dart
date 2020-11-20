@@ -1,4 +1,5 @@
 import 'package:delivery_app/app/data/models/user.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AdressController extends GetxController {
@@ -6,6 +7,15 @@ class AdressController extends GetxController {
 
   Adress oldAdress;
   Adress newAdress;
+//   bairro
+// numero
+// cep
+// rua
+
+  TextEditingController bairroController = TextEditingController();
+  TextEditingController numeroController = TextEditingController();
+  TextEditingController cepController = TextEditingController();
+  TextEditingController ruaController = TextEditingController();
 
   @override
   void onInit() {
@@ -14,9 +24,24 @@ class AdressController extends GetxController {
     super.onInit();
   }
 
-  onBackPressed() {
-    // if (newAdress != null) // TODO: Talvez nao seja necessario
-    Get.back();
+  loadCurrentAdress() {
+    //TODO: Implement loadCurrentAdress in the fields;
+  }
+
+  onBackPressed() => Get.back();
+
+  setAsDefault() {
+    //TODO: Implement setAsDefault
+  }
+
+  onConfirmPressed() {
+    Adress adress = Adress(
+      bairro: bairroController.text,
+      numero: numeroController.text,
+      rua: ruaController.text,
+      cep: cepController.text,
+    );
+    Get.back(result: adress);
   }
 }
 

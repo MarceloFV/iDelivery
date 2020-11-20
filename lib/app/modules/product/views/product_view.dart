@@ -69,7 +69,7 @@ class ProductView extends GetView<ProductController> {
           SizedBox(
             height: 17,
           ),
-          MessageSection(),
+          MessageSection(controller: controller.messageTextController,),
         ],
       ),
     );

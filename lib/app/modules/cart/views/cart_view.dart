@@ -21,47 +21,48 @@ class CartView extends GetView<CartController> {
   }
 
   _body() => ListView(
-      padding: EdgeInsets.symmetric(horizontal: 24),
-      children: [
-        AdressSection(
-          adress: controller.getFormatedUserDefaultAdress(),
-        ),
-        SizedBox(
-          height: 24,
-        ),
-        ItemsSection(),
-        SizedBox(
-          height: 20,
-        ),
-      ],
-    );
+        padding: EdgeInsets.symmetric(horizontal: 24),
+        children: [
+          Obx(() => AdressSection(
+                adress: controller.userAdress,
+                onAdressPressed: controller.onAdressPressed,
+              )),
+          SizedBox(
+            height: 24,
+          ),
+          ItemsSection(),
+          SizedBox(
+            height: 20,
+          ),
+        ],
+      );
 
   _bottomNavBar() => Container(
-      height: 130,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0),
-        child: Column(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Obx(() => FinalValueSection(
-                      frete:
-                          controller.convertToMaskedText(controller.shipValue),
-                      total:
-                          controller.convertToMaskedText(controller.finalValue),
-                    )),
-                SizedBox(
-                  height: 25,
-                ),
-                CustomBlueButton(
-                  text: 'Confirmar pedido',
-                  function: controller.onConfirmOrderPressed,
-                ),
-              ],
-            )
-          ],
+        height: 130,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Column(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Obx(() => FinalValueSection(
+                        frete: controller
+                            .convertToMaskedText(controller.shipValue),
+                        total: controller
+                            .convertToMaskedText(controller.finalValue),
+                      )),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  CustomBlueButton(
+                    text: 'Confirmar pedido',
+                    function: controller.onConfirmOrderPressed,
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
-      ),
-    );
+      );
 }
