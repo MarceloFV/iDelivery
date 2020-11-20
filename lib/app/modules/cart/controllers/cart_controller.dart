@@ -25,7 +25,7 @@ class CartController extends GetxController {
   AppController appController = Get.find<AppController>();
   final _user = UserModel().obs;
 
-  final _adress = Adress().obs;
+  final _adress = Address().obs;
   String get userAdress =>
       "${_adress.value.rua} n${_adress.value.numero}, ${_adress.value.bairro}, ${_adress.value.cep}";
 

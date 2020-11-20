@@ -1,5 +1,5 @@
-import 'package:delivery_app/app/modules/adress/views/adress_view.dart';
-import 'package:delivery_app/app/modules/adress/bindings/adress_binding.dart';
+import 'package:delivery_app/app/modules/address/bindings/address_binding.dart';
+import 'package:delivery_app/app/modules/address/views/address_view.dart';
 import 'package:delivery_app/app/modules/cart/views/cart_view.dart';
 import 'package:delivery_app/app/modules/cart/bindings/cart_binding.dart';
 import 'package:delivery_app/app/modules/home/views/home_view.dart';
@@ -58,8 +58,8 @@ class AppPages {
     ),
     GetPage(
       name: Routes.ADRESS, 
-      page:()=> AdressView(), 
-      binding: AdressBinding(),
+      page:()=> AddressView(), 
+      binding: AddressBinding(),
     ),
   ];
 }

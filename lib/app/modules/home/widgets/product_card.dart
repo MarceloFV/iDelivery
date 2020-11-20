@@ -3,10 +3,13 @@ import 'package:delivery_app/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProductCard extends GetView<HomeController> {
+class ProductCard extends StatelessWidget {
   final ProductModel product;
 
-  const ProductCard({Key key, this.product}) : super(key: key);
+  final HomeController controller = Get.find<HomeController>();
+
+  ProductCard({Key key, this.product}) : super(key: key);
+  
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -32,7 +35,7 @@ class ProductCard extends GetView<HomeController> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Text(
-              product.value.toString(),
+              controller.maskedProductValue(product.value),
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
             )
           ],

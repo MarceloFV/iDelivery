@@ -45,8 +45,8 @@ class ProductProvider {
     } catch (_) {}
   }
 
-  List<ProductModel> getPopularProducts() {
-    return <ProductModel>[
+  Future<List<ProductModel>> getPopularProducts() async {
+    var list = <ProductModel>[
       ProductModel(
           imgUrl:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
@@ -72,8 +72,9 @@ class ProductProvider {
           storeName: "nome da loja",
           value: 20),
     ];
-  }
 
+    return Future.delayed(Duration(seconds: 10), () => list);
+  }
 
   List<CategoryModel> getCategories() {
     return <CategoryModel>[
@@ -92,31 +93,33 @@ class ProductProvider {
     ];
   }
 
-  List<ProductModel> getFavoriteProduct() {
-    return <ProductModel>[
-      ProductModel(
-        imgUrl:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
-        title: "title",
-        storeName: "Restaurante man",
-        category: Category.cake,
-        description:
-            "Nibh faucibus pellentesque ac viverra maecenas ultricies in nisl, faucibus pellentesque ac viverra ecenas ultricies in nisl",
-        likes: 30,
-        value: 20,
-      ),
-      ProductModel(
-          imgUrl:
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
-          title: "title",
-          storeName: "nome da loja",
-          value: 20),
-      ProductModel(
-          imgUrl:
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
-          title: "title",
-          storeName: "nome da loja",
-          value: 20),
-    ];
+  Future<List<ProductModel>> getFavoriteProduct() {
+    return Future.delayed(
+        Duration(seconds: 6),
+        () => <ProductModel>[
+              ProductModel(
+                imgUrl:
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
+                title: "troca ai namoral",
+                storeName: "Restaurante man",
+                category: Category.cake,
+                description:
+                    "Nibh faucibus pellentesque ac viverra maecenas ultricies in nisl, faucibus pellentesque ac viverra ecenas ultricies in nisl",
+                likes: 30,
+                value: 20,
+              ),
+              ProductModel(
+                  imgUrl:
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
+                  title: "title",
+                  storeName: "nome da loja",
+                  value: 20),
+              ProductModel(
+                  imgUrl:
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
+                  title: "title",
+                  storeName: "nome da loja",
+                  value: 20),
+            ]);
   }
 }

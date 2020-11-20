@@ -2,11 +2,11 @@ import 'package:delivery_app/app/data/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AdressController extends GetxController {
+class AddressController extends GetxController {
   //TODO: Implement AdressController
 
-  Adress oldAdress;
-  Adress newAdress;
+  Address currentAddress;
+  Address newAdress;
 //   bairro
 // numero
 // cep
@@ -19,13 +19,14 @@ class AdressController extends GetxController {
 
   @override
   void onInit() {
-    oldAdress = mockedAdress;
+    currentAddress = mockedAdress;
     // adress = Get.arguments['adress']; //TODO: Implementar isso assim que tiver terminado a tela
     super.onInit();
   }
 
-  loadCurrentAdress() {
+  loadCurrentAddress() {
     //TODO: Implement loadCurrentAdress in the fields;
+    currentAddress = Get.arguments['adress'];
   }
 
   onBackPressed() => Get.back();
@@ -35,7 +36,7 @@ class AdressController extends GetxController {
   }
 
   onConfirmPressed() {
-    Adress adress = Adress(
+    Address adress = Address(
       bairro: bairroController.text,
       numero: numeroController.text,
       rua: ruaController.text,
@@ -45,5 +46,5 @@ class AdressController extends GetxController {
   }
 }
 
-Adress mockedAdress =
-    Adress(bairro: 'Centro', numero: '1', cep: '39890-000', rua: 'Praça paris');
+Address mockedAdress =
+    Address(bairro: 'Centro', numero: '1', cep: '39890-000', rua: 'Praça paris');

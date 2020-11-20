@@ -1,10 +1,10 @@
 import 'package:delivery_app/app/global_widgets/custom_app_bar.dart';
 import 'package:delivery_app/app/global_widgets/custom_blue_button.dart';
+import 'package:delivery_app/app/modules/address/controllers/address_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:delivery_app/app/modules/adress/controllers/adress_controller.dart';
 
-class AdressView extends GetView<AdressController> {
+class AddressView extends GetView<AddressController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

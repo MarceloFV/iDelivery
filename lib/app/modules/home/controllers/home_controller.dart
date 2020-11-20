@@ -9,11 +9,9 @@ import 'package:get/get.dart';
 class HomeController extends GetxController {
   final ProductRepository productRepository = ProductRepository();
 
-  final _popularProducts = List<ProductModel>().obs;
-  List<ProductModel> get popularProducts => _popularProducts;
+  final popularProducts = List<ProductModel>().obs;
 
-  final _favoriteProducts = List<ProductModel>().obs;
-  List<ProductModel> get favoriteProducts => _favoriteProducts;
+  final favoriteProducts = List<ProductModel>().obs;
 
   final _categories = List<CategoryModel>().obs;
   List<CategoryModel> get categories => _categories;
@@ -24,9 +22,9 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
-    _getFavoritesProducts();
-    _getPopularProducts();
-    _getCategories();
+    _fetchFavoritesProducts();
+    _fetchPopularProducts();
+    _fetchCategories();
     user = appController.user;
     super.onInit();
   }
@@ -34,16 +32,15 @@ class HomeController extends GetxController {
   @override
   void onClose() {}
 
-
-  _getPopularProducts() {
-    _popularProducts.assignAll(productRepository.getPopularProducts());
+  _fetchFavoritesProducts() async {
+    favoriteProducts.assignAll(await productRepository.getFavoriteProduct());
   }
 
-  _getFavoritesProducts() {
-    _favoriteProducts.assignAll(productRepository.getFavoriteProduct());
+  _fetchPopularProducts() async {
+    popularProducts.assignAll(await productRepository.getPopularProducts());
   }
 
-  _getCategories() {
+  _fetchCategories() {
     _categories.assignAll(productRepository.getCategories());
   }
 
@@ -53,5 +50,9 @@ class HomeController extends GetxController {
 
   void gotoCartPage() {
     Get.toNamed(Routes.CART);
+  }
+
+  String maskedProductValue(double value) {
+    return value.toString();
   }
 }
