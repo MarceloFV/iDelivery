@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:delivery_app/app/data/models/store.dart';
 
 enum Category {
   icecream,
@@ -8,57 +7,62 @@ enum Category {
 }
 
 class ProductModel {
+  String id;
   String imgUrl;
   String title;
   String description;
   Category category;
   double value;
-  // String storeId;
+  String storeId;
   String storeName;
-  // double storeShipPrice;
+  double storeShipPrice;
   // bool isFavorite;
-  int likes; // Indica quantas pessoas clicaram no favorito
+  int likes;
   DocumentReference storeReference;
   DocumentReference reference;
+  // ja que tenho o referencia talvez nao necessite do id;
 
   ProductModel({
+    this.id,
     this.imgUrl,
     this.title,
     this.description,
     this.storeName,
     this.value,
-    // this.isFavorite,
     this.likes,
     this.category,
-    // this.storeId,
+    this.storeId,
+    this.storeShipPrice,
     this.storeReference,
     this.reference,
   });
 
   factory ProductModel.fromDocumentSnapshot(DocumentSnapshot snapshot) =>
       ProductModel(
+          id: snapshot.data()['id'],
           imgUrl: snapshot.data()['imgUrl'],
           title: snapshot.data()['name'],
           description: snapshot.data()['description'],
           storeName: snapshot.data()['storeName'],
           category: snapshot.data()['category'],
-          // isFavorite: snapshot.data()['isFavorite'],
           likes: snapshot.data()['likes'],
+          storeId: snapshot.data()['storeId'],
+          storeShipPrice: snapshot.data()['storeShipPrice'],
           value: snapshot.data()['value'],
-          // storeId: snapshot.data()['store'],
           storeReference: snapshot.data()['storeReference'],
           reference: snapshot.reference);
 
   Map<String, dynamic> toDocument() {
     return {
+      'id': id,
       'imgUrl': imgUrl,
       'title': title,
       'description': description,
       'storeName': storeName,
       'category': category,
       'value': value,
-      // 'store' : storeId,
-      // 'isFavorite': isFavorite,
+      'storeId': storeId,
+      'storeShipPrice': storeShipPrice,
       'likes': likes,
       'storeReference': storeReference,
     };

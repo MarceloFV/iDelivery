@@ -16,9 +16,10 @@ class CartController extends GetxController {
   final _productList = <ProductModel>[].obs;
 
   final _finalValue = 0.0.obs;
+  final _shipValue = 0.0.obs;
 
   double get finalValue => _finalValue.value;
-  double get shipValue => 5; // TODO: ADD ship value
+  double get shipValue => _shipValue.value;
 
   Worker worker;
 
@@ -38,6 +39,17 @@ class CartController extends GetxController {
     _adress.value = _user.value.adress;
     worker = ever(_orderList, onOrderListChanged);
     super.onInit();
+  }
+
+  updateShipValue(ProductModel product) {
+    bool isRepeated = false;
+    _productList.forEach((p) {
+      if (p.storeId == product.storeId) {
+        isRepeated = true;
+      }
+    });
+    if (isRepeated) return;
+    _shipValue.value += product.storeShipPrice;
   }
 
   void onAdressPressed() async {
@@ -63,10 +75,6 @@ class CartController extends GetxController {
   }
 
   void addProductToCart(ProductModel product, String message, int amount) {
-    //TODO: Enviar ordem com o valor já como String, criar mascara aqui.
-    // double value = product.value * amount;
-    // Order order = Order(product: product, amount: amount, value: value);
-    // _orderList.add(order);
     if (_productList.contains(product)) {
       _addExistingProduct(product, amount);
     } else {
@@ -88,7 +96,6 @@ class CartController extends GetxController {
   }
 
   _addNewProduct(ProductModel product, String message, int amount) {
-    _productList.add(product);
     Order order = Order(
       product: product,
       amount: amount,
@@ -96,6 +103,8 @@ class CartController extends GetxController {
       value: (product.value * amount),
     );
     orderList.add(order);
+    updateShipValue(product);
+    _productList.add(product);
   }
 
   void onAmountRemovePressed(Order _order) {

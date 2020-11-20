@@ -73,7 +73,7 @@ class ProductProvider {
           value: 20),
     ];
 
-    return Future.delayed(Duration(seconds: 10), () => list);
+    return Future.delayed(Duration(seconds: 1), () => list);
   }
 
   List<CategoryModel> getCategories() {
@@ -95,7 +95,7 @@ class ProductProvider {
 
   Future<List<ProductModel>> getFavoriteProduct() {
     return Future.delayed(
-        Duration(seconds: 6),
+        Duration(seconds: 1),
         () => <ProductModel>[
               ProductModel(
                 imgUrl:
@@ -107,19 +107,29 @@ class ProductProvider {
                     "Nibh faucibus pellentesque ac viverra maecenas ultricies in nisl, faucibus pellentesque ac viverra ecenas ultricies in nisl",
                 likes: 30,
                 value: 20,
+                storeId: '23hiu32h1i2',
+                storeShipPrice: 3.0
+                
+                
               ),
               ProductModel(
-                  imgUrl:
-                      "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
-                  title: "title",
-                  storeName: "nome da loja",
-                  value: 20),
+                imgUrl:
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
+                title: "title",
+                storeName: "nome da loja",
+                value: 20,
+                storeId: '23hiu32h1i2',
+                storeShipPrice: 3.0
+              ),
               ProductModel(
-                  imgUrl:
-                      "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
-                  title: "title",
-                  storeName: "nome da loja",
-                  value: 20),
+                imgUrl:
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
+                title: "title",
+                storeName: "nome da loja",
+                value: 20,
+                storeId: '312321321',
+                storeShipPrice: 7.0
+              ),
             ]);
   }
 }
