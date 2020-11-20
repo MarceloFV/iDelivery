@@ -14,8 +14,6 @@ class ProductListSection extends StatelessWidget {
 
   const ProductListSection({Key key, this.products, this.icon, this.iconBGColor, this.title, this.subtitle}) : super(key: key);
 
-  // final HomeController controller = Get.find<HomeController>();
-
   @override
   Widget build(BuildContext context) {
     return Column(

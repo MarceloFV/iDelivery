@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CategorySection extends GetView<HomeController> {
+  //TODO: Abstrair CategorySection
   @override
   Widget build(BuildContext context) {
     return Container(
