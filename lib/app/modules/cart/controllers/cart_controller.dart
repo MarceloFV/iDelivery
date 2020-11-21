@@ -1,3 +1,6 @@
+import 'package:delivery_app/app/data/models/user.dart';
+import 'package:delivery_app/app/global_controllers/app_controller.dart';
+import 'package:delivery_app/app/routes/app_pages.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:get/get.dart';
 
@@ -10,21 +13,109 @@ class CartController extends GetxController {
   final _orderList = <Order>[].obs;
   List<Order> get orderList => _orderList;
 
-  double get finalValue => 40;
-  double get shipValue => 5;
+  final _productList = <ProductModel>[].obs;
+
+  final _finalValue = 0.0.obs;
+  final _shipValue = 0.0.obs;
+
+  double get finalValue => _finalValue.value;
+  double get shipValue => _shipValue.value;
+
+  Worker worker;
+
+  AppController appController = Get.find<AppController>();
+  final _user = UserModel().obs;
+
+  final _adress = Address().obs;
+  String get userAdress =>
+      "${_adress.value.rua} n${_adress.value.numero}, ${_adress.value.bairro}, ${_adress.value.cep}";
 
   @override
   void onInit() {
-    _orderList.assignAll(orderListMocked);
+    _fetchUser();
+    _adress.value = _user.value.adress;
+    worker = ever(_orderList, onOrderListChanged);
     super.onInit();
   }
 
-  onAmountRemovePressed() {
-    print('remove');
+  _updateShipValue(ProductModel product) {
+    bool isRepeated = false;
+    _productList.forEach((p) {
+      if (p.storeId == product.storeId) {
+        isRepeated = true;
+      }
+    });
+    if (isRepeated) return;
+    _shipValue.value += product.storeShipPrice;
   }
 
-  onAmountAddPressed() {
-    print('add');
+  void onAdressPressed() async {
+    var val = await Get.toNamed(Routes.ADRESS,
+        arguments: {'adress': _user.value.adress});
+    if (val != null) _adress.value = val;
+  }
+
+  _fetchUser() {
+    _user.value = appController.user;
+  }
+
+  onOrderListChanged(nOrderList) {
+    var total = 0.0;
+    nOrderList.forEach((order) => total += order.value);
+    _finalValue.value = total + shipValue;
+  }
+
+  void addProductToCart(ProductModel product, String message, int amount) {
+    if (_productList.contains(product)) {
+      _addExistingProduct(product, amount);
+    } else {
+      _addNewProduct(product, message, amount);
+    }
+  }
+
+  _addExistingProduct(ProductModel product, int amount) {
+    int index;
+    orderList.forEach(
+      (order) {
+        if (order.product == product) {
+          index = orderList.indexOf(order);
+        }
+      },
+    );
+    orderList[index].amount += amount;
+    orderList[index].value += product.value * amount;
+  }
+
+  _addNewProduct(ProductModel product, String message, int amount) {
+    Order order = Order(
+      product: product,
+      amount: amount,
+      message: message,
+      value: (product.value * amount),
+    );
+    orderList.add(order);
+    _updateShipValue(product);
+    _productList.add(product);
+  }
+
+  void onAmountRemovePressed(Order _order) {
+    if (!(_order.amount > 1)) return;
+    var index = orderList.indexOf(_order);
+    _order.amount--;
+    _order.value -= _order.product.value;
+    _orderList[index] = _order;
+  }
+
+  void onAmountAddPressed(Order _order) {
+    var index = orderList.indexOf(_order);
+    _order.value += _order.product.value;
+    _order.amount++;
+    _orderList[index] = _order;
+  }
+
+  void onRemoveOrderPressed(Order _order) {
+    _productList.remove(_order.product);
+    orderList.remove(_order);
   }
 
   final _moneyTextController =
@@ -34,48 +125,40 @@ class CartController extends GetxController {
     return _moneyTextController.text;
   }
 
-  void addProduct(ProductModel product, int amount) {
-    Order _order = Order(
-      product: product,
-      amount: amount,
-      value: 0,
-    );
-    orderList.add(_order);
-  }
-
   void onBackPressed() {
     Get.back();
   }
 
-  String getUserCurrentAdress() {
-    return '242nd St Tonganoxie, Kansas (KS), 66086';
-  }
-
-  void searchOrderIndex(Order order) {
-    print(orderList.indexOf(order));
+  onConfirmOrderPressed() {
+    // TODO: Implement confirmOrder
+    print('Order confirmada');
   }
 }
 
 class Order {
-  final ProductModel product;
-  final int amount;
-  final double value;
+  ProductModel product;
+  String message;
+  int amount;
+  double value;
 
-  Order({this.product, this.amount, this.value});
+  Order({this.product, this.amount, this.message, this.value});
 
   Order copyWith({
     ProductModel product,
     int amount,
+    String message,
     double value,
   }) {
     return Order(
       product: product ?? this.product,
       amount: amount ?? this.amount,
+      message: message ?? this.message,
       value: value ?? this.value,
     );
   }
 }
 
+//TODO: Deletar a lista mockada
 final List<Order> orderListMocked = <Order>[
   Order(
     product: ProductModel(

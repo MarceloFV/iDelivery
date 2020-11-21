@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class StoreModel {
   String title;
   String phoneNumber;
-  DocumentReference userReference;
+  DocumentReference userReference; //TODO: PRA QUE SERVE ISSU?
   DocumentReference reference;
 
   StoreModel({

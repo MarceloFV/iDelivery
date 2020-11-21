@@ -1,3 +1,5 @@
+import 'package:delivery_app/app/modules/address/bindings/address_binding.dart';
+import 'package:delivery_app/app/modules/address/views/address_view.dart';
 import 'package:delivery_app/app/modules/cart/views/cart_view.dart';
 import 'package:delivery_app/app/modules/cart/bindings/cart_binding.dart';
 import 'package:delivery_app/app/modules/home/views/home_view.dart';
@@ -16,7 +18,7 @@ import 'package:get/get.dart';
 part 'app_routes.dart';
 
 class AppPages {
-  static const INITIAL = Routes.CART;
+  static const INITIAL = Routes.HOME;
 
   static final routes = [
     GetPage(
@@ -53,6 +55,11 @@ class AppPages {
       name: Routes.CART, 
       page:()=> CartView(), 
       binding: CartBinding(),
+    ),
+    GetPage(
+      name: Routes.ADRESS, 
+      page:()=> AddressView(), 
+      binding: AddressBinding(),
     ),
   ];
 }

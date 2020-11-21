@@ -3,7 +3,7 @@ import 'package:delivery_app/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CategoryCard extends GetView<HomeController> {
+class CategoryCard extends StatelessWidget {
   final CategoryModel category;
 
   const CategoryCard({Key key, this.category}) : super(key: key);

@@ -4,14 +4,15 @@ class UserModel {
   String name;
   String email;
   String phoneNumber;
+  Address adress;
   bool isStore;
   DocumentReference reference;
-
 
   UserModel({
     this.name,
     this.email,
     this.phoneNumber,
+    this.adress,
     this.isStore = false,
     this.reference,
   });
@@ -36,7 +37,7 @@ class UserModel {
 
   @override
   String toString() {
-    return "'name': $name, 'email': $email, 'phoneNumber' : $phoneNumber, 'isStore': $isStore";
+    return "'name': $name, 'adress': $adress 'email': $email, 'phoneNumber' : $phoneNumber, 'isStore': $isStore";
   }
 
   UserModel copyWith({
@@ -55,4 +56,14 @@ class UserModel {
       reference: reference ?? this.reference,
     );
   }
+}
+
+class Address {
+  final String bairro;
+  final String rua;
+  final String numero;
+  final String cep;
+
+  Address({this.bairro, this.rua, this.numero, this.cep});
+
 }

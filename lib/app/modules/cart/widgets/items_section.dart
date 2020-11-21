@@ -1,11 +1,10 @@
+import 'package:delivery_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:delivery_app/app/modules/cart/widgets/order_item.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ItemsSection extends StatelessWidget {
-  // final List<Order> orderList; // Substituir por esse
-  final List orderList;
-
-  const ItemsSection({Key key, this.orderList}) : super(key: key);
+  final controller = Get.find<CartController>();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,15 +15,15 @@ class ItemsSection extends StatelessWidget {
           SizedBox(
             height: 16,
           ),
-          Column(
-            children: orderList
-                .map(
-                  (order) => OrderItem(
-                    order: order,
-                  ),
-                )
-                .toList(),
-          ),
+          Obx(() => Column(
+                children: controller.orderList
+                    .map(
+                      (order) => OrderItem(
+                        order: order,
+                      ),
+                    )
+                    .toList(),
+              )),
         ],
       ),
     );

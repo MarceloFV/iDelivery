@@ -20,6 +20,8 @@ class UserRepository {
 
   editUser(UserModel user) => provider.editUser(user);
 
+  getUserMocked() => provider.getUserMocked();
+
   // removeUser(UserModel user) => provider.removeUser(user);
 
   login(String email, String password) => provider.login(email, password);

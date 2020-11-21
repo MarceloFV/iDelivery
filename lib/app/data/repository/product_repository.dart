@@ -17,7 +17,7 @@ class ProductRepository {
 
   add(ProductModel product) => provider.addProduct(product);
 
-  getPopularProducts() => provider.getPopularProducts();
-  getFavoriteProduct() => provider.getFavoriteProduct();
+  Future<List<ProductModel>> getPopularProducts() => provider.getPopularProducts();
+  Future<List<ProductModel>> getFavoriteProduct() => provider.getFavoriteProduct();
   getCategories() => provider.getCategories();
 }

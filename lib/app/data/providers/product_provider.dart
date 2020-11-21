@@ -45,78 +45,95 @@ class ProductProvider {
     } catch (_) {}
   }
 
-  List<ProductModel> getPopularProducts() {
-    return <ProductModel>[
+  Future<List<ProductModel>> getPopularProducts() async {
+    var list = <ProductModel>[
       ProductModel(
           imgUrl:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
           title: "LOJINHA",
-          storeName: "location",
+          storeName: "nome da loja",
           value: 20),
       ProductModel(
           imgUrl:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
           title: "TEM TITULO N PORRA",
-          storeName: "location",
+          storeName: "nome da loja",
           value: 20),
       ProductModel(
           imgUrl:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
           title: "title",
-          storeName: "location",
+          storeName: "nome da loja",
           value: 20),
       ProductModel(
           imgUrl:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
           title: "title",
-          storeName: "location",
+          storeName: "nome da loja",
           value: 20),
     ];
-  }
 
+    return Future.delayed(Duration(seconds: 1), () => list);
+  }
 
   List<CategoryModel> getCategories() {
+    //TODO: Turn this into future
     return <CategoryModel>[
       CategoryModel(
-          "https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg",
-          "Sorvete",
-          12),
+        "https://i.pinimg.com/564x/73/cf/20/73cf20f1ea9029358bcc8b7fba39aef9.jpg",
+        "Hamburguer",
+        12,
+      ),
       CategoryModel(
-          "https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg",
-          "Bolo",
-          14),
+        "https://i.pinimg.com/564x/29/41/4d/29414de753fffab0dd1bf470d95c0874.jpg",
+        "Sorvete",
+        14,
+      ),
       CategoryModel(
-          "https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg",
-          "Bolacha",
-          16),
+        "https://i.pinimg.com/564x/6b/a9/35/6ba9356fab983ba7cf8010187dbf696b.jpg",
+        "Cachorro quente",
+        16,
+      ),
+      CategoryModel(
+        "https://i.pinimg.com/564x/67/81/1d/67811d64dab7a52a0ff0f26928922d1d.jpg",
+        "Pasteis",
+        16,
+      ),
     ];
   }
 
-  List<ProductModel> getFavoriteProduct() {
-    return <ProductModel>[
-      ProductModel(
-        imgUrl:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
-        title: "title",
-        storeName: "Restaurante man",
-        category: Category.cake,
-        description:
-            "Nibh faucibus pellentesque ac viverra maecenas ultricies in nisl, faucibus pellentesque ac viverra ecenas ultricies in nisl",
-        likes: 30,
-        value: 20,
-      ),
-      ProductModel(
-          imgUrl:
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
-          title: "title",
-          storeName: "location",
-          value: 20),
-      ProductModel(
-          imgUrl:
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
-          title: "title",
-          storeName: "location",
-          value: 20),
-    ];
+  Future<List<ProductModel>> getFavoriteProduct() {
+    return Future.delayed(
+        Duration(seconds: 1),
+        () => <ProductModel>[
+              ProductModel(
+                  imgUrl:
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
+                  title: "troca ai namoral",
+                  storeName: "Restaurante man",
+                  category: Category.cake,
+                  description:
+                      "Nibh faucibus pellentesque ac viverra maecenas ultricies in nisl, faucibus pellentesque ac viverra ecenas ultricies in nisl",
+                  likes: 30,
+                  value: 20,
+                  storeId: '23hiu32h1i2',
+                  storeShipPrice: 3.0),
+              ProductModel(
+                  imgUrl:
+                      "https://i.pinimg.com/564x/73/cf/20/73cf20f1ea9029358bcc8b7fba39aef9.jpg",
+                  title: "X-bacon",
+                  storeName: "Biribita",
+                  value: 25,
+                  storeId: '23hiu32h1i2',
+                  storeShipPrice: 3.0),
+              ProductModel(
+                  imgUrl:
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
+                  title: "title",
+                  storeName: "nome da loja",
+                  value: 32,
+                  storeId: '312321321',
+                  storeShipPrice: 7.0),
+            ]);
   }
 }

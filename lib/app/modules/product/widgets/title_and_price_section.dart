@@ -14,7 +14,7 @@ class TitleAndPriceSection extends GetView<ProductController> {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           Text(
-            "\$ ${controller.product.value.toString()}",
+            controller.fetchMaskedProductValue(),
             style: TextStyle(
               color: Colors.green,
               fontSize: 14,

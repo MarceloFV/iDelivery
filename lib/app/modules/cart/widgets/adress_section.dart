@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 class AdressSection extends StatelessWidget {
   final String adress;
+  final Function onAdressPressed;
 
-  const AdressSection({Key key, this.adress}) : super(key: key);
+  AdressSection({Key key, this.adress, this.onAdressPressed}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -25,6 +27,7 @@ class AdressSection extends StatelessWidget {
         trailing: Icon(
           Icons.arrow_forward_ios,
         ),
+        onTap: onAdressPressed,
       ),
     );
   }
