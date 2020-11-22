@@ -26,21 +26,19 @@ class ProductCard extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        title: Text(
-          product.title,
-          // style: GoogleFonts.lato(),
-        ),
+        title: Text(product.title, style: GoogleFonts.catamaran(fontSize: 18)),
         subtitle: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Icon(
               Icons.location_on,
               color: Colors.redAccent,
-              size: 12,
+              size: 13,
             ),
+            SizedBox(width: 2,),
             Text(
               product.storeName,
-              style: TextStyle(fontSize: 12),
+              style: GoogleFonts.markaziText(),
             ),
           ],
         ),
@@ -48,8 +46,11 @@ class ProductCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Text(
-              controller.maskedProductValue(product.value),
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+              controller.maskedProductValue(
+                product.value,
+              ),
+              style: GoogleFonts.markaziText(fontSize: 16),
+              // style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
             )
           ],
         ),
