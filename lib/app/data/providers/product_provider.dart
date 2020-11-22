@@ -48,28 +48,29 @@ class ProductProvider {
   Future<List<ProductModel>> getPopularProducts() async {
     var list = <ProductModel>[
       ProductModel(
+          // https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Pizza_mezzo_a_mezzo.jpg/1200px-Pizza_mezzo_a_mezzo.jpg
           imgUrl:
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
-          title: "LOJINHA",
-          storeName: "nome da loja",
+              "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Pizza_mezzo_a_mezzo.jpg/1200px-Pizza_mezzo_a_mezzo.jpg",
+          title: "Pizza",
+          storeName: "Ponta da rua",
           value: 20),
       ProductModel(
           imgUrl:
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
-          title: "TEM TITULO N PORRA",
-          storeName: "nome da loja",
+              "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Pizza_mezzo_a_mezzo.jpg/1200px-Pizza_mezzo_a_mezzo.jpg",
+          title: "Pizza",
+          storeName: "Ponta da rua",
           value: 20),
       ProductModel(
           imgUrl:
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
-          title: "title",
-          storeName: "nome da loja",
+              "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Pizza_mezzo_a_mezzo.jpg/1200px-Pizza_mezzo_a_mezzo.jpg",
+          title: "Pizza",
+          storeName: "Ponta da rua",
           value: 20),
       ProductModel(
           imgUrl:
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
-          title: "title",
-          storeName: "nome da loja",
+              "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Pizza_mezzo_a_mezzo.jpg/1200px-Pizza_mezzo_a_mezzo.jpg",
+          title: "Pizza",
+          storeName: "Ponta da rua",
           value: 20),
     ];
 
@@ -107,33 +108,36 @@ class ProductProvider {
         Duration(seconds: 1),
         () => <ProductModel>[
               ProductModel(
-                  imgUrl:
-                      "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
-                  title: "troca ai namoral",
-                  storeName: "Restaurante man",
-                  category: Category.cake,
-                  description:
-                      "Nibh faucibus pellentesque ac viverra maecenas ultricies in nisl, faucibus pellentesque ac viverra ecenas ultricies in nisl",
-                  likes: 30,
-                  value: 20,
-                  storeId: '23hiu32h1i2',
-                  storeShipPrice: 3.0),
+                imgUrl:
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Pizza_mezzo_a_mezzo.jpg/1200px-Pizza_mezzo_a_mezzo.jpg",
+                title: "Pizza dois sabores",
+                storeName: "Pizzaria Italiano",
+                category: Category.pizza,
+                description:
+                    "Nibh faucibus pellentesque ac viverra maecenas ultricies in nisl, faucibus pellentesque ac viverra ecenas ultricies in nisl",
+                likes: 30,
+                value: 20,
+                storeId: '23hiu32h1i2',
+                storeShipPrice: 3.0,
+              ),
               ProductModel(
-                  imgUrl:
-                      "https://i.pinimg.com/564x/73/cf/20/73cf20f1ea9029358bcc8b7fba39aef9.jpg",
-                  title: "X-bacon",
-                  storeName: "Biribita",
-                  value: 25,
-                  storeId: '23hiu32h1i2',
-                  storeShipPrice: 3.0),
+                imgUrl:
+                    "https://i.pinimg.com/564x/73/cf/20/73cf20f1ea9029358bcc8b7fba39aef9.jpg",
+                title: "X-bacon",
+                storeName: "Biribita",
+                value: 25,
+                storeId: '23hiu32h1i2',
+                storeShipPrice: 3.0,
+              ),
               ProductModel(
-                  imgUrl:
-                      "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjZU_yayz_f9mUdgmdZJ0utxy72G-Ub3_pUw&usqp=CAU",
-                  title: "title",
-                  storeName: "nome da loja",
-                  value: 32,
-                  storeId: '312321321',
-                  storeShipPrice: 7.0),
+                imgUrl:
+                    "https://img.cybercook.com.br/receitas/6/pastel-na-airfryer-623x350.jpeg",
+                title: "Pastel de carne",
+                storeName: "Pastel da ana",
+                value: 32,
+                storeId: '312321321',
+                storeShipPrice: 7.0,
+              ),
             ]);
   }
 }

@@ -17,13 +17,17 @@ class CategoryCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: Image.network(
-                  category.imgUrl,
-                  height: 130.0,
-                  width: 130.0,
-                  fit: BoxFit.cover,
+              Material(
+                elevation: 1.2,
+                borderRadius: BorderRadius.circular(8),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.network(
+                    category.imgUrl,
+                    height: 130.0,
+                    width: 130.0,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               Text(

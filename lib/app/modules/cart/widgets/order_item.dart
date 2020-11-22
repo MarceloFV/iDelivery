@@ -17,7 +17,15 @@ class OrderItem extends StatelessWidget {
         child: Theme(
           data: Theme.of(context).copyWith(accentColor: Colors.black),
           child: ExpansionTile(
-            leading: Image.network(order.product.imgUrl),
+            leading: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.network(
+                order.product.imgUrl,
+                height: 60,
+                width: 60,
+                fit: BoxFit.cover,
+              ),
+            ),
             title: Text(
               order.product.title,
               style: TextStyle(
