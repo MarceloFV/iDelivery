@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
+  String id;
   String name;
   String email;
   String phoneNumber;
@@ -9,6 +10,7 @@ class UserModel {
   DocumentReference reference;
 
   UserModel({
+    this.id,
     this.name,
     this.email,
     this.phoneNumber,
@@ -24,6 +26,7 @@ class UserModel {
         phoneNumber: snapshot.data()['phoneNumber'],
         isStore: snapshot.data()['isStore'],
         reference: snapshot.reference,
+        id: snapshot.id
       );
 
   Map<String, dynamic> toDocument() {
@@ -65,5 +68,4 @@ class Address {
   final String cep;
 
   Address({this.bairro, this.rua, this.numero, this.cep});
-
 }

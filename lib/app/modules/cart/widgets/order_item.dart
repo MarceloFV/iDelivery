@@ -1,10 +1,11 @@
+import 'package:delivery_app/app/data/models/order.dart';
 import 'package:delivery_app/app/global_widgets/amount_selector.dart';
 import 'package:delivery_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class OrderItem extends StatelessWidget {
-  final Order order;
+  final OrderModel order;
 
   final controller = Get.find<CartController>();
 
