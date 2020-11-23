@@ -10,9 +10,9 @@ void main() {
     () {
       expect(
         MockedRequestProvider().add(
-        orderListMocked,
-        null,
-      ),
+          orderListMocked,
+          null,
+        ),
         requestListMocked,
       );
     },
