@@ -59,6 +59,31 @@ class UserModel {
       reference: reference ?? this.reference,
     );
   }
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+  
+    return o is UserModel &&
+      o.id == id &&
+      o.name == name &&
+      o.email == email &&
+      o.phoneNumber == phoneNumber &&
+      o.adress == adress &&
+      o.isStore == isStore &&
+      o.reference == reference;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+      name.hashCode ^
+      email.hashCode ^
+      phoneNumber.hashCode ^
+      adress.hashCode ^
+      isStore.hashCode ^
+      reference.hashCode;
+  }
 }
 
 class Address {

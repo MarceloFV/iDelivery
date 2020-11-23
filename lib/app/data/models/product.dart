@@ -68,4 +68,39 @@ class ProductModel {
       'storeReference': storeReference,
     };
   }
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+  
+    return o is ProductModel &&
+      o.id == id &&
+      o.imgUrl == imgUrl &&
+      o.title == title &&
+      o.description == description &&
+      o.category == category &&
+      o.value == value &&
+      o.storeId == storeId &&
+      o.storeName == storeName &&
+      o.storeShipPrice == storeShipPrice &&
+      o.likes == likes &&
+      o.storeReference == storeReference &&
+      o.reference == reference;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+      imgUrl.hashCode ^
+      title.hashCode ^
+      description.hashCode ^
+      category.hashCode ^
+      value.hashCode ^
+      storeId.hashCode ^
+      storeName.hashCode ^
+      storeShipPrice.hashCode ^
+      likes.hashCode ^
+      storeReference.hashCode ^
+      reference.hashCode;
+  }
 }

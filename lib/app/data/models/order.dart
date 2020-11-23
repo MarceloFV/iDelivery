@@ -22,4 +22,23 @@ class OrderModel {
       value: value ?? this.value,
     );
   }
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+  
+    return o is OrderModel &&
+      o.amount == amount &&
+      o.product == product &&
+      o.message == message &&
+      o.value == value;
+  }
+
+  @override
+  int get hashCode {
+    return amount.hashCode ^
+      product.hashCode ^
+      message.hashCode ^
+      value.hashCode;
+  }
 }

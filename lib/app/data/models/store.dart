@@ -43,4 +43,23 @@ class StoreModel {
       reference: reference ?? this.reference,
     );
   }
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+  
+    return o is StoreModel &&
+      o.title == title &&
+      o.phoneNumber == phoneNumber &&
+      o.userReference == userReference &&
+      o.reference == reference;
+  }
+
+  @override
+  int get hashCode {
+    return title.hashCode ^
+      phoneNumber.hashCode ^
+      userReference.hashCode ^
+      reference.hashCode;
+  }
 }
