@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AmountSelector extends StatelessWidget {
   final Function onRemove;
@@ -26,10 +27,7 @@ class AmountSelector extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child:  Text(
               amount.toString(),
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-              ),
+              style: GoogleFonts.markaziText(fontSize: 30),
             ),
         ),
         Container(

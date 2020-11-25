@@ -17,16 +17,15 @@ class AddressController extends GetxController {
   TextEditingController cepController = TextEditingController();
   TextEditingController ruaController = TextEditingController();
 
+  String get currentRua => currentAddress.rua;
+  String get currentNumero => currentAddress.numero;
+  String get currentCep => currentAddress.cep;
+  String get currentBairro => currentAddress.bairro;
+
   @override
   void onInit() {
-    currentAddress = mockedAdress;
-    // adress = Get.arguments['adress']; //TODO: Implementar isso assim que tiver terminado a tela
-    super.onInit();
-  }
-
-  loadCurrentAddress() {
-    //TODO: Implement loadCurrentAdress in the fields;
     currentAddress = Get.arguments['adress'];
+    super.onInit();
   }
 
   onBackPressed() => Get.back();
@@ -46,5 +45,5 @@ class AddressController extends GetxController {
   }
 }
 
-Address mockedAdress =
-    Address(bairro: 'Centro', numero: '1', cep: '39890-000', rua: 'Praça paris');
+Address mockedAdress = Address(
+    bairro: 'Centro', numero: '1', cep: '39890-000', rua: 'Praça paris');

@@ -3,6 +3,7 @@ import 'package:delivery_app/app/global_widgets/amount_selector.dart';
 import 'package:delivery_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class OrderItem extends StatelessWidget {
   final OrderModel order;
@@ -29,22 +30,18 @@ class OrderItem extends StatelessWidget {
             ),
             title: Text(
               order.product.title,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-              ),
+              style: GoogleFonts.catamaran(fontSize: 18),
             ),
             trailing: Text(
               controller.convertToMaskedText(order.value),
-              style: TextStyle(
+              style: GoogleFonts.markaziText(
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
             subtitle: Text(
               'x ${order.amount.toString()}',
-              style: TextStyle(
-                fontWeight: FontWeight.w300,
-              ),
+              style: GoogleFonts.markaziText(),
             ),
             children: [
               Row(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AdressSection extends StatelessWidget {
   final String adress;
@@ -17,9 +18,9 @@ class AdressSection extends StatelessWidget {
         ),
         title: Text(
           adress,
-          style: TextStyle(
-            fontWeight: FontWeight.w700,
-          ),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: GoogleFonts.catamaran(fontWeight: FontWeight.w700, wordSpacing: -1),
         ),
         subtitle: Text(
           'Enviar para',

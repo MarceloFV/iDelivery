@@ -25,6 +25,8 @@ class ProductController extends GetxController {
     if (_amount.value > 1) _amount.value--;
   }
 
+  // var meuRx = Rx<String>().bindStream(stream)
+
   void onAddPressed() {
     Get.snackbar(
       'Sucesso!',

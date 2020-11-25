@@ -67,6 +67,16 @@ class MockedProductProvider {
     return Future.delayed(
         Duration(seconds: 1),
         () => <ProductModel>[
+          ProductModel(
+                imgUrl:
+                    "https://i.pinimg.com/564x/73/cf/20/73cf20f1ea9029358bcc8b7fba39aef9.jpg",
+                title: "X-bacon",
+                storeName: "Biribita",
+                value: 25,
+                storeId: '23hiu32h1i2',
+                storeShipPrice: 3.0,
+              ),
+              
               ProductModel(
                 imgUrl:
                     "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Pizza_mezzo_a_mezzo.jpg/1200px-Pizza_mezzo_a_mezzo.jpg",
@@ -80,15 +90,7 @@ class MockedProductProvider {
                 storeId: '23hiu32h1i2', //TODO: Trocar o id para ver se fazem 3 requests
                 storeShipPrice: 3.0,
               ),
-              ProductModel(
-                imgUrl:
-                    "https://i.pinimg.com/564x/73/cf/20/73cf20f1ea9029358bcc8b7fba39aef9.jpg",
-                title: "X-bacon",
-                storeName: "Biribita",
-                value: 25,
-                storeId: '23hiu32h1i2',
-                storeShipPrice: 3.0,
-              ),
+              
               ProductModel(
                 imgUrl:
                     "https://img.cybercook.com.br/receitas/6/pastel-na-airfryer-623x350.jpeg",

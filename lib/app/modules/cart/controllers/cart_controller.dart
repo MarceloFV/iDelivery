@@ -1,12 +1,11 @@
 import 'package:delivery_app/app/data/models/order.dart';
+import 'package:delivery_app/app/data/models/product.dart';
 import 'package:delivery_app/app/data/models/user.dart';
 import 'package:delivery_app/app/data/repository/request_repository.dart';
 import 'package:delivery_app/app/global_controllers/app_controller.dart';
 import 'package:delivery_app/app/routes/app_pages.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:get/get.dart';
-
-import 'package:delivery_app/app/data/models/product.dart';
 
 class CartController extends GetxController {
   final _itemAmount = 0.obs;
@@ -32,7 +31,7 @@ class CartController extends GetxController {
 
   final _adress = Address().obs;
   String get userAdress =>
-      "${_adress.value.rua} n${_adress.value.numero}, ${_adress.value.bairro}, ${_adress.value.cep}";
+      "${_adress.value.rua}, nº ${_adress.value.numero}, ${_adress.value.bairro}, ${_adress.value.cep}";
 
   @override
   void onInit() {

@@ -16,6 +16,19 @@ class AddressView extends GetView<AddressController> {
         minimum: EdgeInsets.all(32),
         child: ListView(
           children: [
+            Text('Endereço atual:', style: Theme.of(context).textTheme.headline5,),
+            SizedBox(height: 6,),
+            Text('Rua: ${controller.currentRua}'),
+            SizedBox(height: 4,),
+            Text('Bairro: ${controller.currentBairro}'),
+            SizedBox(height: 4,),
+            Text('Numero: ${controller.currentNumero}'),
+            SizedBox(height: 4,),
+            Text('CEP: ${controller.currentCep}'),
+            SizedBox(height: 4,),
+            Divider(),
+            Text('Novo endereço:', style: Theme.of(context).textTheme.headline5,),
+            SizedBox(height: 6,),
             CustomTextField(
               controller: controller.ruaController,
               hintText: 'Rua',
