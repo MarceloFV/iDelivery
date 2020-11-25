@@ -14,7 +14,7 @@ class HomeController extends GetxController {
 
   final favoriteProducts = List<ProductModel>().obs;
 
-  final _categories = List<CategoryModel>().obs;
+  var _categories = List<CategoryModel>();
   List<CategoryModel> get categories => _categories;
 
   AppController appController = Get.find<AppController>();
@@ -23,12 +23,14 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
+    _categories = categoryList;
     _fetchFavoritesProducts();
     _fetchPopularProducts();
-    _fetchCategories();
     user = appController.user;
     super.onInit();
   }
+
+
 
   @override
   void onClose() {}
@@ -39,10 +41,6 @@ class HomeController extends GetxController {
 
   _fetchPopularProducts() async {
     popularProducts.assignAll(await productRepository.getPopularProducts());
-  }
-
-  _fetchCategories() {
-    _categories.assignAll(productRepository.getCategories());
   }
 
   gotoProductPage(ProductModel product) {
