@@ -8,13 +8,13 @@ class CategorySection extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Container(
       height: 160,
-      child: Obx(() => ListView.builder(
+      child:  ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: controller.categories.length,
             itemBuilder: (context, index) => CategoryCard(
               category: controller.categories[index],
             ),
-          )),
+          ),
     );
   }
 }

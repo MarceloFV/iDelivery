@@ -23,27 +23,27 @@ class ProductProvider {
     }
   }
 
-  // Adicionar produto/editar/deletar é uma responsabilidade exclusiva da loja
-  addProduct(ProductModel productModel) async {
-    try {
-      DocumentReference reference = await firestore
-          .collection(collectionPath)
-          .add(productModel.toDocument());
-      return reference.id;
-    } catch (_) {}
-  }
+  // // Adicionar produto/editar/deletar é uma responsabilidade exclusiva da loja
+  // addProduct(ProductModel productModel) async {
+  //   try {
+  //     DocumentReference reference = await firestore
+  //         .collection(collectionPath)
+  //         .add(productModel.toDocument());
+  //     return reference.id;
+  //   } catch (_) {}
+  // }
 
-  editProduct(ProductModel productModel) async {
-    try {
-      productModel.reference.update(productModel.toDocument());
-    } catch (_) {}
-  }
+  // editProduct(ProductModel productModel) async {
+  //   try {
+  //     productModel.reference.update(productModel.toDocument());
+  //   } catch (_) {}
+  // }
 
-  deleteProduct(ProductModel productModel) async {
-    try {
-      await productModel.reference.delete();
-    } catch (_) {}
-  }
+  // deleteProduct(ProductModel productModel) async {
+  //   try {
+  //     await productModel.reference.delete();
+  //   } catch (_) {}
+  // }
 
   Future<List<ProductModel>> getPopularProducts() async {
     var list = <ProductModel>[
