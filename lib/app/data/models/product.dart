@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
 class ProductModel {
   String id;
   String imgUrl;
@@ -11,7 +10,7 @@ class ProductModel {
   String storeId;
   String storeName;
   double storeShipPrice;
-  // bool isFavorite;
+  bool isFavorite;
   int likes;
   DocumentReference storeReference;
   DocumentReference reference;
@@ -26,6 +25,7 @@ class ProductModel {
     this.value,
     this.likes,
     this.category,
+    this.isFavorite,
     this.storeId,
     this.storeShipPrice,
     this.storeReference,
@@ -40,6 +40,7 @@ class ProductModel {
           description: snapshot.data()['description'],
           storeName: snapshot.data()['storeName'],
           category: snapshot.data()['category'],
+          isFavorite: snapshot.data()['isFavorite'],
           likes: snapshot.data()['likes'],
           storeId: snapshot.data()['storeId'],
           storeShipPrice: snapshot.data()['storeShipPrice'],
@@ -56,12 +57,14 @@ class ProductModel {
       'storeName': storeName,
       'category': category,
       'value': value,
+      'isFavorite': isFavorite,
       'storeId': storeId,
       'storeShipPrice': storeShipPrice,
       'likes': likes,
       'storeReference': storeReference,
     };
   }
+
 
   @override
   bool operator ==(Object o) {
@@ -77,6 +80,7 @@ class ProductModel {
       o.storeId == storeId &&
       o.storeName == storeName &&
       o.storeShipPrice == storeShipPrice &&
+      o.isFavorite == isFavorite &&
       o.likes == likes &&
       o.storeReference == storeReference &&
       o.reference == reference;
@@ -93,6 +97,7 @@ class ProductModel {
       storeId.hashCode ^
       storeName.hashCode ^
       storeShipPrice.hashCode ^
+      isFavorite.hashCode ^
       likes.hashCode ^
       storeReference.hashCode ^
       reference.hashCode;

@@ -4,8 +4,7 @@ import 'package:delivery_app/app/modules/home/models/category.dart';
 // import 'package:meta/meta.dart';
 
 class ProductRepository {
-  final MockedProductProvider provider =
-      MockedProductProvider();
+  final MockedProductProvider provider = MockedProductProvider();
 
   // ProductRepository({@required this.provider}) : assert(provider != null);
 
@@ -17,7 +16,10 @@ class ProductRepository {
 
   // add(ProductModel product) => provider.addProduct(product);
 
-  Future<List<ProductModel>> getPopularProducts() => provider.getPopularProducts();
-  Future<List<ProductModel>> getFavoriteProduct() => provider.getFavoriteProduct();
-  Future<List<ProductModel>> getProductByCategory(CategoryModel category) => provider.getProductsByCategory(category); // change to CategoryType
+  Future<List<ProductModel>> getPopularProducts() =>
+      provider.getPopularProducts();
+  Future<List<ProductModel>> getFavoriteProduct() =>
+      provider.getFavoriteProduct();
+  Future<List<ProductModel>> getProductByCategory(CategoryType category) =>
+      provider.getProductsByCategory(category); // change to CategoryType
 }

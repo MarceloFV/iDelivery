@@ -6,7 +6,12 @@ class CategoryModel {
   final CategoryType type;
   final bool isAvailable;
 
-  CategoryModel(this.imgUrl, this.categoryName, this.type, [this.isAvailable]);
+  CategoryModel(
+    this.imgUrl,
+    this.categoryName,
+    this.type, [
+    this.isAvailable,
+  ]);
 }
 
 final categoryList = <CategoryModel>[
