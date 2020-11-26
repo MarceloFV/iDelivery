@@ -33,12 +33,19 @@ class ProductView extends GetView<ProductController> {
         iconSize: 12,
       ),
       actions: [
-        IconButton(
-          icon: Icon(
-            Icons.shopping_cart_outlined,
-            color: Colors.black,
+        Obx(
+          () => IconButton(
+            icon: controller.isFavorite.value
+                ? Icon(
+                    Icons.favorite,
+                    color: Colors.red,
+                  )
+                : Icon(
+                    Icons.favorite_outline,
+                    color: Colors.black,
+                  ),
+            onPressed: () => controller.onLikePressed(),
           ),
-          onPressed: () => controller.onCartPressed(),
         ),
         // TODO: Sistema de favoritos
         // IconButton(
@@ -69,7 +76,9 @@ class ProductView extends GetView<ProductController> {
           SizedBox(
             height: 17,
           ),
-          MessageSection(controller: controller.messageTextController,),
+          MessageSection(
+            controller: controller.messageTextController,
+          ),
         ],
       ),
     );
@@ -90,10 +99,14 @@ class ProductView extends GetView<ProductController> {
                   )),
             ),
             Expanded(
-              child: CustomBlueButton(
-                function: controller.onAddPressed,
-                text: "Adicionar",
-              ),
+              child: Obx(() => CustomBlueButton(
+                    function: controller.isAdded.value
+                        ? controller.onCartPressed
+                        : controller.onAddPressed,
+                    text: controller.isAdded.value
+                        ? 'Abrir Carrinho'
+                        : 'Adicionar',
+                  )),
             )
           ],
         ),

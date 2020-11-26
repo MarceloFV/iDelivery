@@ -5,12 +5,14 @@ class ProductModel {
   String imgUrl;
   String title;
   String description;
-  CategoryType category; // talvez conflite com o categoryModel, ja que esse seria o type
+  CategoryType
+      category; // talvez conflite com o categoryModel, ja que esse seria o type
   double value;
   String storeId;
   String storeName;
   double storeShipPrice;
   bool isFavorite;
+  bool isAvailable;
   int likes;
   DocumentReference storeReference;
   DocumentReference reference;
@@ -23,7 +25,7 @@ class ProductModel {
     this.description,
     this.storeName,
     this.value,
-    this.likes,
+    this.likes,this.isAvailable,
     this.category,
     this.isFavorite,
     this.storeId,
@@ -41,6 +43,7 @@ class ProductModel {
           storeName: snapshot.data()['storeName'],
           category: snapshot.data()['category'],
           isFavorite: snapshot.data()['isFavorite'],
+          isAvailable: snapshot.data()['isAvailable'],
           likes: snapshot.data()['likes'],
           storeId: snapshot.data()['storeId'],
           storeShipPrice: snapshot.data()['storeShipPrice'],
@@ -56,6 +59,7 @@ class ProductModel {
       'description': description,
       'storeName': storeName,
       'category': category,
+      'isAvailable': isAvailable,
       'value': value,
       'isFavorite': isFavorite,
       'storeId': storeId,
@@ -65,46 +69,43 @@ class ProductModel {
     };
   }
 
-
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-  
+
     return o is ProductModel &&
-      o.id == id &&
-      o.imgUrl == imgUrl &&
-      o.title == title &&
-      o.description == description &&
-      o.category == category &&
-      o.value == value &&
-      o.storeId == storeId &&
-      o.storeName == storeName &&
-      o.storeShipPrice == storeShipPrice &&
-      o.isFavorite == isFavorite &&
-      o.likes == likes &&
-      o.storeReference == storeReference &&
-      o.reference == reference;
+        o.id == id &&
+        o.imgUrl == imgUrl &&
+        o.title == title &&
+        o.description == description &&
+        o.category == category &&
+        o.value == value &&
+        o.storeId == storeId &&
+        o.storeName == storeName &&
+        o.storeShipPrice == storeShipPrice &&
+        o.isFavorite == isFavorite &&
+        o.likes == likes &&
+        o.storeReference == storeReference &&
+        o.reference == reference;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      imgUrl.hashCode ^
-      title.hashCode ^
-      description.hashCode ^
-      category.hashCode ^
-      value.hashCode ^
-      storeId.hashCode ^
-      storeName.hashCode ^
-      storeShipPrice.hashCode ^
-      isFavorite.hashCode ^
-      likes.hashCode ^
-      storeReference.hashCode ^
-      reference.hashCode;
+        imgUrl.hashCode ^
+        title.hashCode ^
+        description.hashCode ^
+        category.hashCode ^
+        value.hashCode ^
+        storeId.hashCode ^
+        storeName.hashCode ^
+        storeShipPrice.hashCode ^
+        isFavorite.hashCode ^
+        likes.hashCode ^
+        storeReference.hashCode ^
+        reference.hashCode;
   }
 }
-
-
 
 enum CategoryType {
   Hamburguer,

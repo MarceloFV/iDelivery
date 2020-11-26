@@ -1,32 +1,47 @@
-import 'dart:developer';
-
 import 'package:delivery_app/app/data/models/product.dart';
 
 const baseUrl = 'http://gerador-nomes.herokuapp.com/nomes/10';
 
 class MockedProductProvider {
   Future<List<ProductModel>> getPopularProducts() async {
-    return Future.delayed(Duration(seconds: 1), () => simpleProcutList);
+    return Future.delayed(
+        Duration(seconds: 0),
+        () =>
+            simpleProductList.where((element) => element.likes >= 40).toList());
   }
 
   Future<List<ProductModel>> getProductsByCategory(CategoryType category) {
-    return Future.delayed(Duration(seconds: 1), () => []);
+    return Future.delayed(
+        Duration(seconds: 0),
+        () => simpleProductList
+            .where((element) => element.category == category)
+            .toList());
   }
 
   Future<List<ProductModel>> getFavoriteProduct() {
-    return Future.delayed(Duration(seconds: 1), () => simpleProcutList);
+    return Future.delayed(
+        Duration(seconds: 0),
+        () => simpleProductList
+            .where((element) => element.isFavorite == true)
+            .toList());
   }
 
-  void getAllProducts() {
+  Future<List<ProductModel>> getAllProducts() {
     //...//
+    return Future.delayed(Duration(seconds: 0), () => simpleProductList);
   }
 
-  void getAllAvailableProducts() {
+  Future<List<ProductModel>> getAllAvailableProducts() {
     //...//
+    return Future.delayed(
+        Duration(seconds: 0),
+        () => simpleProductList
+            .where((element) => element.isAvailable == true)
+            .toList());
   }
 }
 
-List<ProductModel> simpleProcutList = [
+List<ProductModel> simpleProductList = [
   ProductModel(
     imgUrl:
         "https://i.pinimg.com/564x/73/cf/20/73cf20f1ea9029358bcc8b7fba39aef9.jpg",
@@ -38,6 +53,7 @@ List<ProductModel> simpleProcutList = [
     description: 'Pizza delicinha',
     id: 'xxxx1',
     isFavorite: true,
+    isAvailable: true,
     likes: 30,
     storeShipPrice: 3.0,
   ),
@@ -53,6 +69,7 @@ List<ProductModel> simpleProcutList = [
     value: 25,
     id: 'xxxx2',
     isFavorite: true,
+    isAvailable: true,
     storeId: '23hiu32h1i2',
     storeShipPrice: 3.0,
   ),
@@ -95,21 +112,19 @@ List<ProductModel> simpleProcutList = [
     likes: 60,
   ),
   ProductModel(
-    imgUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Pizza_mezzo_a_mezzo.jpg/1200px-Pizza_mezzo_a_mezzo.jpg",
-    title: "Pizza favorita 2",
-    storeName: "Ponta da rua",
-    value: 20,
-    isFavorite: false,
-    likes: 80
-  ),
+      imgUrl:
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Pizza_mezzo_a_mezzo.jpg/1200px-Pizza_mezzo_a_mezzo.jpg",
+      title: "Pizza favorita 2",
+      storeName: "Ponta da rua",
+      value: 20,
+      isFavorite: false,
+      likes: 80),
   ProductModel(
-    imgUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Pizza_mezzo_a_mezzo.jpg/1200px-Pizza_mezzo_a_mezzo.jpg",
-    title: "Pizza favorita",
-    storeName: "Ponta da rua",
-    value: 20,
-    isFavorite: false,
-    likes: 90
-  ),
+      imgUrl:
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Pizza_mezzo_a_mezzo.jpg/1200px-Pizza_mezzo_a_mezzo.jpg",
+      title: "Pizza favorita",
+      storeName: "Ponta da rua",
+      value: 20,
+      isFavorite: false,
+      likes: 90),
 ];

@@ -13,9 +13,13 @@ class ProductController extends GetxController {
 
   int get amount => _amount.value;
 
+  final isAdded = false.obs;
+  final isFavorite = false.obs; // TODO: get if product is favorite
+
   @override
   void onInit() {
     product = Get.arguments['product'];
+    isFavorite.value = product.isFavorite;
     super.onInit();
   }
 
@@ -28,13 +32,6 @@ class ProductController extends GetxController {
   // var meuRx = Rx<String>().bindStream(stream)
 
   void onAddPressed() {
-    Get.snackbar(
-      'Sucesso!',
-      'Produto adicionado ao carrinho',
-      backgroundColor: Colors.blue,
-      snackPosition: SnackPosition.BOTTOM,
-      dismissDirection: SnackDismissDirection.HORIZONTAL,
-    );
     var cartController;
     if (Get.isRegistered<CartController>())
       cartController = Get.find<CartController>();
@@ -42,6 +39,7 @@ class ProductController extends GetxController {
       cartController = Get.put(CartController(), permanent: true);
     cartController.addProductToCart(
         product, messageTextController.text, amount);
+    isAdded.value = true;
   }
 
   void onCartPressed() {
@@ -57,5 +55,10 @@ class ProductController extends GetxController {
         new MoneyMaskedTextController(leftSymbol: 'R\$ ');
     _moneyTextController.updateValue(product.value);
     return _moneyTextController.text;
+  }
+
+  onLikePressed() {
+    isFavorite.toggle();
+    //TODO: Implement onLikePressed
   }
 }
