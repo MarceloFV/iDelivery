@@ -76,7 +76,6 @@ class ProductProvider {
     return Future.delayed(Duration(seconds: 1), () => list);
   }
 
-
   Future<List<ProductModel>> getFavoriteProduct() {
     return Future.delayed(
         Duration(seconds: 1),
@@ -113,5 +112,16 @@ class ProductProvider {
                 storeShipPrice: 7.0,
               ),
             ]);
+  }
+
+  Future<List<ProductModel>> getAllProducts() async {
+    var response = await firestore.collection('products').get();
+    var docs = response.docs;
+    List<ProductModel> productList = [];
+    for (int i = 0; i < docs.length; i++) {
+      // print(docs[i].data());
+      productList.add(ProductModel.fromDocumentSnapshot(response.docs[i]));
+    }
+    return productList;
   }
 }

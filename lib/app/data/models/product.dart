@@ -25,7 +25,8 @@ class ProductModel {
     this.description,
     this.storeName,
     this.value,
-    this.likes,this.isAvailable,
+    this.likes,
+    this.isAvailable,
     this.category,
     this.isFavorite,
     this.storeId,
@@ -36,20 +37,21 @@ class ProductModel {
 
   factory ProductModel.fromDocumentSnapshot(DocumentSnapshot snapshot) =>
       ProductModel(
-          id: snapshot.data()['id'],
-          imgUrl: snapshot.data()['imgUrl'],
-          title: snapshot.data()['name'],
-          description: snapshot.data()['description'],
-          storeName: snapshot.data()['storeName'],
-          category: snapshot.data()['category'],
-          isFavorite: snapshot.data()['isFavorite'],
-          isAvailable: snapshot.data()['isAvailable'],
-          likes: snapshot.data()['likes'],
-          storeId: snapshot.data()['storeId'],
-          storeShipPrice: snapshot.data()['storeShipPrice'],
-          value: snapshot.data()['value'],
-          storeReference: snapshot.data()['storeReference'],
-          reference: snapshot.reference);
+        id: snapshot.data()['id'],
+        imgUrl: snapshot.data()['imgUrl'],
+        title: snapshot.data()['name'],
+        description: snapshot.data()['description'],
+        storeName: snapshot.data()['storeName'],
+        category: snapshot.data()['category'],
+        isFavorite: snapshot.data()['isFavorite'],
+        isAvailable: snapshot.data()['isAvailable'],
+        likes: snapshot.data()['likes'],
+        storeId: snapshot.data()['storeId'],
+        storeShipPrice: snapshot.data()['storeShipPrice'],
+        value: snapshot.data()['value'],
+        storeReference: snapshot.data()['storeReference'],
+        reference: snapshot.reference,
+      );
 
   Map<String, dynamic> toDocument() {
     return {
@@ -59,12 +61,12 @@ class ProductModel {
       'description': description,
       'storeName': storeName,
       'category': category,
-      'isAvailable': isAvailable,
-      'value': value,
       'isFavorite': isFavorite,
+      'isAvailable': isAvailable,
+      'likes': likes,
       'storeId': storeId,
       'storeShipPrice': storeShipPrice,
-      'likes': likes,
+      'value': value,
       'storeReference': storeReference,
     };
   }

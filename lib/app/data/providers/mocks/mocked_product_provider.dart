@@ -126,5 +126,5 @@ List<ProductModel> simpleProductList = [
       storeName: "Ponta da rua",
       value: 20,
       isFavorite: false,
-      likes: 90),
+      likes: 90,),
 ];
