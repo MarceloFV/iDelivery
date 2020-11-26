@@ -39,7 +39,7 @@ class ProductModel {
       ProductModel(
         id: snapshot.data()['id'],
         imgUrl: snapshot.data()['imgUrl'],
-        title: snapshot.data()['name'],
+        title: snapshot.data()['title'],
         description: snapshot.data()['description'],
         storeName: snapshot.data()['storeName'],
         category: snapshot.data()['category'],
@@ -74,38 +74,40 @@ class ProductModel {
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-
+  
     return o is ProductModel &&
-        o.id == id &&
-        o.imgUrl == imgUrl &&
-        o.title == title &&
-        o.description == description &&
-        o.category == category &&
-        o.value == value &&
-        o.storeId == storeId &&
-        o.storeName == storeName &&
-        o.storeShipPrice == storeShipPrice &&
-        o.isFavorite == isFavorite &&
-        o.likes == likes &&
-        o.storeReference == storeReference &&
-        o.reference == reference;
+      o.id == id &&
+      o.imgUrl == imgUrl &&
+      o.title == title &&
+      o.description == description &&
+      o.category == category &&
+      o.value == value &&
+      o.storeId == storeId &&
+      o.storeName == storeName &&
+      o.storeShipPrice == storeShipPrice &&
+      o.isFavorite == isFavorite &&
+      o.isAvailable == isAvailable &&
+      o.likes == likes &&
+      o.storeReference == storeReference &&
+      o.reference == reference;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-        imgUrl.hashCode ^
-        title.hashCode ^
-        description.hashCode ^
-        category.hashCode ^
-        value.hashCode ^
-        storeId.hashCode ^
-        storeName.hashCode ^
-        storeShipPrice.hashCode ^
-        isFavorite.hashCode ^
-        likes.hashCode ^
-        storeReference.hashCode ^
-        reference.hashCode;
+      imgUrl.hashCode ^
+      title.hashCode ^
+      description.hashCode ^
+      category.hashCode ^
+      value.hashCode ^
+      storeId.hashCode ^
+      storeName.hashCode ^
+      storeShipPrice.hashCode ^
+      isFavorite.hashCode ^
+      isAvailable.hashCode ^
+      likes.hashCode ^
+      storeReference.hashCode ^
+      reference.hashCode;
   }
 }
 

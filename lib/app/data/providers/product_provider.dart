@@ -119,8 +119,21 @@ class ProductProvider {
     var docs = response.docs;
     List<ProductModel> productList = [];
     for (int i = 0; i < docs.length; i++) {
-      // print(docs[i].data());
-      productList.add(ProductModel.fromDocumentSnapshot(response.docs[i]));
+      productList.add(ProductModel.fromDocumentSnapshot(docs[i]));
+    }
+    return productList;
+  }
+
+  getAllAvailableProducts() async {
+    var response = await firestore
+        .collection('products')
+        .get();
+        // .where('isAvailable', isEqualTo: true)
+
+    var docs = response.docs;
+    List<ProductModel> productList = [];
+    for (int i = 0; i < docs.length; i++) {
+      productList.add(ProductModel.fromDocumentSnapshot(docs[i]));
     }
     return productList;
   }
