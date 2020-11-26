@@ -1,13 +1,14 @@
-
 import 'package:flutter/material.dart';
 
 class TopicCard extends StatelessWidget {
   final TopicItem topicItem;
+  final Function onTap;
 
-  const TopicCard({Key key, this.topicItem}) : super(key: key);
+  const TopicCard({Key key, this.onTap, this.topicItem}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: onTap,
       leading: topicItem.icon,
       title: Text(topicItem.title),
       subtitle: Text(topicItem.subtitle),

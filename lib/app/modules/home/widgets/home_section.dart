@@ -5,20 +5,32 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
-class ProductListSection extends StatelessWidget {
+class HomeSection extends StatelessWidget {
   final RxList<ProductModel> products;
+  final Function onTap;
   final IconData icon;
   final Color iconBGColor;
   final String title;
   final String subtitle;
+  final bool showList;
 
-  const ProductListSection({Key key, this.products, this.icon, this.iconBGColor, this.title, this.subtitle}) : super(key: key);
+  const HomeSection({
+    Key key,
+    this.products,
+    this.icon = Icons.star,
+    this.onTap,
+    this.iconBGColor = Colors.blue,
+    this.title = '',
+    this.subtitle = '',
+    this.showList = true,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         TopicCard(
+          onTap: onTap,
           topicItem: TopicItem(
             Container(
               child: Icon(
@@ -36,17 +48,19 @@ class ProductListSection extends StatelessWidget {
             subtitle,
           ),
         ),
-        Obx(
-          () => Column(
-            children: products
-                .map(
-                  (ProductModel product) => ProductCard(
-                    product: product,
-                  ),
-                )
-                .toList(),
-          ),
-        ),
+        showList
+            ? Obx(
+                () => Column(
+                  children: products
+                      .map(
+                        (ProductModel product) => ProductCard(
+                          product: product,
+                        ),
+                      )
+                      .toList(),
+                ),
+              )
+            : Container(),
       ],
     );
   }
