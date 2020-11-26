@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:delivery_app/app/data/models/category.dart';
 import 'package:delivery_app/app/data/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
@@ -87,7 +86,7 @@ class ProductProvider {
                     "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Pizza_mezzo_a_mezzo.jpg/1200px-Pizza_mezzo_a_mezzo.jpg",
                 title: "Pizza dois sabores",
                 storeName: "Pizzaria Italiano",
-                category: Category.Pizza,
+                category: CategoryType.Pizza,
                 description:
                     "Nibh faucibus pellentesque ac viverra maecenas ultricies in nisl, faucibus pellentesque ac viverra ecenas ultricies in nisl",
                 likes: 30,

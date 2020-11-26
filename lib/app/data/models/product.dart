@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:delivery_app/app/data/models/category.dart';
 
 
 class ProductModel {
@@ -7,7 +6,7 @@ class ProductModel {
   String imgUrl;
   String title;
   String description;
-  Category category; // talvez conflite com o categoryModel, ja que esse seria o type
+  CategoryType category; // talvez conflite com o categoryModel, ja que esse seria o type
   double value;
   String storeId;
   String storeName;
@@ -98,4 +97,15 @@ class ProductModel {
       storeReference.hashCode ^
       reference.hashCode;
   }
+}
+
+
+
+enum CategoryType {
+  Hamburguer,
+  Pizza,
+  Sorvete,
+  Bolo,
+  Hotdog,
+  Pastel,
 }
