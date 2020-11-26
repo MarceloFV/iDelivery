@@ -13,7 +13,8 @@ void main() {
     });
     test('fetch favorite products', () async {
       var actual = await provider.getFavoriteProduct();
-      var list = [for(var i=0; i<3; i+=1) simpleProductList[i]];
+      var list = simpleProductList.getRange(0, 3).toList();
+
       var matcher = simpleProductList
           .where((element) => element.isFavorite == true)
           .toList();
@@ -22,16 +23,17 @@ void main() {
     });
     test('fetch popular products', () async {
       var actual = await provider.getPopularProducts();
-      var list = [for(var i=3; i<7; i+=1) simpleProductList[i]];
-      var matcher = simpleProductList
-          .where((element) => element.likes >= 40)
-          .toList();
+      var list = simpleProductList.getRange(3, 7).toList();
+
+      var matcher =
+          simpleProductList.where((element) => element.likes >= 40).toList();
       expect(actual, list);
       expect(actual, matcher);
     });
     test('fetch popular products', () async {
       var actual = await provider.getAllAvailableProducts();
-      var list = [for(var i=0; i<2; i+=1) simpleProductList[i]];
+      var list = simpleProductList.getRange(0, 2).toList();
+
       var matcher = simpleProductList
           .where((element) => element.isAvailable == true)
           .toList();
@@ -39,12 +41,11 @@ void main() {
       expect(actual, matcher);
     });
     test('fetch popular products', () async {
-      var actual = await provider.getProductsByCategory(CategoryType.Hamburguer);
-      // var list = [for(var i=0; i<2; i+=1) simpleProductList[i]];
+      var actual =
+          await provider.getProductsByCategory(CategoryType.Hamburguer);
       var matcher = simpleProductList
           .where((element) => element.category == CategoryType.Hamburguer)
           .toList();
-      // expect(actual, list);
       expect(actual, matcher);
     });
   });
