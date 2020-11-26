@@ -88,43 +88,43 @@ List<ProductModel> simpleProductList = [
     id: 'xxxx3',
     isFavorite: true,
   ),
-  // ProductModel(
-  //   imgUrl:
-  //       "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Pizza_mezzo_a_mezzo.jpg/1200px-Pizza_mezzo_a_mezzo.jpg",
-  //   title: "Pizza favorita 4",
-  //   storeName: "Ponta da rua",
-  //   value: 20,
-  //   category: CategoryType.Pizza,
-  //   description: 'Pizza delicosa',
-  //   likes: 40,
-  //   isFavorite: false,
-  //   id: 'xxxx4',
-  //   storeId: 'xx',
-  //   storeShipPrice: 2,
-  // ),
-  // ProductModel(
-  //   imgUrl:
-  //       "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Pizza_mezzo_a_mezzo.jpg/1200px-Pizza_mezzo_a_mezzo.jpg",
-  //   title: "Pizza",
-  //   storeName: "Ponta da rua favorita 3",
-  //   value: 20,
-  //   isFavorite: false,
-  //   likes: 60,
-  // ),
-  // ProductModel(
-  //     imgUrl:
-  //         "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Pizza_mezzo_a_mezzo.jpg/1200px-Pizza_mezzo_a_mezzo.jpg",
-  //     title: "Pizza favorita 2",
-  //     storeName: "Ponta da rua",
-  //     value: 20,
-  //     isFavorite: false,
-  //     likes: 80),
-  // ProductModel(
-  //     imgUrl:
-  //         "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Pizza_mezzo_a_mezzo.jpg/1200px-Pizza_mezzo_a_mezzo.jpg",
-  //     title: "Pizza favorita",
-  //     storeName: "Ponta da rua",
-  //     value: 20,
-  //     isFavorite: false,
-  //     likes: 90,),
+  ProductModel(
+    imgUrl:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Pizza_mezzo_a_mezzo.jpg/1200px-Pizza_mezzo_a_mezzo.jpg",
+    title: "Pizza favorita 4",
+    storeName: "Ponta da rua",
+    value: 20,
+    category: CategoryType.Pizza,
+    description: 'Pizza delicosa',
+    likes: 40,
+    isFavorite: false,
+    id: 'xxxx4',
+    storeId: 'xx',
+    storeShipPrice: 2,
+  ),
+  ProductModel(
+    imgUrl:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Pizza_mezzo_a_mezzo.jpg/1200px-Pizza_mezzo_a_mezzo.jpg",
+    title: "Pizza",
+    storeName: "Ponta da rua favorita 3",
+    value: 20,
+    isFavorite: false,
+    likes: 60,
+  ),
+  ProductModel(
+      imgUrl:
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Pizza_mezzo_a_mezzo.jpg/1200px-Pizza_mezzo_a_mezzo.jpg",
+      title: "Pizza favorita 2",
+      storeName: "Ponta da rua",
+      value: 20,
+      isFavorite: false,
+      likes: 80),
+  ProductModel(
+      imgUrl:
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Pizza_mezzo_a_mezzo.jpg/1200px-Pizza_mezzo_a_mezzo.jpg",
+      title: "Pizza favorita",
+      storeName: "Ponta da rua",
+      value: 20,
+      isFavorite: false,
+      likes: 90,),
 ];

@@ -87,12 +87,12 @@ void main() {
       for (int i = 0; i < simpleProductList.length; i++) {
         ProductModel model = simpleProductList[i];
         Map<String, dynamic> map = model.toDocument();
-        when(collectionReference.add(map))
-            .thenAnswer((_) async => documentReference);
-        when(documentReference.get()).thenAnswer((_) async => documentSnapshot);
-        when(documentSnapshot.data()).thenReturn(map);
-        when(collectionReference.get()).thenAnswer((_) async => querySnapshot);
         queryDocumentSnapshot = MockQueryDocumentSnapshot();
+        // when(collectionReference.add(map))
+        //     .thenAnswer((_) async => documentReference);
+        // when(documentReference.get()).thenAnswer((_) async => documentSnapshot);
+        // when(documentSnapshot.data()).thenReturn(map);
+        when(collectionReference.get()).thenAnswer((_) async => querySnapshot);
         when(queryDocumentSnapshot.data()).thenReturn(map);
         listOfDocs.add(queryDocumentSnapshot);
       }
@@ -104,10 +104,10 @@ void main() {
       var matcher = simpleProductList;
       expect(actual, matcher);
     });
-    test('fetch all available products', () async{
-      var actual = await provider.getAllAvailableProducts();
-      var matcher = simpleProductList.where((element) => element.isAvailable == true).toList();
-      expect(actual, matcher);
-    });
+    // test('fetch all available products', () async{
+    //   var actual = await provider.getAllAvailableProducts();
+    //   var matcher = simpleProductList.where((element) => element.isAvailable == true).toList();
+    //   expect(actual, matcher);
+    // });
   });
 }

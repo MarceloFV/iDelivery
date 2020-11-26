@@ -127,8 +127,8 @@ class ProductProvider {
   getAllAvailableProducts() async {
     var response = await firestore
         .collection('products')
+        .where('isAvailable', isEqualTo: true)
         .get();
-        // .where('isAvailable', isEqualTo: true)
 
     var docs = response.docs;
     List<ProductModel> productList = [];
