@@ -8,13 +8,15 @@ import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  final ProductRepository productRepository = ProductRepository();
-
+  final ProductRepository productRepository;
+  HomeController(this.productRepository);
+  
   final popularProducts = List<ProductModel>().obs;
 
   final favoriteProducts = List<ProductModel>().obs;
 
   var _categories = List<CategoryModel>();
+
   List<CategoryModel> get categories => _categories;
 
   AppController appController = Get.find<AppController>();
@@ -29,8 +31,6 @@ class HomeController extends GetxController {
     user = appController.user;
     super.onInit();
   }
-
-
 
   @override
   void onClose() {}
