@@ -44,15 +44,11 @@ class ProductProvider {
   //   } catch (_) {}
   // }
 
-//TODO: Error dnv
   Future<List<ProductModel>> getPopularProducts() async {
     var response = await firestore
         .collection('products')
-        .where('isAvailable', isEqualTo: true)
+        .where('likes', isGreaterThan: 40)
         .get();
-
-   //O Error está vindo o query.get(Nesse caso ele pegou 4 sendo que deveria pegar 3)
-
 
     List<ProductModel> productList = [];
     for (int i = 0; i < response.docs.length; i++) {

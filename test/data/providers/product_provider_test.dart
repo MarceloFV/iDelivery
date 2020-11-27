@@ -30,7 +30,7 @@ void main() {
     MockQueryDocumentSnapshot queryDocumentSnapshot;
     MockQuery query;
 
-    setUpAll(() async {
+    setUp(() async {
       firestore = MockFirestore();
       provider = ProductProvider(firestore: firestore);
       collectionReference = MockCollectionReference();
@@ -39,10 +39,9 @@ void main() {
       querySnapshot = MockQuerySnapshot();
       query = MockQuery();
 
-      when(firestore.collection('products')).thenReturn(collectionReference);
     });
 
-    tearDownAll(() {
+    tearDown(() {
       firestore = null;
       provider = null;
       collectionReference = null;
@@ -74,7 +73,7 @@ void main() {
     test('fetch all available products', () async {
       when(firestore.collection('products')).thenReturn(collectionReference);
 
-      when(collectionReference.where('isAvailable', isEqualTo: true))
+      when(collectionReference.where(any, isEqualTo: true))
           .thenReturn(query);
       when(query.get()).thenAnswer((_) async => querySnapshot);
 
@@ -103,7 +102,7 @@ void main() {
     test('fetch all favorite products', () async {
       when(firestore.collection('products')).thenReturn(collectionReference);
 
-      when(collectionReference.where('isFavorite', isEqualTo: true))
+      when(collectionReference.where(any, isEqualTo: true))
           .thenReturn(query);
       when(query.get()).thenAnswer((_) async => querySnapshot);
 
@@ -132,7 +131,7 @@ void main() {
     test('fetch all popular products', () async { // TODO: Esse teste tem que falhar
       when(firestore.collection('products')).thenReturn(collectionReference);
 
-      when(collectionReference.where('likes', isGreaterThan: 40))
+      when(collectionReference.where(any, isGreaterThan: 40))
           .thenReturn(query);
       when(query.get()).thenAnswer((_) async => querySnapshot);
 
