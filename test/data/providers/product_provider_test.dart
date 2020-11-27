@@ -38,7 +38,6 @@ void main() {
       documentSnapshot = MockDocumentSnapshot();
       querySnapshot = MockQuerySnapshot();
       query = MockQuery();
-
     });
 
     tearDown(() {
@@ -66,15 +65,13 @@ void main() {
       when(querySnapshot.docs).thenReturn(listOfDocs);
 
       var actual = await provider.getAllProducts();
-      var matcher = simpleProductList;
-      expect(actual, matcher);
+      expect(actual, resultList);
     });
 
     test('fetch all available products', () async {
       when(firestore.collection('products')).thenReturn(collectionReference);
 
-      when(collectionReference.where(any, isEqualTo: true))
-          .thenReturn(query);
+      when(collectionReference.where(any, isEqualTo: true)).thenReturn(query);
       when(query.get()).thenAnswer((_) async => querySnapshot);
 
       List<QueryDocumentSnapshot> listOfDocs = [];
@@ -102,8 +99,7 @@ void main() {
     test('fetch all favorite products', () async {
       when(firestore.collection('products')).thenReturn(collectionReference);
 
-      when(collectionReference.where(any, isEqualTo: true))
-          .thenReturn(query);
+      when(collectionReference.where(any, isEqualTo: true)).thenReturn(query);
       when(query.get()).thenAnswer((_) async => querySnapshot);
 
       List<QueryDocumentSnapshot> listOfDocs = [];
@@ -128,10 +124,10 @@ void main() {
       expect(actual, matcher);
     });
 
-    test('fetch all popular products', () async { // TODO: Esse teste tem que falhar
+    test('fetch all popular products', () async {
       when(firestore.collection('products')).thenReturn(collectionReference);
 
-      when(collectionReference.where(any, isGreaterThan: 40))
+      when(collectionReference.where('likes', isGreaterThan: 40))
           .thenReturn(query);
       when(query.get()).thenAnswer((_) async => querySnapshot);
 
@@ -149,6 +145,7 @@ void main() {
       when(querySnapshot.docs).thenReturn(listOfDocs);
 
       var actual = await provider.getPopularProducts();
+
       var matcher =
           simpleProductList.where((element) => element.likes >= 40).toList();
       expect(actual, matcher);

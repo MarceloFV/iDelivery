@@ -12,47 +12,38 @@ class ProductProvider {
 
   Future<List<ProductModel>> getPopularProducts() async {
     var response = await firestore
-        .collection('products')
+        .collection(collectionPath)
         .where('likes', isGreaterThan: 40)
         .get();
-    List<ProductModel> productList = response.docs
+    return response.docs
         .map<ProductModel>((map) => ProductModel.fromDocumentSnapshot(map))
         .toList();
-    return productList;
   }
 
   Future<List<ProductModel>> getFavoriteProduct() async {
     var response = await firestore
-        .collection('products')
+        .collection(collectionPath)
         .where('isFavorite', isEqualTo: true)
         .get();
-
-    List<ProductModel> productList = response.docs
+    return response.docs
         .map<ProductModel>((map) => ProductModel.fromDocumentSnapshot(map))
         .toList();
-
-    return productList;
   }
 
   Future<List<ProductModel>> getAllProducts() async {
-    var response = await firestore.collection('products').get();
-    List<ProductModel> productList = response.docs
+    var response = await firestore.collection(collectionPath).get();
+    return response.docs
         .map<ProductModel>((map) => ProductModel.fromDocumentSnapshot(map))
         .toList();
-
-    return productList;
   }
 
   Future<List<ProductModel>> getAllAvailableProducts() async {
     var response = await firestore
-        .collection('products')
+        .collection(collectionPath)
         .where('isAvailable', isEqualTo: true)
         .get();
-
-    List<ProductModel> productList = response.docs
+    return response.docs
         .map<ProductModel>((map) => ProductModel.fromDocumentSnapshot(map))
         .toList();
-
-    return productList;
   }
 }
