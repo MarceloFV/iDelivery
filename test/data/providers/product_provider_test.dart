@@ -17,53 +17,9 @@ class MockCollectionReference extends Mock implements CollectionReference {}
 
 class MockDocumentReference extends Mock implements DocumentReference {}
 
+class MockQuery extends Mock implements Query {}
+
 void main() {
-  // group('Getting products from the mocked provider', () {
-  //   MockedProductProvider provider = MockedProductProvider();
-  //   test('fetch all products', () async {
-  //     var actual = await provider.getAllProducts();
-  //     var matcher = simpleProductList;
-  //     expect(actual, matcher);
-  //   });
-  //   test('fetch favorite products', () async {
-  //     var actual = await provider.getFavoriteProduct();
-  //     var list = simpleProductList.getRange(0, 3).toList();
-
-  //     var matcher = simpleProductList
-  //         .where((element) => element.isFavorite == true)
-  //         .toList();
-  //     expect(actual, list);
-  //     expect(actual, matcher);
-  //   });
-  //   test('fetch popular products', () async {
-  //     var actual = await provider.getPopularProducts();
-  //     var list = simpleProductList.getRange(3, 7).toList();
-
-  //     var matcher =
-  //         simpleProductList.where((element) => element.likes >= 40).toList();
-  //     expect(actual, list);
-  //     expect(actual, matcher);
-  //   });
-  //   test('fetch popular products', () async {
-  //     var actual = await provider.getAllAvailableProducts();
-  //     var list = simpleProductList.getRange(0, 2).toList();
-
-  //     var matcher = simpleProductList
-  //         .where((element) => element.isAvailable == true)
-  //         .toList();
-  //     expect(actual, list);
-  //     expect(actual, matcher);
-  //   });
-  //   test('fetch popular products', () async {
-  //     var actual =
-  //         await provider.getProductsByCategory(CategoryType.Hamburguer);
-  //     var matcher = simpleProductList
-  //         .where((element) => element.category == CategoryType.Hamburguer)
-  //         .toList();
-  //     expect(actual, matcher);
-  //   });
-  // });
-
   group('Testing products from the mocked firestore: ', () {
     MockFirestore firestore;
     ProductProvider provider;
@@ -72,6 +28,7 @@ void main() {
     MockDocumentReference documentReference;
     MockDocumentSnapshot documentSnapshot;
     MockQueryDocumentSnapshot queryDocumentSnapshot;
+    MockQuery query;
 
     setUpAll(() async {
       firestore = MockFirestore();
@@ -80,34 +37,122 @@ void main() {
       documentReference = MockDocumentReference();
       documentSnapshot = MockDocumentSnapshot();
       querySnapshot = MockQuerySnapshot();
-
-      List<QueryDocumentSnapshot> listOfDocs = [];
+      query = MockQuery();
 
       when(firestore.collection('products')).thenReturn(collectionReference);
-      for (int i = 0; i < simpleProductList.length; i++) {
-        ProductModel model = simpleProductList[i];
+    });
+
+    tearDownAll(() {
+      firestore = null;
+      provider = null;
+      collectionReference = null;
+      documentReference = null;
+      documentSnapshot = null;
+      querySnapshot = null;
+      query = null;
+    });
+
+    test('fetch all products:', () async {
+      List<QueryDocumentSnapshot> listOfDocs = [];
+      var resultList = simpleProductList;
+      when(firestore.collection('products')).thenReturn(collectionReference);
+      when(collectionReference.get()).thenAnswer((_) async => querySnapshot);
+      for (int i = 0; i < resultList.length; i++) {
+        ProductModel model = resultList[i];
         Map<String, dynamic> map = model.toDocument();
         queryDocumentSnapshot = MockQueryDocumentSnapshot();
-        // when(collectionReference.add(map))
-        //     .thenAnswer((_) async => documentReference);
-        // when(documentReference.get()).thenAnswer((_) async => documentSnapshot);
-        // when(documentSnapshot.data()).thenReturn(map);
-        when(collectionReference.get()).thenAnswer((_) async => querySnapshot);
         when(queryDocumentSnapshot.data()).thenReturn(map);
         listOfDocs.add(queryDocumentSnapshot);
       }
       when(querySnapshot.docs).thenReturn(listOfDocs);
-    });
 
-    test('fetch all products:', () async {
       var actual = await provider.getAllProducts();
       var matcher = simpleProductList;
       expect(actual, matcher);
     });
-    // test('fetch all available products', () async{
-    //   var actual = await provider.getAllAvailableProducts();
-    //   var matcher = simpleProductList.where((element) => element.isAvailable == true).toList();
-    //   expect(actual, matcher);
-    // });
+
+    test('fetch all available products', () async {
+      when(firestore.collection('products')).thenReturn(collectionReference);
+
+      when(collectionReference.where('isAvailable', isEqualTo: true))
+          .thenReturn(query);
+      when(query.get()).thenAnswer((_) async => querySnapshot);
+
+      List<QueryDocumentSnapshot> listOfDocs = [];
+
+      var resultList = simpleProductList
+          .where((element) => element.isAvailable == true)
+          .toList();
+
+      for (int i = 0; i < resultList.length; i++) {
+        ProductModel model = resultList[i];
+        Map<String, dynamic> map = model.toDocument();
+        queryDocumentSnapshot = MockQueryDocumentSnapshot();
+        when(queryDocumentSnapshot.data()).thenReturn(map);
+        listOfDocs.add(queryDocumentSnapshot);
+      }
+
+      when(querySnapshot.docs).thenReturn(listOfDocs);
+
+      var actual = await provider.getAllAvailableProducts();
+      var matcher = simpleProductList
+          .where((element) => element.isAvailable == true)
+          .toList();
+      expect(actual, matcher);
+    });
+    test('fetch all favorite products', () async {
+      when(firestore.collection('products')).thenReturn(collectionReference);
+
+      when(collectionReference.where('isFavorite', isEqualTo: true))
+          .thenReturn(query);
+      when(query.get()).thenAnswer((_) async => querySnapshot);
+
+      List<QueryDocumentSnapshot> listOfDocs = [];
+
+      var resultList = simpleProductList
+          .where((element) => element.isFavorite == true)
+          .toList();
+
+      for (int i = 0; i < resultList.length; i++) {
+        ProductModel model = resultList[i];
+        Map<String, dynamic> map = model.toDocument();
+        queryDocumentSnapshot = MockQueryDocumentSnapshot();
+        when(queryDocumentSnapshot.data()).thenReturn(map);
+        listOfDocs.add(queryDocumentSnapshot);
+      }
+      when(querySnapshot.docs).thenReturn(listOfDocs);
+
+      var actual = await provider.getFavoriteProduct();
+      var matcher = simpleProductList
+          .where((element) => element.isFavorite == true)
+          .toList();
+      expect(actual, matcher);
+    });
+
+    test('fetch all popular products', () async { // TODO: Esse teste tem que falhar
+      when(firestore.collection('products')).thenReturn(collectionReference);
+
+      when(collectionReference.where('likes', isGreaterThan: 40))
+          .thenReturn(query);
+      when(query.get()).thenAnswer((_) async => querySnapshot);
+
+      List<QueryDocumentSnapshot> listOfDocs = [];
+      var resultList =
+          simpleProductList.where((element) => element.likes >= 40).toList();
+
+      for (int i = 0; i < resultList.length; i++) {
+        ProductModel model = resultList[i];
+        Map<String, dynamic> map = model.toDocument();
+        queryDocumentSnapshot = MockQueryDocumentSnapshot();
+        when(queryDocumentSnapshot.data()).thenReturn(map);
+        listOfDocs.add(queryDocumentSnapshot);
+      }
+      when(querySnapshot.docs).thenReturn(listOfDocs);
+
+      var actual = await provider.getPopularProducts();
+      var matcher =
+          simpleProductList.where((element) => element.likes >= 40).toList();
+      expect(actual, matcher);
+    });
   });
 }

@@ -44,96 +44,54 @@ class ProductProvider {
   //   } catch (_) {}
   // }
 
+//TODO: Error dnv
   Future<List<ProductModel>> getPopularProducts() async {
-    var list = <ProductModel>[
-      ProductModel(
-          // https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Pizza_mezzo_a_mezzo.jpg/1200px-Pizza_mezzo_a_mezzo.jpg
-          imgUrl:
-              "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Pizza_mezzo_a_mezzo.jpg/1200px-Pizza_mezzo_a_mezzo.jpg",
-          title: "Pizza",
-          storeName: "Ponta da rua",
-          value: 20),
-      ProductModel(
-          imgUrl:
-              "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Pizza_mezzo_a_mezzo.jpg/1200px-Pizza_mezzo_a_mezzo.jpg",
-          title: "Pizza",
-          storeName: "Ponta da rua",
-          value: 20),
-      ProductModel(
-          imgUrl:
-              "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Pizza_mezzo_a_mezzo.jpg/1200px-Pizza_mezzo_a_mezzo.jpg",
-          title: "Pizza",
-          storeName: "Ponta da rua",
-          value: 20),
-      ProductModel(
-          imgUrl:
-              "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Pizza_mezzo_a_mezzo.jpg/1200px-Pizza_mezzo_a_mezzo.jpg",
-          title: "Pizza",
-          storeName: "Ponta da rua",
-          value: 20),
-    ];
-
-    return Future.delayed(Duration(seconds: 1), () => list);
-  }
-
-  Future<List<ProductModel>> getFavoriteProduct() {
-    return Future.delayed(
-        Duration(seconds: 1),
-        () => <ProductModel>[
-              ProductModel(
-                imgUrl:
-                    "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Pizza_mezzo_a_mezzo.jpg/1200px-Pizza_mezzo_a_mezzo.jpg",
-                title: "Pizza dois sabores",
-                storeName: "Pizzaria Italiano",
-                category: CategoryType.Pizza,
-                description:
-                    "Nibh faucibus pellentesque ac viverra maecenas ultricies in nisl, faucibus pellentesque ac viverra ecenas ultricies in nisl",
-                likes: 30,
-                value: 20,
-                storeId: '23hiu32h1i2',
-                storeShipPrice: 3.0,
-              ),
-              ProductModel(
-                imgUrl:
-                    "https://i.pinimg.com/564x/73/cf/20/73cf20f1ea9029358bcc8b7fba39aef9.jpg",
-                title: "X-bacon",
-                storeName: "Biribita",
-                value: 25,
-                storeId: '23hiu32h1i2',
-                storeShipPrice: 3.0,
-              ),
-              ProductModel(
-                imgUrl:
-                    "https://img.cybercook.com.br/receitas/6/pastel-na-airfryer-623x350.jpeg",
-                title: "Pastel de carne",
-                storeName: "Pastel da ana",
-                value: 32,
-                storeId: '312321321',
-                storeShipPrice: 7.0,
-              ),
-            ]);
-  }
-
-  Future<List<ProductModel>> getAllProducts() async {
-    var response = await firestore.collection('products').get();
-    var docs = response.docs;
-    List<ProductModel> productList = [];
-    for (int i = 0; i < docs.length; i++) {
-      productList.add(ProductModel.fromDocumentSnapshot(docs[i]));
-    }
-    return productList;
-  }
-
-  getAllAvailableProducts() async {
     var response = await firestore
         .collection('products')
         .where('isAvailable', isEqualTo: true)
         .get();
 
-    var docs = response.docs;
+   //O Error está vindo o query.get(Nesse caso ele pegou 4 sendo que deveria pegar 3)
+
+
     List<ProductModel> productList = [];
-    for (int i = 0; i < docs.length; i++) {
-      productList.add(ProductModel.fromDocumentSnapshot(docs[i]));
+    for (int i = 0; i < response.docs.length; i++) {
+      productList.add(ProductModel.fromDocumentSnapshot(response.docs[i]));
+    }
+    return productList;
+  }
+
+  Future<List<ProductModel>> getFavoriteProduct() async {
+    var response = await firestore
+        .collection('products')
+        .where('isFavorite', isEqualTo: true)
+        .get();
+
+    List<ProductModel> productList = [];
+    for (int i = 0; i < response.docs.length; i++) {
+      productList.add(ProductModel.fromDocumentSnapshot(response.docs[i]));
+    }
+    return productList;
+  }
+
+  Future<List<ProductModel>> getAllProducts() async {
+    var response = await firestore.collection('products').get();
+    List<ProductModel> productList = [];
+    for (int i = 0; i < response.docs.length; i++) {
+      productList.add(ProductModel.fromDocumentSnapshot(response.docs[i]));
+    }
+    return productList;
+  }
+
+  Future<List<ProductModel>> getAllAvailableProducts() async {
+    var response = await firestore
+        .collection('products')
+        .where('isAvailable', isEqualTo: true)
+        .get();
+
+    List<ProductModel> productList = [];
+    for (int i = 0; i < response.docs.length; i++) {
+      productList.add(ProductModel.fromDocumentSnapshot(response.docs[i]));
     }
     return productList;
   }

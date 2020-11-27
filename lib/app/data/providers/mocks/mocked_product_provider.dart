@@ -52,7 +52,7 @@ List<ProductModel> simpleProductList = [
     category: CategoryType.Hamburguer,
     description: 'Pizza delicinha',
     id: 'xxxx1',
-    isFavorite: true,
+    isFavorite: false,
     isAvailable: true,
     likes: 30,
     storeShipPrice: 3.0,
@@ -87,6 +87,7 @@ List<ProductModel> simpleProductList = [
     likes: 30,
     id: 'xxxx3',
     isFavorite: true,
+    isAvailable: false,
   ),
   ProductModel(
     imgUrl:
@@ -98,6 +99,7 @@ List<ProductModel> simpleProductList = [
     description: 'Pizza delicosa',
     likes: 40,
     isFavorite: false,
+    isAvailable: true,
     id: 'xxxx4',
     storeId: 'xx',
     storeShipPrice: 2,
@@ -117,7 +119,7 @@ List<ProductModel> simpleProductList = [
       title: "Pizza favorita 2",
       storeName: "Ponta da rua",
       value: 20,
-      isFavorite: false,
+      isFavorite: true,
       likes: 80),
   ProductModel(
       imgUrl:
