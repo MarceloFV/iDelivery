@@ -37,18 +37,19 @@ void main() {
       documentReference = MockDocumentReference();
       documentSnapshot = MockDocumentSnapshot();
       querySnapshot = MockQuerySnapshot();
+      queryDocumentSnapshot = MockQueryDocumentSnapshot();
       query = MockQuery();
     });
 
-    tearDown(() {
-      firestore = null;
-      provider = null;
-      collectionReference = null;
-      documentReference = null;
-      documentSnapshot = null;
-      querySnapshot = null;
-      query = null;
-    });
+    // tearDown(() {
+    //   firestore = null;
+    //   provider = null;
+    //   collectionReference = null;
+    //   documentReference = null;
+    //   documentSnapshot = null;
+    //   querySnapshot = null;
+    //   query = null;
+    // });
 
     test('fetch all products:', () async {
       List<QueryDocumentSnapshot> listOfDocs = [];
@@ -71,7 +72,7 @@ void main() {
     test('fetch all available products', () async {
       when(firestore.collection('products')).thenReturn(collectionReference);
 
-      when(collectionReference.where(any, isEqualTo: true)).thenReturn(query);
+      when(collectionReference.where('isAvailable', isEqualTo: true)).thenReturn(query);
       when(query.get()).thenAnswer((_) async => querySnapshot);
 
       List<QueryDocumentSnapshot> listOfDocs = [];
@@ -99,7 +100,7 @@ void main() {
     test('fetch all favorite products', () async {
       when(firestore.collection('products')).thenReturn(collectionReference);
 
-      when(collectionReference.where(any, isEqualTo: true)).thenReturn(query);
+      when(collectionReference.where('isFavorite', isEqualTo: true)).thenReturn(query);
       when(query.get()).thenAnswer((_) async => querySnapshot);
 
       List<QueryDocumentSnapshot> listOfDocs = [];

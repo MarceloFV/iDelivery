@@ -1,9 +1,11 @@
 
+import 'dart:convert';
+
 import 'package:delivery_app/app/data/models/product.dart';
 
 class OrderModel {
-  int amount;
   ProductModel product;
+  int amount;
   String message;
   double value;
 
@@ -41,4 +43,28 @@ class OrderModel {
       message.hashCode ^
       value.hashCode;
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'product': product?.toMap(),
+      'amount': amount,
+      'message': message,
+      'value': value,
+    };
+  }
+
+  factory OrderModel.fromMap(Map<String, dynamic> map) {
+    if (map == null) return null;
+  
+    return OrderModel(
+      product: ProductModel.fromMap(map['product']),
+      amount: map['amount'],
+      message: map['message'],
+      value: map['value'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory OrderModel.fromJson(String source) => OrderModel.fromMap(json.decode(source));
 }

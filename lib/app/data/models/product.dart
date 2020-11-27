@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductModel {
@@ -5,8 +7,7 @@ class ProductModel {
   String imgUrl;
   String title;
   String description;
-  CategoryType
-      category; // talvez conflite com o categoryModel, ja que esse seria o type
+  CategoryType category;
   double value;
   String storeId;
   String storeName;
@@ -16,7 +17,6 @@ class ProductModel {
   int likes;
   DocumentReference storeReference;
   DocumentReference reference;
-  // ja que tenho o referencia talvez nao necessite do id;
 
   ProductModel({
     this.id,
@@ -109,6 +109,46 @@ class ProductModel {
       storeReference.hashCode ^
       reference.hashCode;
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'imgUrl': imgUrl,
+      'title': title,
+      'description': description,
+      'category': category.toString(),
+      'value': value,
+      'storeId': storeId,
+      'storeName': storeName,
+      'storeShipPrice': storeShipPrice,
+      'isFavorite': isFavorite,
+      'isAvailable': isAvailable,
+      'likes': likes,
+    };
+  }
+
+  factory ProductModel.fromMap(Map<String, dynamic> map) {
+    if (map == null) return null;
+  
+    return ProductModel(
+      id: map['id'],
+      imgUrl: map['imgUrl'],
+      title: map['title'],
+      description: map['description'],
+      category: map['category'],
+      value: map['value'],
+      storeId: map['storeId'],
+      storeName: map['storeName'],
+      storeShipPrice: map['storeShipPrice'],
+      isFavorite: map['isFavorite'],
+      isAvailable: map['isAvailable'],
+      likes: map['likes'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory ProductModel.fromJson(String source) => ProductModel.fromMap(json.decode(source));
 }
 
 enum CategoryType {
