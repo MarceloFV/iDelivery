@@ -20,6 +20,6 @@ class MainController extends GetxController {
   List<ProductModel> get productList => _productList;
 
   getProductList() async {
-    _productList.assignAll(await productProvider.getProducts());
+    // _productList.assignAll(await productProvider.getProducts());
   }
 }
