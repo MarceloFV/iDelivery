@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
 import 'package:delivery_app/app/data/models/order.dart';
-import 'package:delivery_app/app/data/models/user.dart';
 
 class RequestModel {
   List<OrderModel> orders;
