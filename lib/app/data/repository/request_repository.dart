@@ -1,12 +1,15 @@
 import 'package:delivery_app/app/data/models/order.dart';
 import 'package:delivery_app/app/data/models/user.dart';
-import 'package:delivery_app/app/data/providers/mocks/mocked_request_provider.dart';
-
+import 'package:delivery_app/app/data/providers/request_provider.dart';
+import 'package:meta/meta.dart';
 class RequestRepository {
-  MockedRequestProvider provider = MockedRequestProvider();
+
+  final RequestProvider provider;
+
+  RequestRepository({@required this.provider});
 
   add(List<OrderModel> orderList, UserModel user) { // trocar para bool
-    return provider.add(orderList, user);
+    return provider.sendOrder(orderList, user);
     // return apiClient.add(obj);
   }
 

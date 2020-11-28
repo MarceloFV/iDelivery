@@ -12,22 +12,18 @@ class MockCollectionReference extends Mock implements CollectionReference {}
 
 class MockDocumentReference extends Mock implements DocumentReference {}
 
-class MockQuerySnapshot extends Mock implements QuerySnapshot {}
-
 void main() {
-  group('Request provider', () {
+  group('Request provider without user', () {
     RequestProvider provider;
     MockFirestore firestore;
     MockCollectionReference collectionReference;
     MockDocumentReference documentReference;
-    // MockQuerySnapshot querySnapshot;
 
     setUp(() {
       firestore = MockFirestore();
       provider = RequestProvider(firestore: firestore);
       collectionReference = MockCollectionReference();
       documentReference = MockDocumentReference();
-      // querySnapshot = MockQuerySnapshot();
 
       when(firestore.collection('requests')).thenReturn(collectionReference);
       when(collectionReference.add(any))
@@ -35,35 +31,34 @@ void main() {
     });
 
     test('Sending request with a single order', () {
-      var actual = provider.sendOrder(singleOrderMockedList);
-      var matcher = RequestStatus.Enviada;
+      var actual = provider.sendOrder(singleOrderMockedList, null);
+      var matcher = singleOrderRequestMockedList;
+      var actualStatus = provider.requestStatus;
+      var matcherStatus = RequestStatus.Enviada;
+      expect(actualStatus, matcherStatus);
       expect(actual, matcher);
     });
+
     test('Sending request with a multiple order of the same store', () {
-      var actual = provider.sendOrder(multiOrderSameStoreMockedList);
-      var matcher = RequestStatus.Enviada;
+      var actual = provider.sendOrder(multiOrderSameStoreMockedList, null);
+      var matcher = multiOrderSameStoreSingleRequestMockedList;
+      var actualStatus = provider.requestStatus;
+      var matcherStatus = RequestStatus.Enviada;
+      expect(actualStatus, matcherStatus);
       expect(actual, matcher);
     });
     test('Sending multiRequest with orders of the various store', () {
-      var actual = provider.sendOrder(orderListMocked);
-      var matcher = RequestStatus.Enviada;
+      var actual = provider.sendOrder(orderListMocked, null);
+      var matcher = multiOrderMultiStoreRequestMockedList;
+      var actualStatus = provider.requestStatus;
+      var matcherStatus = RequestStatus.Enviada;
+      expect(actualStatus, matcherStatus);
       expect(actual, matcher);
     });
   });
 }
 
-// final List<RequestModel> requestListMocked = <RequestModel>[
-//   RequestModel(
-//     orders: [orderListMocked[0], orderListMocked[1]],
-//     storeId: orderListMocked[0].product.storeId,
-//   ),
-//   RequestModel(
-//     orders: [orderListMocked[2]],
-//     storeId: orderListMocked[2].product.storeId,
-//   ),
-// ];
-
-final List<OrderModel> multiOrderSameStoreMockedList = <OrderModel>[
+final multiOrderSameStoreMockedList = [
   OrderModel(
     product: ProductModel(
       imgUrl:
@@ -88,7 +83,14 @@ final List<OrderModel> multiOrderSameStoreMockedList = <OrderModel>[
   ),
 ];
 
-final List<OrderModel> singleOrderMockedList = <OrderModel>[
+final multiOrderSameStoreSingleRequestMockedList = [
+  RequestModel(
+    orders: multiOrderSameStoreMockedList,
+    storeId: 'xx',
+  )
+];
+
+final singleOrderMockedList = [
   OrderModel(
     product: ProductModel(
       imgUrl:
@@ -102,7 +104,14 @@ final List<OrderModel> singleOrderMockedList = <OrderModel>[
   ),
 ];
 
-final List<OrderModel> orderListMocked = <OrderModel>[
+final singleOrderRequestMockedList = [
+  RequestModel(
+    orders: singleOrderMockedList,
+    storeId: 'xx',
+  ),
+];
+
+final orderListMocked = [
   OrderModel(
     product: ProductModel(
       imgUrl:
@@ -138,4 +147,10 @@ final List<OrderModel> orderListMocked = <OrderModel>[
   ),
 ];
 
-// OrderModel();
+final multiOrderMultiStoreRequestMockedList = [
+  RequestModel(orders: [orderListMocked[0], orderListMocked[1]], storeId: 'xx'),
+  RequestModel(
+    orders: [orderListMocked[2]],
+    storeId: 'yy',
+  ),
+];

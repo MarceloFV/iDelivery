@@ -8,7 +8,15 @@ import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:get/get.dart';
 
 class CartController extends GetxController {
+
+final RequestRepository repository;
+  CartController({this.repository});
+
   final _itemAmount = 0.obs;
+
+  AppController appController = Get.find<AppController>();
+
+
   String get itemAmount => _itemAmount.string;
 
   final _orderList = <OrderModel>[].obs;
@@ -24,9 +32,7 @@ class CartController extends GetxController {
 
   Worker worker;
 
-  RequestRepository repository = RequestRepository();
-
-  AppController appController = Get.find<AppController>();
+  
   final _user = UserModel().obs;
 
   final _adress = Address().obs;

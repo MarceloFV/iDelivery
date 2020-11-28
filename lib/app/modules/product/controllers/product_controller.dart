@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delivery_app/app/data/models/product.dart';
+import 'package:delivery_app/app/data/providers/request_provider.dart';
+import 'package:delivery_app/app/data/repository/request_repository.dart';
 import 'package:delivery_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:delivery_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +39,15 @@ class ProductController extends GetxController {
     if (Get.isRegistered<CartController>())
       cartController = Get.find<CartController>();
     else
-      cartController = Get.put(CartController(), permanent: true);
+      cartController = Get.put(
+          CartController(
+            repository: RequestRepository(
+              provider: RequestProvider(
+                firestore: FirebaseFirestore.instance,
+              ),
+            ),
+          ),
+          permanent: true);
     cartController.addProductToCart(
         product, messageTextController.text, amount);
     isAdded.value = true;
