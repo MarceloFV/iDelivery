@@ -10,13 +10,13 @@ class ProductRepository {
   Future<List<ProductModel>> getAllProducts() => provider.getAllProducts();
 
   Future<List<ProductModel>> getAllAvailableProducts() =>
-      provider.getAllAvailableProducts();
+      provider.getAvailableProducts();
 
   Future<List<ProductModel>> getPopularProducts() =>
       provider.getPopularProducts();
 
   Future<List<ProductModel>> getFavoriteProduct() =>
-      provider.getFavoriteProduct();
+      provider.getFavoriteProducts();
 
   Future<List<ProductModel>> getProductByCategory(CategoryType category) =>
       provider.getProductsByCategory(category); // change to CategoryType

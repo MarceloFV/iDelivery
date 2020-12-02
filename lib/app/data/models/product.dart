@@ -42,7 +42,7 @@ class ProductModel {
         title: snapshot.data()['title'],
         description: snapshot.data()['description'],
         storeName: snapshot.data()['storeName'],
-        category: snapshot.data()['category'],
+        // category: snapshot.data()['category'],
         isFavorite: snapshot.data()['isFavorite'],
         isAvailable: snapshot.data()['isAvailable'],
         likes: snapshot.data()['likes'],
@@ -50,7 +50,7 @@ class ProductModel {
         storeShipPrice: snapshot.data()['storeShipPrice'],
         value: snapshot.data()['value'],
         storeReference: snapshot.data()['storeReference'],
-        reference: snapshot.reference,
+        // reference: snapshot.reference,
       );
 
   Map<String, dynamic> toDocument() {
@@ -70,6 +70,8 @@ class ProductModel {
       'storeReference': storeReference,
     };
   }
+
+
 
   @override
   bool operator ==(Object o) {
@@ -110,6 +112,11 @@ class ProductModel {
       reference.hashCode;
   }
 
+
+  String toJson() => json.encode(toMap());
+
+  factory ProductModel.fromJson(String source) => ProductModel.fromMap(json.decode(source));
+
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -127,28 +134,46 @@ class ProductModel {
     };
   }
 
-  factory ProductModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-  
-    return ProductModel(
-      id: map['id'],
-      imgUrl: map['imgUrl'],
-      title: map['title'],
-      description: map['description'],
-      category: map['category'],
-      value: map['value'],
-      storeId: map['storeId'],
-      storeName: map['storeName'],
-      storeShipPrice: map['storeShipPrice'],
-      isFavorite: map['isFavorite'],
-      isAvailable: map['isAvailable'],
-      likes: map['likes'],
-    );
+  ProductModel.fromMap(Map<String, dynamic> map) {
+      id = map['id'];
+      imgUrl = map['imgUrl'];
+      title = map['title'];
+      description = map['description'];
+      category = getCategory(map['category']);
+      value = map['value'];
+      storeId = map['storeId'];
+      storeName = map['storeName'];
+      storeShipPrice = map['storeShipPrice'];
+      isFavorite = map['isFavorite'];
+      isAvailable = map['isAvailable'];
+      likes = map['likes'];
+      // storeReference: DocumentReference.fromMap(map['storeReference']),
+      // reference: DocumentReference.fromMap(map['reference']),
+    
   }
 
-  String toJson() => json.encode(toMap());
+  CategoryType getCategory(String type){
+    switch (type) {
+      case 'CategoryType.Hamburguer':
+        return CategoryType.Hamburguer;
+      case 'CategoryType.Pizza':
+        return CategoryType.Pizza;
+      case 'CategoryType.Sorvete':
+        return CategoryType.Sorvete;
+      case 'CategoryType.Bolo':
+        return CategoryType.Bolo;
+      case 'CategoryType.Hotdog':
+        return CategoryType.Hotdog;
+      case 'CategoryType.Pastel':
+        return CategoryType.Pastel;
+      default:
+    }
+  }
 
-  factory ProductModel.fromJson(String source) => ProductModel.fromMap(json.decode(source));
+  // @override
+  // String toString() {
+  //   return 'ProductModel(id: $id, imgUrl: $imgUrl, title: $title, description: $description, category: $category, value: $value, storeId: $storeId, storeName: $storeName, storeShipPrice: $storeShipPrice, isFavorite: $isFavorite, isAvailable: $isAvailable, likes: $likes, storeReference: $storeReference, reference: $reference)';
+  // }
 }
 
 enum CategoryType {

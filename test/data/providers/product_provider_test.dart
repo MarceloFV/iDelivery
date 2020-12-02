@@ -4,6 +4,8 @@ import 'package:delivery_app/app/data/providers/product_provider.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
+import 'package:cloud_firestore_mocks/cloud_firestore_mocks.dart';
+
 class MockFirestore extends Mock implements FirebaseFirestore {}
 
 class MockQuerySnapshot extends Mock implements QuerySnapshot {}
@@ -14,121 +16,40 @@ class MockCollectionReference extends Mock implements CollectionReference {}
 
 class MockQuery extends Mock implements Query {}
 
-void main() {
-  group('Testing products from mocked firestore: ', () {
-    MockFirestore firestore;
-    ProductProvider provider;
-    MockQuerySnapshot querySnapshot;
-    MockCollectionReference collectionReference;
-    MockQueryDocumentSnapshot queryDocumentSnapshot;
-    MockQuery query;
-
-    setUp(() async {
-      firestore = MockFirestore();
-      provider = ProductProvider(firestore: firestore);
-      collectionReference = MockCollectionReference();
-      querySnapshot = MockQuerySnapshot();
-      queryDocumentSnapshot = MockQueryDocumentSnapshot();
-      query = MockQuery();
-    });
-
+Future<void> main() async {
+    final firestore = MockFirestoreInstance();
+    final provider = ProductProvider(firestore: firestore);
+    
+      for (var i = 0; i < simpleProductList.length; i++) {
+        await firestore
+            .collection('products')
+            .add(simpleProductList[i].toDocument());
+      }
+    
+  group('Testing product provider with cloud firestore mock library: ', () {
     test('fetch all products:', () async {
-      List<QueryDocumentSnapshot> listOfDocs = [];
-      var resultList = simpleProductList;
-      when(firestore.collection('products')).thenReturn(collectionReference);
-      when(collectionReference.get()).thenAnswer((_) async => querySnapshot);
-      for (int i = 0; i < resultList.length; i++) {
-        ProductModel model = resultList[i];
-        Map<String, dynamic> map = model.toDocument();
-        queryDocumentSnapshot = MockQueryDocumentSnapshot();
-        when(queryDocumentSnapshot.data()).thenReturn(map);
-        listOfDocs.add(queryDocumentSnapshot);
-      }
-      when(querySnapshot.docs).thenReturn(listOfDocs);
-
-      var actual = await provider.getAllProducts();
-      expect(actual, resultList);
+      final actual = await provider.getAllProducts();
+      final matcher = simpleProductList;
+      // print(actual.first.toString());
+      expect(actual, matcher);
     });
-
     test('fetch all available products', () async {
-      when(firestore.collection('products')).thenReturn(collectionReference);
-
-      when(collectionReference.where('isAvailable', isEqualTo: true)).thenReturn(query);
-      when(query.get()).thenAnswer((_) async => querySnapshot);
-
-      List<QueryDocumentSnapshot> listOfDocs = [];
-
-      var resultList = simpleProductList
-          .where((element) => element.isAvailable == true)
-          .toList();
-
-      for (int i = 0; i < resultList.length; i++) {
-        ProductModel model = resultList[i];
-        Map<String, dynamic> map = model.toDocument();
-        queryDocumentSnapshot = MockQueryDocumentSnapshot();
-        when(queryDocumentSnapshot.data()).thenReturn(map);
-        listOfDocs.add(queryDocumentSnapshot);
-      }
-
-      when(querySnapshot.docs).thenReturn(listOfDocs);
-
-      var actual = await provider.getAllAvailableProducts();
-      var matcher = simpleProductList
+      final actual = await provider.getAvailableProducts();
+      final matcher = simpleProductList
           .where((element) => element.isAvailable == true)
           .toList();
       expect(actual, matcher);
     });
     test('fetch all favorite products', () async {
-      when(firestore.collection('products')).thenReturn(collectionReference);
-
-      when(collectionReference.where('isFavorite', isEqualTo: true)).thenReturn(query);
-      when(query.get()).thenAnswer((_) async => querySnapshot);
-
-      List<QueryDocumentSnapshot> listOfDocs = [];
-
-      var resultList = simpleProductList
-          .where((element) => element.isFavorite == true)
-          .toList();
-
-      for (int i = 0; i < resultList.length; i++) {
-        ProductModel model = resultList[i];
-        Map<String, dynamic> map = model.toDocument();
-        queryDocumentSnapshot = MockQueryDocumentSnapshot();
-        when(queryDocumentSnapshot.data()).thenReturn(map);
-        listOfDocs.add(queryDocumentSnapshot);
-      }
-      when(querySnapshot.docs).thenReturn(listOfDocs);
-
-      var actual = await provider.getFavoriteProduct();
-      var matcher = simpleProductList
+      final actual = await provider.getFavoriteProducts();
+      final matcher = simpleProductList
           .where((element) => element.isFavorite == true)
           .toList();
       expect(actual, matcher);
     });
-
     test('fetch all popular products', () async {
-      when(firestore.collection('products')).thenReturn(collectionReference);
-
-      when(collectionReference.where('likes', isGreaterThan: 40))
-          .thenReturn(query);
-      when(query.get()).thenAnswer((_) async => querySnapshot);
-
-      List<QueryDocumentSnapshot> listOfDocs = [];
-      var resultList =
-          simpleProductList.where((element) => element.likes >= 40).toList();
-
-      for (int i = 0; i < resultList.length; i++) {
-        ProductModel model = resultList[i];
-        Map<String, dynamic> map = model.toDocument();
-        queryDocumentSnapshot = MockQueryDocumentSnapshot();
-        when(queryDocumentSnapshot.data()).thenReturn(map);
-        listOfDocs.add(queryDocumentSnapshot);
-      }
-      when(querySnapshot.docs).thenReturn(listOfDocs);
-
-      var actual = await provider.getPopularProducts();
-
-      var matcher =
+      final actual = await provider.getPopularProducts();
+      final matcher =
           simpleProductList.where((element) => element.likes >= 40).toList();
       expect(actual, matcher);
     });
