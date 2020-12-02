@@ -1,12 +1,12 @@
 import 'package:delivery_app/app/data/repository/user_repository.dart';
 import 'package:delivery_app/app/routes/app_pages.dart';
 import 'package:get/get.dart';
-// import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 
 class SplashController extends GetxController {
-  final UserRepository repository = UserRepository();
+  final UserRepository repository ;
 
-  // SplashController({@required this.repository}) : assert(repository != null);
+  SplashController({@required this.repository}) : assert(repository != null);
 
   RxBool isUserConnected = false.obs;
 

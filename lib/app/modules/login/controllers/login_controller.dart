@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
-  final UserRepository repository = UserRepository();
+  final UserRepository repository;
 
-  // LoginController({@required this.repository}) : assert(repository != null);
+  LoginController({@required this.repository}) : assert(repository != null);
 
   UserModel userModel;
 

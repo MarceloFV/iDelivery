@@ -1,16 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delivery_app/app/data/models/user.dart';
 import 'package:delivery_app/app/data/providers/user_provider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:meta/meta.dart';
+import 'package:meta/meta.dart';
 
 class UserRepository {
-  final UserProvider provider = UserProvider(
-    firestore: FirebaseFirestore.instance,
-    firebaseAuth: FirebaseAuth.instance,
-  );
+  final UserProvider provider;
 
-  // UserRepository({@required this.provider}) : assert(provider != null);
+  UserRepository({@required this.provider}) : assert(provider != null);
 
   createUser(UserModel user, String password) =>
       provider.createUser(user, password);

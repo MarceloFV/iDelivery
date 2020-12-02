@@ -3,12 +3,12 @@ import 'package:delivery_app/app/data/repository/user_repository.dart';
 import 'package:delivery_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 
 class RegisterController extends GetxController {
-  final UserRepository repository = UserRepository();
+  final UserRepository repository;
 
-  // RegisterController({@required this.repository}) : assert(repository != null);
+  RegisterController({@required this.repository}) : assert(repository != null);
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
