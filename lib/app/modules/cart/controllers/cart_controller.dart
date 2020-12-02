@@ -2,20 +2,15 @@ import 'package:delivery_app/app/data/models/order.dart';
 import 'package:delivery_app/app/data/models/product.dart';
 import 'package:delivery_app/app/data/models/user.dart';
 import 'package:delivery_app/app/data/repository/request_repository.dart';
-import 'package:delivery_app/app/global_controllers/app_controller.dart';
 import 'package:delivery_app/app/routes/app_pages.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:get/get.dart';
 
 class CartController extends GetxController {
-
-final RequestRepository repository;
+  final RequestRepository repository;
   CartController({this.repository});
 
   final _itemAmount = 0.obs;
-
-  AppController appController = Get.find<AppController>();
-
 
   String get itemAmount => _itemAmount.string;
 
@@ -32,12 +27,14 @@ final RequestRepository repository;
 
   Worker worker;
 
-  
   final _user = UserModel().obs;
 
   final _adress = Address().obs;
-  String get userAdress =>
-      "${_adress.value.rua}, nº ${_adress.value.numero}, ${_adress.value.bairro}, ${_adress.value.cep}";
+
+
+  String get userAdress => (_adress.value != null)
+      ? "${_adress.value?.rua}, nº ${_adress.value?.numero}, ${_adress.value?.bairro}, ${_adress.value?.cep}"
+      : 'Adicionar endereço';
 
   @override
   void onInit() {
@@ -60,12 +57,13 @@ final RequestRepository repository;
 
   void onAdressPressed() async {
     var val = await Get.toNamed(Routes.ADRESS,
-        arguments: {'adress': _user.value.adress});
+        arguments: {'adress': _adress.value});
+
     if (val != null) _adress.value = val;
   }
 
   _fetchUser() {
-    _user.value = appController.user;
+    _user.value = Get.arguments['user'];
   }
 
   onOrderListChanged(nOrderList) {

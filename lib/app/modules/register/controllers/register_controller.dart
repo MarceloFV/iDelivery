@@ -25,7 +25,7 @@ class RegisterController extends GetxController {
   }
 
   onUserCreated(UserModel user) {
-    if (user != null) Get.offAllNamed(Routes.LAYOUT, arguments: {'user': user});
+    if (user != null) Get.offAllNamed(Routes.HOME, arguments: {'user': user});
   }
 
   register() async {

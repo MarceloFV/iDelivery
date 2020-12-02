@@ -16,19 +16,20 @@ class AddressView extends GetView<AddressController> {
         minimum: EdgeInsets.all(32),
         child: ListView(
           children: [
-            Text('Endereço atual:', style: Theme.of(context).textTheme.headline5,),
-            SizedBox(height: 6,),
-            Text('Rua: ${controller.currentRua}'),
-            SizedBox(height: 4,),
-            Text('Bairro: ${controller.currentBairro}'),
-            SizedBox(height: 4,),
-            Text('Numero: ${controller.currentNumero}'),
-            SizedBox(height: 4,),
-            Text('CEP: ${controller.currentCep}'),
-            SizedBox(height: 4,),
-            Divider(),
-            Text('Novo endereço:', style: Theme.of(context).textTheme.headline5,),
-            SizedBox(height: 6,),
+            (controller.currentAddress != null) ?
+            CurrentAdressSection(
+              rua: controller.currentRua,
+              bairro: controller.currentBairro,
+              numero: controller.currentNumero,
+              cep: controller.currentCep,
+            ): Container(),
+            Text(
+              'Novo endereço:',
+              style: Theme.of(context).textTheme.headline5,
+            ),
+            SizedBox(
+              height: 6,
+            ),
             CustomTextField(
               controller: controller.ruaController,
               hintText: 'Rua',
@@ -43,15 +44,60 @@ class AddressView extends GetView<AddressController> {
             ),
             CustomTextField(
               controller: controller.cepController,
-              hintText: 'CEP', 
+              hintText: 'CEP',
             ),
             // SizedBox(height: 16,), // TODO: Implementar definir como endereço principal
             // CheckboxListTile(contentPadding: EdgeInsets.all(0), value: false, onChanged: null, title: Text('Desejo definir esse endereço como principal'), controlAffinity: ListTileControlAffinity.leading,),
-            SizedBox(height: 32,),
-            CustomBlueButton(function: controller.onConfirmPressed, text: 'Confirmar'),
+            SizedBox(
+              height: 32,
+            ),
+            CustomBlueButton(
+                function: controller.onConfirmPressed, text: 'Confirmar'),
           ],
         ),
       ),
+    );
+  }
+}
+
+class CurrentAdressSection extends StatelessWidget {
+  final String rua;
+  final String bairro;
+  final String numero;
+  final String cep;
+
+  const CurrentAdressSection({Key key, this.rua, this.bairro, this.numero, this.cep}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Endereço atual:',
+          style: Theme.of(context).textTheme.headline5,
+        ),
+        SizedBox(
+          height: 6,
+        ),
+        Text('Rua: $rua'),
+        SizedBox(
+          height: 4,
+        ),
+        Text('Bairro: $bairro'),
+        SizedBox(
+          height: 4,
+        ),
+        Text('Numero: $numero'),
+        SizedBox(
+          height: 4,
+        ),
+        Text('CEP: $cep'),
+        SizedBox(
+          height: 4,
+        ),
+        Divider(),
+      ],
     );
   }
 }
@@ -67,7 +113,7 @@ class CustomTextField extends StatelessWidget {
     return TextField(
       controller: controller,
       decoration: InputDecoration(
-        hintText: hintText, 
+        hintText: hintText,
       ),
     );
   }

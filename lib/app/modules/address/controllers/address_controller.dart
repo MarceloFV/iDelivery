@@ -17,14 +17,15 @@ class AddressController extends GetxController {
   TextEditingController cepController = TextEditingController();
   TextEditingController ruaController = TextEditingController();
 
-  String get currentRua => currentAddress.rua;
-  String get currentNumero => currentAddress.numero;
-  String get currentCep => currentAddress.cep;
-  String get currentBairro => currentAddress.bairro;
+  String get currentRua => currentAddress?.rua;
+  String get currentNumero => currentAddress?.numero;
+  String get currentCep => currentAddress?.cep;
+  String get currentBairro => currentAddress?.bairro;
 
   @override
   void onInit() {
     currentAddress = Get.arguments['adress'];
+
     super.onInit();
   }
 

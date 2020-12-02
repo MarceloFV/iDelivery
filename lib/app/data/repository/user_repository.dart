@@ -6,8 +6,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class UserRepository {
   final UserProvider provider = UserProvider(
-      firestore: FirebaseFirestore.instance,
-      firebaseAuth: FirebaseAuth.instance);
+    firestore: FirebaseFirestore.instance,
+    firebaseAuth: FirebaseAuth.instance,
+  );
 
   // UserRepository({@required this.provider}) : assert(provider != null);
 
@@ -19,10 +20,6 @@ class UserRepository {
   String getUserId() => provider.getUserId();
 
   editUser(UserModel user) => provider.editUser(user);
-
-  getUserMocked() => provider.getUserMocked();
-
-  // removeUser(UserModel user) => provider.removeUser(user);
 
   login(String email, String password) => provider.login(email, password);
 

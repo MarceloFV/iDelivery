@@ -54,7 +54,8 @@ class ProductController extends GetxController {
   }
 
   void onCartPressed() {
-    Get.toNamed(Routes.CART);
+    var user = Get.arguments['user'];
+    Get.toNamed(Routes.CART, arguments: {'user' : user});
   }
 
   void onBackPressed() {

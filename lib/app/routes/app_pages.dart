@@ -6,8 +6,6 @@ import 'package:delivery_app/app/modules/home/views/home_view.dart';
 import 'package:delivery_app/app/modules/home/bindings/home_binding.dart';
 import 'package:delivery_app/app/modules/product/views/product_view.dart';
 import 'package:delivery_app/app/modules/product/bindings/product_binding.dart';
-import 'package:delivery_app/app/modules/layout/views/layout_view.dart';
-import 'package:delivery_app/app/modules/layout/bindings/layout_binding.dart';
 import 'package:delivery_app/app/modules/splash/views/splash_view.dart';
 import 'package:delivery_app/app/modules/splash/bindings/splash_binding.dart';
 import 'package:delivery_app/app/modules/register/views/register_view.dart';
@@ -18,7 +16,7 @@ import 'package:get/get.dart';
 part 'app_routes.dart';
 
 class AppPages {
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.SPLASH;
 
   static final routes = [
     GetPage(
@@ -35,11 +33,6 @@ class AppPages {
       name: Routes.SPLASH,
       page: () => SplashView(),
       binding: SplashBinding(),
-    ),
-    GetPage(
-      name: Routes.LAYOUT,
-      page: () => LayoutView(),
-      binding: LayoutBinding(),
     ),
     GetPage(
       name: Routes.PRODUCT,

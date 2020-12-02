@@ -39,7 +39,7 @@ class LoginController extends GetxController {
       final login = await repository.login(email.value, password.value);
       userModel = await repository.getUser(repository.getUserId());
       if (login != null && userModel != null)
-        Get.offAndToNamed(Routes.LAYOUT, arguments: {'user': userModel});
+        Get.offAndToNamed(Routes.HOME, arguments: {'user': userModel});
     } catch (e) {
       if (Get.isSnackbarOpen) Get.back();
       Get.snackbar("Usuário inválido", "Email ou senha incorretos",

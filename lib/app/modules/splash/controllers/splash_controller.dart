@@ -22,7 +22,7 @@ class SplashController extends GetxController {
   getUser(bool val) async {
     final userModel = await repository.getUser(repository.getUserId());
     if (userModel != null && val == true) {
-      Get.offAllNamed(Routes.LAYOUT, arguments: {'user': userModel});
+      Get.offAllNamed(Routes.HOME, arguments: {'user': userModel});
     }
     if (userModel == null && val == false) Get.offAllNamed(Routes.LOGIN);
   }

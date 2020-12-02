@@ -6,9 +6,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:cloud_firestore_mocks/cloud_firestore_mocks.dart';
 
 void main() {
+  final firestore = MockFirestoreInstance();
+  RequestProvider provider = RequestProvider(firestore: firestore);
   group('Request provider without user', () {
-    final firestore = MockFirestoreInstance();
-    RequestProvider provider = RequestProvider(firestore: firestore);
     
     test('Sending request with a single order', () {
       var actual = provider.sendOrder(singleOrderMockedList, null);

@@ -1,7 +1,6 @@
 import 'package:delivery_app/app/data/models/product.dart';
 import 'package:delivery_app/app/data/models/user.dart';
 import 'package:delivery_app/app/data/repository/product_repository.dart';
-import 'package:delivery_app/app/global_controllers/app_controller.dart';
 import 'package:delivery_app/app/modules/home/models/category.dart';
 import 'package:delivery_app/app/routes/app_pages.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
@@ -10,7 +9,7 @@ import 'package:get/get.dart';
 class HomeController extends GetxController {
   final ProductRepository productRepository;
   HomeController(this.productRepository);
-  
+
   final popularProducts = List<ProductModel>().obs;
 
   final favoriteProducts = List<ProductModel>().obs;
@@ -19,16 +18,14 @@ class HomeController extends GetxController {
 
   List<CategoryModel> get categories => _categories;
 
-  AppController appController = Get.find<AppController>();
-
-  UserModel user;
+  UserModel _user;
 
   @override
   void onInit() {
+    _user = Get.arguments['user'];
     _categories = categoryList;
     _fetchFavoritesProducts();
     _fetchPopularProducts();
-    user = appController.user;
     super.onInit();
   }
 
@@ -44,11 +41,11 @@ class HomeController extends GetxController {
   }
 
   gotoProductPage(ProductModel product) {
-    Get.toNamed(Routes.PRODUCT, arguments: {'product': product});
+    Get.toNamed(Routes.PRODUCT, arguments: {'product': product, 'user' : _user});
   }
 
   void gotoCartPage() {
-    Get.toNamed(Routes.CART);
+    Get.toNamed(Routes.CART, arguments: {'user' : _user});
   }
 
   final _moneyTextController =
