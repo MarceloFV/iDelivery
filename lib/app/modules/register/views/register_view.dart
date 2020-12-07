@@ -12,28 +12,73 @@ class RegisterView extends GetView<RegisterController> {
       ),
       body: SafeArea(
         minimum: EdgeInsets.all(32),
-        child: Center(
-          child: Column(
-            children: [
-              TextFormField(
-                controller: controller.nameController,
-                decoration: InputDecoration(hintText: "Name"),
+        child: ListView(
+          children: [
+            Text(
+              'Dados: ',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
               ),
-              TextFormField(
-                controller: controller.emailController,
-                decoration: InputDecoration(hintText: "Email"),
+            ),
+            TextFormField(
+              controller: controller.nameController,
+              decoration: InputDecoration(hintText: "Nome"),
+            ),
+            TextFormField(
+              controller: controller.cpfController,
+              decoration: InputDecoration(hintText: "CPF"),
+              keyboardType: TextInputType.number,
+            ),
+            TextFormField(
+              controller: controller.phoneController,
+              decoration: InputDecoration(hintText: "Telefone"),
+              keyboardType: TextInputType.number,
+            ),
+            TextFormField(
+              controller: controller.emailController,
+              decoration: InputDecoration(hintText: "Email"),
+              keyboardType: TextInputType.emailAddress,
+            ),
+            TextFormField(
+              controller: controller.passwordController,
+              decoration: InputDecoration(hintText: "Senha"),
+              obscureText: true,
+            ),
+            Divider(),
+            Text(
+              'Endereço: ',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
               ),
-              TextFormField(
-                controller: controller.passwordController,
-                decoration: InputDecoration(hintText: "Password"),
-                obscureText: true,
-              ),
-              RaisedButton(
-                onPressed: controller.register,
-                child: Text("Confirm"),
-              ),
-            ],
-          ),
+            ),
+            TextFormField(
+              controller: controller.ruaController,
+              decoration: InputDecoration(hintText: "Rua"),
+            ),
+            TextFormField(
+              controller: controller.numeroController,
+              decoration: InputDecoration(hintText: "Numero"),
+              keyboardType: TextInputType.number,
+            ),
+            TextFormField(
+              controller: controller.bairroController,
+              decoration: InputDecoration(hintText: "Bairro"),
+            ),
+            TextFormField(
+              controller: controller.cepController,
+              decoration: InputDecoration(hintText: "CEP"),
+              keyboardType: TextInputType.number,
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            RaisedButton(
+              onPressed: controller.register,
+              child: Text("Confirmar"),
+            ),
+          ],
         ),
       ),
     );

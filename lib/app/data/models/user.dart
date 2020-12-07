@@ -1,21 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
-  String id;
   String name;
   String email;
   String phoneNumber;
-  Address adress;
-  bool isStore;
+  String cpf;
+  Address address;
   DocumentReference reference;
 
   UserModel({
-    this.id,
     this.name,
     this.email,
     this.phoneNumber,
-    this.adress,
-    this.isStore = false,
+    this.address,
+    this.cpf,
     this.reference,
   });
 
@@ -24,65 +22,41 @@ class UserModel {
         name: snapshot.data()['name'],
         email: snapshot.data()['email'],
         phoneNumber: snapshot.data()['phoneNumber'],
-        isStore: snapshot.data()['isStore'],
+        cpf: snapshot.data()['cpf'],
         reference: snapshot.reference,
-        id: snapshot.id
       );
 
   Map<String, dynamic> toDocument() {
     return {
       'name': name,
       'email': email,
+      'cpf': cpf,
       'phoneNumber': phoneNumber,
-      'isStore': isStore,
     };
   }
 
   @override
   String toString() {
-    return "'name': $name, 'adress': $adress 'email': $email, 'phoneNumber' : $phoneNumber, 'isStore': $isStore";
+    return "'name': $name, 'adress': $address 'email': $email, 'phoneNumber' : $phoneNumber";
   }
+
 
   UserModel copyWith({
     String name,
     String email,
     String phoneNumber,
-    bool isStore,
-    DocumentReference storeReference,
+    String cpf,
+    Address adress,
     DocumentReference reference,
   }) {
     return UserModel(
       name: name ?? this.name,
       email: email ?? this.email,
       phoneNumber: phoneNumber ?? this.phoneNumber,
-      isStore: isStore ?? this.isStore,
+      cpf: cpf ?? this.cpf,
+      address: adress ?? this.address,
       reference: reference ?? this.reference,
     );
-  }
-
-  @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
-  
-    return o is UserModel &&
-      o.id == id &&
-      o.name == name &&
-      o.email == email &&
-      o.phoneNumber == phoneNumber &&
-      o.adress == adress &&
-      o.isStore == isStore &&
-      o.reference == reference;
-  }
-
-  @override
-  int get hashCode {
-    return id.hashCode ^
-      name.hashCode ^
-      email.hashCode ^
-      phoneNumber.hashCode ^
-      adress.hashCode ^
-      isStore.hashCode ^
-      reference.hashCode;
   }
 }
 

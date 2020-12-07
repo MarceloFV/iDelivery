@@ -39,7 +39,7 @@ class CartController extends GetxController {
   @override
   void onInit() {
     _fetchUser();
-    _adress.value = _user.value.adress;
+    _adress.value = _user.value.address;
     worker = ever(_orderList, onOrderListChanged);
     super.onInit();
   }
