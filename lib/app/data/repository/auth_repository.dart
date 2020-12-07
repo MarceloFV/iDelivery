@@ -9,5 +9,8 @@ class AuthRepository {
   Future<String> login(email, password) => provider.login(email, password);
 
   bool isUserConnected() => provider.isUserConnected();
+
   String getUID() => provider.getUID();
+
+  register(String email, String password) => provider.register(email, password);
 }

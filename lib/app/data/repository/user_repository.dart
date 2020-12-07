@@ -7,7 +7,7 @@ class UserRepository {
 
   UserRepository({@required this.provider}) : assert(provider != null);
 
-  createUser(String uid, UserModel user) => provider.createUser(uid, user);
+  Future<UserModel> createUser(String uid, UserModel user) => provider.createUser(uid, user);
 
-  getCurrentUser(String uid) => provider.getCurrentUser(uid);
+  Future<UserModel> getCurrentUser(String uid) => provider.getCurrentUser(uid);
 }

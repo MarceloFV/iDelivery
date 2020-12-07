@@ -25,7 +25,7 @@ class UserProvider {
   Future<UserModel> createUser(String uid, UserModel user) async {
     try {
       var reference = firestore.collection(collectionPath).doc(uid);
-      reference.set(user.toDocument());
+      reference.set(user.toMap());
 
       return user.copyWith(reference: reference);
     } catch (_) {
@@ -60,7 +60,7 @@ class UserProvider {
 
   Future<UserModel> editUser(UserModel user) async {
     try {
-      user.reference.update(user.toDocument());
+      user.reference.update(user.toMap());
       //TODO: Testar
       return user;
     } catch (_) {
