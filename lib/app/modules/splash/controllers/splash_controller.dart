@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:meta/meta.dart';
 
 class SplashController extends GetxController {
-  final UserRepository repository ;
+  final UserRepository repository;
 
   SplashController({@required this.repository}) : assert(repository != null);
 
@@ -21,10 +21,16 @@ class SplashController extends GetxController {
 
   getUser(bool val) async {
     final userModel = await repository.getUser(repository.getUserId());
+
     if (userModel != null && val == true) {
-      Get.offAllNamed(Routes.HOME, arguments: {'user': userModel});
+      return Get.offAllNamed(Routes.HOME, arguments: {'user': userModel});
     }
-    if (userModel == null && val == false) Get.offAllNamed(Routes.LOGIN);
+    // if (userModel == null && val == true) {
+    //   print('Deu merda aqui mermao');
+    //   return;
+    // }
+    // if (userModel == null && val == false) return Get.offAllNamed(Routes.LOGIN);
+    if (userModel == null) return Get.offAllNamed(Routes.LOGIN);
   }
 
   @override

@@ -33,11 +33,13 @@ class LoginController extends GetxController {
     passwordError.value = null;
     password.value = changedPassword;
   }
-  
+
   login() async {
     try {
       final login = await repository.login(email.value, password.value);
       userModel = await repository.getUser(repository.getUserId());
+      if (login != null && userModel == null)
+        return print('Mano para de tentar usar email de loja');
       if (login != null && userModel != null)
         Get.offAndToNamed(Routes.HOME, arguments: {'user': userModel});
     } catch (e) {
