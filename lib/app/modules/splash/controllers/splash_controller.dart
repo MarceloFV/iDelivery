@@ -1,12 +1,17 @@
+import 'package:delivery_app/app/data/repository/auth_repository.dart';
 import 'package:delivery_app/app/data/repository/user_repository.dart';
 import 'package:delivery_app/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:meta/meta.dart';
 
 class SplashController extends GetxController {
-  final UserRepository repository;
+  final UserRepository userRepository;
+  final AuthRepository authRepository;
 
-  SplashController({@required this.repository}) : assert(repository != null);
+  SplashController({
+    @required this.userRepository,
+    @required this.authRepository,
+  }) : assert(userRepository != null);
 
   RxBool isUserConnected = false.obs;
 
@@ -15,22 +20,21 @@ class SplashController extends GetxController {
   @override
   void onInit() {
     worker = ever(isUserConnected, getUser);
-    isUserConnected.value = repository.isUserConnected();
+    isUserConnected.value = authRepository.isUserConnected();
     super.onInit();
   }
 
   getUser(bool val) async {
-    final userModel = await repository.getUser(repository.getUserId());
+    if (!val) return Get.offAllNamed(Routes.LOGIN);
 
-    if (userModel != null && val == true) {
-      return Get.offAllNamed(Routes.HOME, arguments: {'user': userModel});
-    }
-    // if (userModel == null && val == true) {
-    //   print('Deu merda aqui mermao');
-    //   return;
-    // }
-    // if (userModel == null && val == false) return Get.offAllNamed(Routes.LOGIN);
-    if (userModel == null) return Get.offAllNamed(Routes.LOGIN);
+    String uid = authRepository.getUID();
+    var user = await userRepository.getCurrentUser(uid);
+
+//TODO: Implement case where the user is null cause they tryed to login using store email
+    if (user == null) return Get.offAllNamed(Routes.LOGIN);
+
+    if (user != null)
+      return Get.offAllNamed(Routes.HOME, arguments: {'user': user});
   }
 
   @override

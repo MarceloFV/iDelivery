@@ -36,8 +36,9 @@ class LoginController extends GetxController {
 
   login() async {
     try {
-      final login = await repository.login(email.value, password.value);
-      userModel = await repository.getUser(repository.getUserId());
+      //TODO: Corrigir login
+      // final login = await repository.login(email.value, password.value);
+      // userModel = await repository.getUser(repository.getUserId());
       if (login != null && userModel == null)
         return print('Mano para de tentar usar email de loja');
       if (login != null && userModel != null)

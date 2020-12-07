@@ -7,4 +7,7 @@ class AuthRepository {
   AuthRepository({@required this.provider}) : assert(provider != null);
 
   Future<String> login(email, password) => provider.login(email, password);
+
+  bool isUserConnected() => provider.isUserConnected();
+  String getUID() => provider.getUID();
 }

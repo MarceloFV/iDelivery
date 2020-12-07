@@ -59,10 +59,8 @@ class RegisterController extends GetxController {
 
     try {
       var uid = await authRepository.login(email, password);
-      // userRepository.createUser(uid, user);
+      userRepository.createUser(uid, user);
 
-      newUser.value =
-          await userRepository.createUser(user, passwordController.text);
       if (Get.isSnackbarOpen) Get.back();
       Get.snackbar("Usuário cadastrado", "Cadastrado com sucesso!");
     } catch (e) {

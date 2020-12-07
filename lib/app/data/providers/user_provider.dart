@@ -11,33 +11,31 @@ class UserProvider {
   final FirebaseAuth firebaseAuth;
 
   UserProvider({@required this.firestore, @required this.firebaseAuth});
-
-  isUserConnected() => firebaseAuth.currentUser != null;
-
-  createUser(UserModel user, String password) async {
+  Future<UserModel> getCurrentUser(String uid) async {
     try {
-      UserCredential userCredential =
-          await _createUserWithEmailAndPassword(user.email, password);
-      DocumentReference reference;
-      if (userCredential != null) {
-        reference =
-            firestore.collection(collectionPath).doc(userCredential.user.uid);
-        reference.set(user.toDocument());
+      DocumentSnapshot snapshot =
+          await firestore.collection(collectionPath).doc(uid).get();
+      UserModel user = UserModel.fromDocumentSnapshot(snapshot);
+      return user;
+    } catch (_) {
+      return null;
+    }
+  }
 
-        return user.copyWith(reference: reference);
-      }
+  Future<UserModel> createUser(String uid, UserModel user) async {
+    try {
+      var reference = firestore.collection(collectionPath).doc(uid);
+      reference.set(user.toDocument());
+
+      return user.copyWith(reference: reference);
     } catch (_) {
       rethrow;
     }
   }
 
-
-  Future<UserCredential> _createUserWithEmailAndPassword(
-      String email, String password) async {
-    UserCredential userCredential = await firebaseAuth
-        .createUserWithEmailAndPassword(email: email, password: password);
-    return userCredential;
-  }
+//TODO: Mark to exclusion
+  isUserConnected() => firebaseAuth.currentUser != null;
+  //TODO: Mark to exclusion
 
   Future<UserModel> getUser(String id) async {
     try {
@@ -50,6 +48,7 @@ class UserProvider {
     }
   }
 
+//TODO: Mark to exclusion
 //Talvez nao seja necessario
   String getUserId() {
     try {
@@ -62,12 +61,14 @@ class UserProvider {
   Future<UserModel> editUser(UserModel user) async {
     try {
       user.reference.update(user.toDocument());
+      //TODO: Testar
       return user;
     } catch (_) {
       return null;
     }
   }
 
+//TODO: Mark to exclusion
   login(String email, String password) async {
     try {
       UserCredential userCredential = await firebaseAuth
@@ -78,6 +79,7 @@ class UserProvider {
     }
   }
 
+//TODO: Mark to exclusion
   logout() async {
     try {
       await firebaseAuth.signOut();

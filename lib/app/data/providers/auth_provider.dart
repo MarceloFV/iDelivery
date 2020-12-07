@@ -11,4 +11,7 @@ class AuthProvider {
         await auth.signInWithEmailAndPassword(email: email, password: password);
     return creds.user.uid;
   }
+
+   bool isUserConnected() => auth.currentUser != null;
+   String getUID() => auth.currentUser.uid;
 }

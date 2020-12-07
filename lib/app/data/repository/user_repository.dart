@@ -7,18 +7,7 @@ class UserRepository {
 
   UserRepository({@required this.provider}) : assert(provider != null);
 
-  createUser(UserModel user, String password) =>
-      provider.createUser(user, password);
+  createUser(String uid, UserModel user) => provider.createUser(uid, user);
 
-  Future<UserModel> getUser(String id) => provider.getUser(id);
-
-  String getUserId() => provider.getUserId();
-
-  editUser(UserModel user) => provider.editUser(user);
-
-  login(String email, String password) => provider.login(email, password);
-
-  logout() => provider.logout();
-
-  bool isUserConnected() => provider.isUserConnected();
+  getCurrentUser(String uid) => provider.getCurrentUser(uid);
 }
