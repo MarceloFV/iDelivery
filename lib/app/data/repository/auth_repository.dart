@@ -12,5 +12,7 @@ class AuthRepository {
 
   String getUID() => provider.getUID();
 
-  register(String email, String password) => provider.register(email, password);
+  Future<String> register(String email, String password) => provider.register(email, password);
+
+  Future<void> logout() => provider.logout();
 }

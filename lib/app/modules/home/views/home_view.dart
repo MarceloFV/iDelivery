@@ -27,6 +27,16 @@ class HomeView extends GetView<HomeController> {
               onPressed: controller.gotoCartPage,
             ),
           ),
+          Card(
+            elevation: 3,
+            child: IconButton(
+              icon: Icon(
+                Icons.exit_to_app,
+              ),
+              color: Colors.black,
+              onPressed: controller.logout,
+            ),
+          ),
         ],
         backgroundColor: Colors.transparent,
       ),

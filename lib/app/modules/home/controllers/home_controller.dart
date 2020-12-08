@@ -1,14 +1,18 @@
 import 'package:delivery_app/app/data/models/product.dart';
 import 'package:delivery_app/app/data/models/user.dart';
+import 'package:delivery_app/app/data/repository/auth_repository.dart';
 import 'package:delivery_app/app/data/repository/product_repository.dart';
 import 'package:delivery_app/app/modules/home/models/category.dart';
 import 'package:delivery_app/app/routes/app_pages.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   final ProductRepository productRepository;
-  HomeController(this.productRepository);
+  final AuthRepository authRepository;
+  HomeController(
+      {@required this.productRepository, @required this.authRepository});
 
   final popularProducts = List<ProductModel>().obs;
 
@@ -41,11 +45,11 @@ class HomeController extends GetxController {
   }
 
   gotoProductPage(ProductModel product) {
-    Get.toNamed(Routes.PRODUCT, arguments: {'product': product, 'user' : _user});
+    Get.toNamed(Routes.PRODUCT, arguments: {'product': product, 'user': _user});
   }
 
   void gotoCartPage() {
-    Get.toNamed(Routes.CART, arguments: {'user' : _user});
+    Get.toNamed(Routes.CART, arguments: {'user': _user});
   }
 
   final _moneyTextController =
@@ -53,5 +57,11 @@ class HomeController extends GetxController {
   String maskedProductValue(double value) {
     _moneyTextController.updateValue(value);
     return _moneyTextController.text;
+  }
+
+  logout() async {
+    print('disloga carai');
+    await authRepository.logout();
+    Get.offAllNamed(Routes.LOGIN);
   }
 }

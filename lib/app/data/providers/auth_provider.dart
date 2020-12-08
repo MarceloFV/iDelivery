@@ -12,12 +12,14 @@ class AuthProvider {
     return creds.user.uid;
   }
 
-   bool isUserConnected() => auth.currentUser != null;
-   String getUID() => auth.currentUser.uid;
+  bool isUserConnected() => auth.currentUser != null;
+  String getUID() => auth.currentUser.uid;
 
   Future<String> register(String email, String password) async {
-    var creds =
-        await auth.createUserWithEmailAndPassword(email: email, password: password);
+    var creds = await auth.createUserWithEmailAndPassword(
+        email: email, password: password);
     return creds.user.uid;
   }
+
+  Future<void> logout() => auth.signOut();
 }
