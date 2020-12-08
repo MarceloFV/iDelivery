@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delivery_app/app/data/models/product.dart';
+import 'package:delivery_app/app/data/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
@@ -27,11 +28,8 @@ class ProductProvider {
         .toList();
   }
 
-  Future<List<ProductModel>> getFavoriteProducts() async {
-    var response = await firestore
-        .collection(collectionPath)
-        .where('isFavorite', isEqualTo: true)
-        .get();
+  Future<List<ProductModel>> getFavoriteProducts(UserModel user) async {
+    var response = await user.reference.collection('favorites').get();
     return response.docs
         .map<ProductModel>((map) => ProductModel.fromDocumentSnapshot(map))
         .toList();

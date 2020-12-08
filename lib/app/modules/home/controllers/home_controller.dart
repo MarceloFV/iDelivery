@@ -46,7 +46,7 @@ class HomeController extends GetxController {
   }
 
   _fetchFavoritesProducts() async {
-    favoriteProducts.assignAll(await productRepository.getFavoriteProduct());
+    favoriteProducts.assignAll(await productRepository.getFavoriteProduct(_user));
   }
 
   _fetchPopularProducts() async {
@@ -69,7 +69,6 @@ class HomeController extends GetxController {
   }
 
   logout() async {
-    print('disloga carai');
     await authRepository.logout();
     Get.offAllNamed(Routes.LOGIN);
   }
