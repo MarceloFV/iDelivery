@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delivery_app/app/data/models/product.dart';
+import 'package:delivery_app/app/data/models/user.dart';
 import 'package:delivery_app/app/data/providers/request_provider.dart';
 import 'package:delivery_app/app/data/repository/request_repository.dart';
 import 'package:delivery_app/app/modules/cart/controllers/cart_controller.dart';
@@ -18,11 +19,13 @@ class ProductController extends GetxController {
 
   final isAdded = false.obs;
   final isFavorite = false.obs; // TODO: get if product is favorite
+  UserModel user;
 
   @override
   void onInit() {
     product = Get.arguments['product'];
-    isFavorite.value = product.isFavorite;
+    user = Get.arguments['user'];
+    // isFavorite.value = product.isFavorite;
     super.onInit();
   }
 
@@ -54,8 +57,7 @@ class ProductController extends GetxController {
   }
 
   void onCartPressed() {
-    var user = Get.arguments['user'];
-    Get.toNamed(Routes.CART, arguments: {'user' : user});
+    Get.toNamed(Routes.CART, arguments: {'user': user});
   }
 
   void onBackPressed() {

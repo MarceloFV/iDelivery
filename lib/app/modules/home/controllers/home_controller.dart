@@ -29,14 +29,14 @@ class HomeController extends GetxController {
 
   List<CategoryModel> get categories => _categories;
 
-  UserModel _user;
+  UserModel user;
 
   @override
   void onInit() {
-    _user = Get.arguments['user'];
+    user = Get.arguments['user'];
     _categories = categoryList;
     _fetchStores();
-    _fetchFavoritesProducts();
+    // _fetchFavoritesProducts();
     // _fetchPopularProducts();
     super.onInit();
   }
@@ -45,21 +45,21 @@ class HomeController extends GetxController {
     stores.assignAll(await storeRepository.getStores());
   }
 
-  _fetchFavoritesProducts() async {
-    favoriteProducts
-        .assignAll(await productRepository.getFavoriteProduct(_user));
-  }
+  // _fetchFavoritesProducts() async {
+  //   favoriteProducts
+  //       .assignAll(await productRepository.getFavoriteProduct(user));
+  // }
 
-  _fetchPopularProducts() async {
-    popularProducts.assignAll(await productRepository.getPopularProducts());
-  }
+  // _fetchPopularProducts() async {
+  //   popularProducts.assignAll(await productRepository.getPopularProducts());
+  // }
 
   onProductPressed(ProductModel product) {
-    Get.toNamed(Routes.PRODUCT, arguments: {'product': product, 'user': _user});
+    Get.toNamed(Routes.PRODUCT, arguments: {'product': product, 'user': user});
   }
 
   void onCartPressed() {
-    Get.toNamed(Routes.CART, arguments: {'user': _user});
+    Get.toNamed(Routes.CART, arguments: {'user': user});
   }
 
   final _moneyTextController =
@@ -75,7 +75,7 @@ class HomeController extends GetxController {
   }
 
   onStorePressed(StoreModel store) {
-    Get.toNamed(Routes.STORE, arguments: {'store': store});
+    Get.toNamed(Routes.STORE, arguments: {'store': store, 'user':user});
     print(store.title);
   }
 }

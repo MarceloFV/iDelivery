@@ -41,10 +41,10 @@ class ProductCard extends StatelessWidget {
             SizedBox(
               width: 2,
             ),
-            Text(
-              product.storeName,
-              style: GoogleFonts.markaziText(),
-            ),
+            // Text(
+            //   product.storeName,
+            //   style: GoogleFonts.markaziText(),
+            // ),
           ],
         ),
         trailing: Column(

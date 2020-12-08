@@ -31,7 +31,6 @@ class CartController extends GetxController {
 
   final _adress = Address().obs;
 
-
   String get userAdress => (_adress.value != null)
       ? "${_adress.value?.rua}, nº ${_adress.value?.numero}, ${_adress.value?.bairro}, ${_adress.value?.cep}"
       : 'Adicionar endereço';
@@ -44,20 +43,20 @@ class CartController extends GetxController {
     super.onInit();
   }
 
-  _updateShipValue(ProductModel product) {
-    bool isRepeated = false;
-    _productList.forEach((p) {
-      if (p.storeId == product.storeId) {
-        isRepeated = true;
-      }
-    });
-    if (isRepeated) return;
-    _shipValue.value += product.storeShipPrice;
-  }
+  // _updateShipValue(ProductModel product) {
+  //   bool isRepeated = false;
+  //   _productList.forEach((p) {
+  //     if (p.storeId == product.storeId) {
+  //       isRepeated = true;
+  //     }
+  //   });
+  //   if (isRepeated) return;
+  //   _shipValue.value += product.storeShipPrice;
+  // }
 
   void onAdressPressed() async {
-    var val = await Get.toNamed(Routes.ADRESS,
-        arguments: {'adress': _adress.value});
+    var val =
+        await Get.toNamed(Routes.ADRESS, arguments: {'adress': _adress.value});
 
     if (val != null) _adress.value = val;
   }
@@ -72,13 +71,13 @@ class CartController extends GetxController {
     _finalValue.value = total + shipValue;
   }
 
-  void addProductToCart(ProductModel product, String message, int amount) {
-    if (_productList.contains(product)) {
-      _addExistingProduct(product, amount);
-    } else {
-      _addNewProduct(product, message, amount);
-    }
-  }
+  // void addProductToCart(ProductModel product, String message, int amount) {
+  //   if (_productList.contains(product)) {
+  //     _addExistingProduct(product, amount);
+  //   } else {
+  //     _addNewProduct(product, message, amount);
+  //   }
+  // }
 
   _addExistingProduct(ProductModel product, int amount) {
     int index;
@@ -93,17 +92,17 @@ class CartController extends GetxController {
     orderList[index].value += product.value * amount;
   }
 
-  _addNewProduct(ProductModel product, String message, int amount) {
-    OrderModel order = OrderModel(
-      product: product,
-      amount: amount,
-      message: message,
-      value: (product.value * amount),
-    );
-    orderList.add(order);
-    _updateShipValue(product);
-    _productList.add(product);
-  }
+  // _addNewProduct(ProductModel product, String message, int amount) {
+  //   OrderModel order = OrderModel(
+  //     product: product,
+  //     amount: amount,
+  //     message: message,
+  //     value: (product.value * amount),
+  //   );
+  //   orderList.add(order);
+  //   _updateShipValue(product);
+  //   _productList.add(product);
+  // }
 
   void onAmountRemovePressed(OrderModel _order) {
     if (!(_order.amount > 1)) return;
@@ -136,8 +135,8 @@ class CartController extends GetxController {
     Get.back();
   }
 
-  onConfirmOrderPressed() {
-    repository.add(orderList, null);
-    print('Order confirmada');
-  }
+  // onConfirmOrderPressed() {
+  //   repository.add(orderList, null);
+  //   print('Order confirmada');
+  // }
 }

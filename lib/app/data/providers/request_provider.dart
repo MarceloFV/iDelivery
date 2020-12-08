@@ -21,38 +21,38 @@ class RequestProvider {
   RequestStatus _requestStatus;
   RequestStatus get requestStatus => _requestStatus;
 
-  sendOrder(List<OrderModel> orderList, UserModel model) {
-    List<RequestModel> requestList = _sortOrders(orderList);
+  // sendOrder(List<OrderModel> orderList, UserModel model) {
+  //   List<RequestModel> requestList = _sortOrders(orderList);
 
-    if (requestList.length == 1)
-      return _sendSingleRequest(requestList);
-    else
-      return _sendMultipleRequests(requestList);
-  }
+  //   if (requestList.length == 1)
+  //     return _sendSingleRequest(requestList);
+  //   else
+  //     return _sendMultipleRequests(requestList);
+  // }
 
-  List<RequestModel> _sortOrders(List<OrderModel> orderList) {
-    List<RequestModel> list = [];
+  // List<RequestModel> _sortOrders(List<OrderModel> orderList) {
+  //   List<RequestModel> list = [];
 
-    List<String> idList = [];
+  //   List<String> idList = [];
 
-    orderList.forEach((order) {
-      String id = order.product.storeId;
-      if (!idList.contains(id)) idList.add(id);
-    });
+  //   orderList.forEach((order) {
+  //     String id = order.product.storeId;
+  //     if (!idList.contains(id)) idList.add(id);
+  //   });
 
-    idList.forEach((id) {
-      RequestModel request = RequestModel(storeId: id, orders: []);
-      orderList.forEach((order) {
-        String orderId = order.product.storeId;
-        if (id == orderId) {
-          request.orders.add(order);
-        }
-      });
+  //   idList.forEach((id) {
+  //     RequestModel request = RequestModel(storeId: id, orders: []);
+  //     orderList.forEach((order) {
+  //       String orderId = order.product.storeId;
+  //       if (id == orderId) {
+  //         request.orders.add(order);
+  //       }
+  //     });
 
-      list.add(request);
-    });
-    return list;
-  }
+  //     list.add(request);
+  //   });
+  //   return list;
+  // }
 
   List<RequestModel> _sendSingleRequest(List<RequestModel> requestList) {
     try {

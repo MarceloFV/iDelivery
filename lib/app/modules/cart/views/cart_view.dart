@@ -57,7 +57,9 @@ class CartView extends GetView<CartController> {
                   ),
                   CustomBlueButton(
                     text: 'Confirmar pedido',
-                    function: controller.onConfirmOrderPressed,
+                    function: (){},
+                    // function: controller.onConfirmOrderPressed,
+                    //TODO: Implement confirmOrder
                   ),
                 ],
               )
