@@ -20,7 +20,6 @@ class RegisterBinding extends Bindings {
           userRepository: UserRepository(
             provider: UserProvider(
               firestore: FirebaseFirestore.instance,
-              firebaseAuth: FirebaseAuth.instance,
             ),
           ),
           authRepository: AuthRepository(

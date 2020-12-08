@@ -8,9 +8,8 @@ const collectionPath = 'users';
 
 class UserProvider {
   final FirebaseFirestore firestore;
-  final FirebaseAuth firebaseAuth;
 
-  UserProvider({@required this.firestore, @required this.firebaseAuth});
+  UserProvider({@required this.firestore});
   Future<UserModel> getCurrentUser(String uid) async {
     try {
       DocumentSnapshot snapshot =
@@ -33,30 +32,30 @@ class UserProvider {
     }
   }
 
-//TODO: Mark to exclusion
-  isUserConnected() => firebaseAuth.currentUser != null;
-  //TODO: Mark to exclusion
+// //TODO: Mark to exclusion
+//   isUserConnected() => firebaseAuth.currentUser != null;
+//   //TODO: Mark to exclusion
 
-  Future<UserModel> getUser(String id) async {
-    try {
-      DocumentSnapshot snapshot =
-          await firestore.collection(collectionPath).doc(id).get();
-      UserModel user = UserModel.fromDocumentSnapshot(snapshot);
-      return user;
-    } catch (_) {
-      return null;
-    }
-  }
+//   Future<UserModel> getUser(String id) async {
+//     try {
+//       DocumentSnapshot snapshot =
+//           await firestore.collection(collectionPath).doc(id).get();
+//       UserModel user = UserModel.fromDocumentSnapshot(snapshot);
+//       return user;
+//     } catch (_) {
+//       return null;
+//     }
+//   }
 
 //TODO: Mark to exclusion
 //Talvez nao seja necessario
-  String getUserId() {
-    try {
-      return firebaseAuth.currentUser.uid;
-    } catch (_) {
-      return null;
-    }
-  }
+  // String getUserId() {
+  //   try {
+  //     return firebaseAuth.currentUser.uid;
+  //   } catch (_) {
+  //     return null;
+  //   }
+  // }
 
   Future<UserModel> editUser(UserModel user) async {
     try {
@@ -69,20 +68,20 @@ class UserProvider {
   }
 
 //TODO: Mark to exclusion
-  login(String email, String password) async {
-    try {
-      UserCredential userCredential = await firebaseAuth
-          .signInWithEmailAndPassword(email: email, password: password);
-      return userCredential;
-    } catch (e) {
-      return null;
-    }
-  }
+//   login(String email, String password) async {
+//     try {
+//       UserCredential userCredential = await firebaseAuth
+//           .signInWithEmailAndPassword(email: email, password: password);
+//       return userCredential;
+//     } catch (e) {
+//       return null;
+//     }
+//   }
 
-//TODO: Mark to exclusion
-  logout() async {
-    try {
-      await firebaseAuth.signOut();
-    } catch (e) {}
-  }
+// //TODO: Mark to exclusion
+//   logout() async {
+//     try {
+//       await firebaseAuth.signOut();
+//     } catch (e) {}
+//   }
 }
