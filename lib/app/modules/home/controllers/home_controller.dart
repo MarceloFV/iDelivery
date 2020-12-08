@@ -1,7 +1,9 @@
 import 'package:delivery_app/app/data/models/product.dart';
+import 'package:delivery_app/app/data/models/store.dart';
 import 'package:delivery_app/app/data/models/user.dart';
 import 'package:delivery_app/app/data/repository/auth_repository.dart';
 import 'package:delivery_app/app/data/repository/product_repository.dart';
+import 'package:delivery_app/app/data/repository/store_repository.dart';
 import 'package:delivery_app/app/modules/home/models/category.dart';
 import 'package:delivery_app/app/routes/app_pages.dart';
 import 'package:flutter/foundation.dart';
@@ -9,14 +11,19 @@ import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  final ProductRepository productRepository;
   final AuthRepository authRepository;
-  HomeController(
-      {@required this.productRepository, @required this.authRepository});
+  final ProductRepository productRepository;
+  final StoreRepository storeRepository;
+  HomeController({
+    @required this.productRepository,
+    @required this.authRepository,
+    @required this.storeRepository,
+  });
 
   final popularProducts = List<ProductModel>().obs;
 
   final favoriteProducts = List<ProductModel>().obs;
+  final stores = List<StoreModel>().obs;
 
   var _categories = List<CategoryModel>();
 
@@ -28,13 +35,15 @@ class HomeController extends GetxController {
   void onInit() {
     _user = Get.arguments['user'];
     _categories = categoryList;
+    _fetchStores();
     _fetchFavoritesProducts();
-    _fetchPopularProducts();
+    // _fetchPopularProducts();
     super.onInit();
   }
 
-  @override
-  void onClose() {}
+  _fetchStores() async {
+    stores.assignAll(await storeRepository.getStores());
+  }
 
   _fetchFavoritesProducts() async {
     favoriteProducts.assignAll(await productRepository.getFavoriteProduct());
@@ -63,5 +72,10 @@ class HomeController extends GetxController {
     print('disloga carai');
     await authRepository.logout();
     Get.offAllNamed(Routes.LOGIN);
+  }
+
+  onStorePressed(StoreModel store) {
+    //TODO: Implement onStorePressed
+    print(store.title);
   }
 }

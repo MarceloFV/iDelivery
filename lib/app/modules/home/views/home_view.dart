@@ -1,6 +1,7 @@
 import 'package:delivery_app/app/modules/home/controllers/home_controller.dart';
 import 'package:delivery_app/app/modules/home/widgets/category_section.dart';
 import 'package:delivery_app/app/modules/home/widgets/home_section.dart';
+import 'package:delivery_app/app/modules/home/widgets/store_home_section.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
@@ -27,47 +28,47 @@ class HomeView extends GetView<HomeController> {
               onPressed: controller.gotoCartPage,
             ),
           ),
-          Card(
-            elevation: 3,
-            child: IconButton(
-              icon: Icon(
-                Icons.exit_to_app,
-              ),
-              color: Colors.black,
-              onPressed: controller.logout,
-            ),
-          ),
+          //TODO: If need to exit the app
+          // Card(
+          //   elevation: 3,
+          //   child: IconButton(
+          //     icon: Icon(
+          //       Icons.exit_to_app,
+          //     ),
+          //     color: Colors.black,
+          //     onPressed: controller.logout,
+          //   ),
+          // ),
         ],
         backgroundColor: Colors.transparent,
       ),
       body: ListView(
         padding: EdgeInsets.all(12),
         children: [
-          CategorySection(),
+          // CategorySection(),
           // FavoritesSection(),
           // FeaturesSection(),
-          HomeSection(
-            // products: controller.favoriteProducts,
-            showList: false,
-            icon: Icons.store,
-            iconBGColor: Colors.blue,
-            title: "Lanchonetes",
-            subtitle: 'Parceiros cadastrados...',
-          ),
-          HomeSection(
+          ProductHomeSection(
             products: controller.favoriteProducts,
             icon: Icons.favorite,
             iconBGColor: Colors.red,
             title: "Favoritos",
             subtitle: "Você mais gosta!",
           ),
-          HomeSection(
-            products: controller.popularProducts,
-            icon: Icons.star,
-            iconBGColor: Colors.yellow,
-            title: "Populares",
-            subtitle: "A galera curtiu!",
+          StoreHomeSection(
+            stores: controller.stores,
+            icon: Icons.store,
+            iconBGColor: Colors.blue,
+            title: "Lanchonetes",
+            subtitle: 'Parceiros cadastrados...',
           ),
+          // HomeSection(
+          //   products: controller.popularProducts,
+          //   icon: Icons.star,
+          //   iconBGColor: Colors.yellow,
+          //   title: "Populares",
+          //   subtitle: "A galera curtiu!",
+          // ),
         ],
       ),
     );

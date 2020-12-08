@@ -1,12 +1,14 @@
-import 'package:delivery_app/app/data/models/product.dart';
-import 'package:delivery_app/app/modules/home/widgets/product_card.dart';
+
+import 'package:delivery_app/app/data/models/store.dart';
+import 'package:delivery_app/app/modules/home/widgets/store_card.dart';
 import 'package:delivery_app/app/modules/home/widgets/topic_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 
-class ProductHomeSection extends StatelessWidget {
-  final RxList<ProductModel> products;
+
+//TODO: Provavelmente vai bugar tudo
+class StoreHomeSection extends StatelessWidget {
+  final RxList<StoreModel> stores;
   final Function onTap;
   final IconData icon;
   final Color iconBGColor;
@@ -14,9 +16,9 @@ class ProductHomeSection extends StatelessWidget {
   final String subtitle;
   final bool showList;
 
-  const ProductHomeSection({
+  const StoreHomeSection({
     Key key,
-    this.products,
+    this.stores,
     this.icon = Icons.star,
     this.onTap,
     this.iconBGColor = Colors.blue,
@@ -51,10 +53,10 @@ class ProductHomeSection extends StatelessWidget {
         showList
             ? Obx(
                 () => Column(
-                  children: products
+                  children: stores
                       .map(
-                        (ProductModel product) => ProductCard(
-                          product: product,
+                        (StoreModel store) => StoreCard(
+                          store: store,
                         ),
                       )
                       .toList(),
