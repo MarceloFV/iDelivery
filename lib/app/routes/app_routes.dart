@@ -6,7 +6,8 @@ abstract class Routes {
   static const LOGIN = '/login';
   static const REGISTER = '/register';
   static const PRODUCT = '/product';
-  static const HOME = '/home';
+  static const HOME = '/';
   static const CART = '/cart';
   static const ADRESS = '/adress';
+  static const STORE = '/store';
 }

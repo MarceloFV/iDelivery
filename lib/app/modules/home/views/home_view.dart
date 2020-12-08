@@ -25,7 +25,7 @@ class HomeView extends GetView<HomeController> {
                 Icons.shopping_cart,
               ),
               color: Colors.black,
-              onPressed: controller.gotoCartPage,
+              onPressed: controller.onCartPressed,
             ),
           ),
           //TODO: If need to exit the app

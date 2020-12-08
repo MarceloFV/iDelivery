@@ -16,7 +16,7 @@ class ProductCard extends StatelessWidget {
     return Card(
       elevation: 0.4,
       child: ListTile(
-        onTap: () => controller.gotoProductPage(product),
+        onTap: () => controller.onProductPressed(product),
         leading: ClipRRect(
           borderRadius: BorderRadius.circular(8.0),
           child: Image.network(

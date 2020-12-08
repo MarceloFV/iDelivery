@@ -1,3 +1,5 @@
+import 'package:delivery_app/app/modules/store/views/store_view.dart';
+import 'package:delivery_app/app/modules/store/bindings/store_binding.dart';
 import 'package:delivery_app/app/modules/address/bindings/address_binding.dart';
 import 'package:delivery_app/app/modules/address/views/address_view.dart';
 import 'package:delivery_app/app/modules/cart/views/cart_view.dart';
@@ -53,6 +55,11 @@ class AppPages {
       name: Routes.ADRESS, 
       page:()=> AddressView(), 
       binding: AddressBinding(),
+    ),
+    GetPage(
+      name: Routes.STORE, 
+      page:()=> StoreView(), 
+      binding: StoreBinding(),
     ),
   ];
 }
