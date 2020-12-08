@@ -1,4 +1,5 @@
 import 'package:delivery_app/app/data/models/product.dart';
+import 'package:delivery_app/app/data/models/store.dart';
 import 'package:delivery_app/app/data/models/user.dart';
 import 'package:delivery_app/app/data/providers/product_provider.dart';
 import 'package:meta/meta.dart';
@@ -21,4 +22,7 @@ class ProductRepository {
 
   Future<List<ProductModel>> getProductByCategory(CategoryType category) =>
       provider.getProductsByCategory(category); // change to CategoryType
+
+  Future<List<ProductModel>> getProductsFromStore(StoreModel store) =>
+      provider.getProductsFromStore(store);
 }

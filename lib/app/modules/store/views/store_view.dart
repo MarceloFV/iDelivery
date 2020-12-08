@@ -1,3 +1,4 @@
+import 'package:delivery_app/app/data/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:delivery_app/app/modules/store/controllers/store_controller.dart';
@@ -25,7 +26,6 @@ class StoreView extends GetView<StoreController> {
                 color: Colors.red,
                 child: controller.store.imgUrl != null
                     ? Image.network(
-                        //TODO: Efeito caroulsel sera implementado aqui
                         controller.store.imgUrl,
                         height: 310.0,
                         fit: BoxFit.cover,
@@ -37,9 +37,84 @@ class StoreView extends GetView<StoreController> {
                       ),
               ),
             ),
-            Text(controller.store.title),
+            SizedBox(
+              height: 18,
+            ),
+            Text(
+              controller.store.title,
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              controller.store.title,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            SizedBox(
+              height: 24,
+            ),
+            //TODO: Category filter
+            Obx(() => Column(
+                  children: controller.menu
+                      .map<ProductCard>(
+                        (product) => ProductCard(
+                          product: product,
+                          onCardPressed: controller.onProductCardPressed,
+                          onFavoritePressed: controller.onFavoritePressed,
+                        ),
+                      )
+                      .toList(),
+                ))
           ],
         ),
+      ),
+    );
+  }
+}
+
+class ProductCard extends StatelessWidget {
+  final ProductModel product;
+  final Function onCardPressed;
+  final Function onFavoritePressed;
+
+  ProductCard({Key key, this.product, this.onCardPressed, this.onFavoritePressed}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 0.4,
+      child: ListTile(
+        onTap: () => onCardPressed(product),
+        leading: ClipRRect(
+          borderRadius: BorderRadius.circular(8.0),
+          child: Container(
+            color: Colors.red,
+            child: product.imgUrl != null
+                ? Image.network(
+                    product.imgUrl,
+                    height: 60,
+                    width: 60,
+                    fit: BoxFit.cover,
+                  )
+                : Image.asset(
+                    'assets/images/not-found.jpg',
+                    height: 60,
+                    width: 60,
+                    fit: BoxFit.cover,
+                  ),
+          ),
+        ),
+        title: Text(
+          product.title,
+          // style: GoogleFonts.catamaran(fontSize: 18),
+        ),
+        subtitle: Text(product.value.toString()),
+        trailing:
+            IconButton(icon: Icon(Icons.favorite_outline), onPressed: onFavoritePressed),
       ),
     );
   }

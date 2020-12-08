@@ -13,7 +13,6 @@ class StoreCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(store);
     return Card(
       elevation: 0.4,
       child: ListTile(

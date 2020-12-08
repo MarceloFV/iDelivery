@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delivery_app/app/data/models/product.dart';
+import 'package:delivery_app/app/data/models/store.dart';
 import 'package:delivery_app/app/data/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
@@ -51,6 +52,17 @@ class ProductProvider {
         () => simpleProductList
             .where((element) => element.category == category)
             .toList());
+  }
+
+  Future<List<ProductModel>> getProductsFromStore(StoreModel store) async {
+    var query = await store.reference.collection(collectionPath).get();
+    List<ProductModel> products = [];
+    query.docs.forEach(
+      (snap) => products.add(
+        ProductModel.fromDocumentSnapshot(snap),
+      ),
+    );
+    return products;
   }
 }
 

@@ -22,10 +22,10 @@ class ProductView extends GetView<ProductController> {
     return AppBar(
       elevation: 0,
       backgroundColor: Colors.transparent,
-      title: Text(
-        controller.product.storeName.toUpperCase(),
-        style: TextStyle(color: Colors.black, fontSize: 16),
-      ),
+      // title: Text(
+      //   // controller.product.storeName.toUpperCase(),
+      //   // style: TextStyle(color: Colors.black, fontSize: 16),
+      // ),
       leading: IconButton(
         onPressed: () => controller.onBackPressed(),
         icon: Icon(Icons.arrow_back_ios),
@@ -33,20 +33,20 @@ class ProductView extends GetView<ProductController> {
         iconSize: 12,
       ),
       actions: [
-        Obx(
-          () => IconButton(
-            icon: controller.isFavorite.value
-                ? Icon(
-                    Icons.favorite,
-                    color: Colors.red,
-                  )
-                : Icon(
-                    Icons.favorite_outline,
-                    color: Colors.black,
-                  ),
-            onPressed: () => controller.onLikePressed(),
-          ),
-        ),
+        // Obx(
+        //   () => IconButton(
+        //     icon: controller.isFavorite.value
+        //         ? Icon(
+        //             Icons.favorite,
+        //             color: Colors.red,
+        //           )
+        //         : Icon(
+        //             Icons.favorite_outline,
+        //             color: Colors.black,
+        //           ),
+        //     onPressed: () => controller.onLikePressed(),
+        //   ),
+        // ),
         // TODO: Sistema de favoritos
         // IconButton(
         //   icon: Icon(
