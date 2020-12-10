@@ -71,13 +71,13 @@ class CartController extends GetxController {
     _finalValue.value = total + shipValue;
   }
 
-  // void addProductToCart(ProductModel product, String message, int amount) {
-  //   if (_productList.contains(product)) {
-  //     _addExistingProduct(product, amount);
-  //   } else {
-  //     _addNewProduct(product, message, amount);
-  //   }
-  // }
+  void addProductToCart(ProductModel product, String message, int amount) {
+    if (_productList.contains(product)) {
+      _addExistingProduct(product, amount);
+    } else {
+      _addNewProduct(product, message, amount);
+    }
+  }
 
   _addExistingProduct(ProductModel product, int amount) {
     int index;
@@ -92,17 +92,17 @@ class CartController extends GetxController {
     orderList[index].value += product.value * amount;
   }
 
-  // _addNewProduct(ProductModel product, String message, int amount) {
-  //   OrderModel order = OrderModel(
-  //     product: product,
-  //     amount: amount,
-  //     message: message,
-  //     value: (product.value * amount),
-  //   );
-  //   orderList.add(order);
-  //   _updateShipValue(product);
-  //   _productList.add(product);
-  // }
+  _addNewProduct(ProductModel product, String message, int amount) {
+    OrderModel order = OrderModel(
+      product: product,
+      amount: amount,
+      message: message,
+      value: (product.value * amount),
+    );
+    orderList.add(order);
+    // _updateShipValue(product);
+    _productList.add(product);
+  }
 
   void onAmountRemovePressed(OrderModel _order) {
     if (!(_order.amount > 1)) return;

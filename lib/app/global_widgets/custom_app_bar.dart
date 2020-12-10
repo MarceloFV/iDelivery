@@ -28,5 +28,4 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  // TODO: implement preferredSize
 }

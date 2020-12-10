@@ -57,7 +57,7 @@ class StoreView extends GetView<StoreController> {
             SizedBox(
               height: 24,
             ),
-            //TODO: Category filter
+            
             Obx(() => Column(
                   children: controller.menu
                       .map<ProductCard>(

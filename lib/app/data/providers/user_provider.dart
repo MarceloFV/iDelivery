@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delivery_app/app/data/models/user.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:meta/meta.dart';
 
@@ -57,15 +56,14 @@ class UserProvider {
   //   }
   // }
 
-  Future<UserModel> editUser(UserModel user) async {
-    try {
-      user.reference.update(user.toMap());
-      //TODO: Testar
-      return user;
-    } catch (_) {
-      return null;
-    }
-  }
+  // Future<UserModel> editUser(UserModel user) async {
+  //   try {
+  //     user.reference.update(user.toMap());
+  //     return user;
+  //   } catch (_) {
+  //     return null;
+  //   }
+  // }
 
 //TODO: Mark to exclusion
 //   login(String email, String password) async {

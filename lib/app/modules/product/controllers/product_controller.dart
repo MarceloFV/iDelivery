@@ -51,6 +51,8 @@ class ProductController extends GetxController {
             ),
           ),
           permanent: true);
+
+          //TODO: A partir daqui ta tudo quebrado >>>>
     cartController.addProductToCart(
         product, messageTextController.text, amount);
     isAdded.value = true;

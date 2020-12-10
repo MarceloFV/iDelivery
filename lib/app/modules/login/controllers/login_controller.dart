@@ -1,4 +1,3 @@
-import 'package:delivery_app/app/data/models/user.dart';
 import 'package:delivery_app/app/data/repository/auth_repository.dart';
 import 'package:delivery_app/app/data/repository/user_repository.dart';
 import 'package:delivery_app/app/routes/app_pages.dart';

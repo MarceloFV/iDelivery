@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delivery_app/app/data/models/product.dart';
 import 'package:delivery_app/app/data/models/store.dart';
-import 'package:delivery_app/app/data/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 

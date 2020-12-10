@@ -1,5 +1,4 @@
 import 'package:delivery_app/app/modules/home/controllers/home_controller.dart';
-import 'package:delivery_app/app/modules/home/widgets/category_section.dart';
 import 'package:delivery_app/app/modules/home/widgets/home_section.dart';
 import 'package:delivery_app/app/modules/home/widgets/store_home_section.dart';
 import 'package:flutter/material.dart';
@@ -28,17 +27,16 @@ class HomeView extends GetView<HomeController> {
               onPressed: controller.onCartPressed,
             ),
           ),
-          //TODO: If need to exit the app
-          // Card(
-          //   elevation: 3,
-          //   child: IconButton(
-          //     icon: Icon(
-          //       Icons.exit_to_app,
-          //     ),
-          //     color: Colors.black,
-          //     onPressed: controller.logout,
-          //   ),
-          // ),
+          Card(
+            elevation: 3,
+            child: IconButton(
+              icon: Icon(
+                Icons.exit_to_app,
+              ),
+              color: Colors.black,
+              onPressed: controller.logout,
+            ),
+          ),
         ],
         backgroundColor: Colors.transparent,
       ),
