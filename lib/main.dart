@@ -5,40 +5,33 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'app/routes/app_pages.dart';
 
-void main() async {
+void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
 
-  bool useEmulator = true;
+  // const useFirebaseEmulator = Sring.fromEnvironment('emu', defaultValue: 'false') == 'true'? true : false ;
+  // const isVirtualDevice = String.fromEnvironment('virtualDevice', defaultValue: 'false') == 'true'? true : false;
 
+  const useFirebaseEmulator = true;
+  const isVirtualDevice = false;
+  String host = isVirtualDevice ? '10.0.0.2' : '192.168.1.101:5003';
 
-  if (kDebugMode && useEmulator) {
+  // if (isVirtualDevice)
+  if (kDebugMode && useFirebaseEmulator)
     FirebaseFirestore.instance.settings = Settings(
-      host: '192.168.1.106:5003', //TODO: Testar localhost
+      host: host,
       sslEnabled: false,
       persistenceEnabled: false,
     );
-    runApp(
-      GetMaterialApp(
-        defaultTransition: Transition.rightToLeft,
-        title: "Application",
-        debugShowCheckedModeBanner: false,
-        initialRoute: AppPages.DEBUG,
-        getPages: AppPages.routes,
-        enableLog: false,
-      ),
-    );
-  } else {
-    runApp(
-      GetMaterialApp(
-        defaultTransition: Transition.rightToLeft,
-        title: "Application",
-        debugShowCheckedModeBanner: false,
-        initialRoute: AppPages.INITIAL,
-        getPages: AppPages.routes,
-        enableLog: false,
-      ),
-    );
-  }
+  runApp(
+    GetMaterialApp(
+      defaultTransition: Transition.rightToLeft,
+      title: "Uai Food",
+      debugShowCheckedModeBanner: false,
+      initialRoute: AppPages.INITIAL,
+      getPages: AppPages.routes,
+      enableLog: false,
+    ),
+  );
 }

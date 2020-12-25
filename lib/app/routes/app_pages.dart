@@ -1,5 +1,3 @@
-import 'package:delivery_app/app/modules/debug/views/debug_view.dart';
-import 'package:delivery_app/app/modules/debug/bindings/debug_binding.dart';
 import 'package:delivery_app/app/modules/store/views/store_view.dart';
 import 'package:delivery_app/app/modules/store/bindings/store_binding.dart';
 import 'package:delivery_app/app/modules/address/bindings/address_binding.dart';
@@ -21,8 +19,6 @@ part 'app_routes.dart';
 
 class AppPages {
   static const INITIAL = Routes.SPLASH;
-  static const DEBUG = Routes.DEBUG;
-
 
   static final routes = [
     GetPage(
@@ -64,11 +60,6 @@ class AppPages {
       name: Routes.STORE, 
       page:()=> StoreView(), 
       binding: StoreBinding(),
-    ),
-    GetPage(
-      name: Routes.DEBUG, 
-      page:()=> DebugView(), 
-      binding: DebugBinding(),
     ),
   ];
 }
