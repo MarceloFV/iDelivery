@@ -8,6 +8,6 @@ abstract class Routes {
   static const PRODUCT = '/product';
   static const HOME = '/';
   static const CART = '/cart';
-  static const ADRESS = '/adress';
+  static const ADDRESS = '/adress';
   static const STORE = '/store';
 }

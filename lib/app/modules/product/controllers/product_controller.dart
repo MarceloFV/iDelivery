@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delivery_app/app/data/models/product.dart';
+import 'package:delivery_app/app/data/models/store.dart';
 import 'package:delivery_app/app/data/models/user.dart';
 import 'package:delivery_app/app/data/providers/request_provider.dart';
 import 'package:delivery_app/app/data/repository/request_repository.dart';
@@ -20,12 +21,13 @@ class ProductController extends GetxController {
   final isAdded = false.obs;
   final isFavorite = false.obs; // TODO: get if product is favorite
   UserModel user;
+  StoreModel store;
 
   @override
   void onInit() {
     product = Get.arguments['product'];
     user = Get.arguments['user'];
-    // isFavorite.value = product.isFavorite;
+    store = Get.arguments['store'];
     super.onInit();
   }
 
@@ -44,7 +46,7 @@ class ProductController extends GetxController {
     else
       cartController = Get.put(
           CartController(
-            repository: RequestRepository(
+            requestRepository: RequestRepository(
               provider: RequestProvider(
                 firestore: FirebaseFirestore.instance,
               ),
@@ -52,9 +54,13 @@ class ProductController extends GetxController {
           ),
           permanent: true);
 
-          //TODO: A partir daqui ta tudo quebrado >>>>
+    //TODO: A partir daqui ta tudo quebrado >>>>
     cartController.addProductToCart(
-        product, messageTextController.text, amount);
+      product,
+      messageTextController.text,
+      amount,
+      store,
+    );
     isAdded.value = true;
   }
 

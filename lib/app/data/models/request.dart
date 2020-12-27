@@ -1,44 +1,22 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-
+import 'package:delivery_app/app/data/models/address.dart';
 import 'package:delivery_app/app/data/models/order.dart';
+import 'package:delivery_app/app/data/models/product.dart';
 
 class RequestModel {
   List<OrderModel> orders;
-  String storeId;
-  String userId;
-  // Address userAdress;
-  // String userName; //TODO: Implement adress
+  RequestUserModel user;
 
-  RequestModel({this.orders, this.storeId, this.userId});
-
-  @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
-
-    return o is RequestModel &&
-        listEquals(o.orders, orders) &&
-        o.storeId == storeId &&
-        o.userId == userId;
-    // o.userAdress == userAdress &&
-    // o.userName == userName;
-  }
-
-  @override
-  int get hashCode {
-    return orders.hashCode ^ storeId.hashCode ^ userId.hashCode;
-    // userAdress.hashCode ^
-    // userName.hashCode;
-  }
+  RequestModel({
+    this.orders,
+    this.user,
+  });
 
   Map<String, dynamic> toMap() {
     return {
       'orders': orders?.map((x) => x?.toMap())?.toList(),
-      'storeId': storeId,
-      'userId': userId,
-      // 'userAdress': userAdress?.toMap(),
-      // 'userName': userName,
+      'user': user?.toMap(),
     };
   }
 
@@ -48,10 +26,7 @@ class RequestModel {
     return RequestModel(
       orders: List<OrderModel>.from(
           map['orders']?.map((x) => OrderModel.fromMap(x))),
-      storeId: map['storeId'],
-      userId: map['userId'],
-      // userAdress: Address.fromMap(map['userAdress']),
-      // userName: map['userName'],
+      user: RequestUserModel.fromMap(map['user']),
     );
   }
 
@@ -59,4 +34,54 @@ class RequestModel {
 
   factory RequestModel.fromJson(String source) =>
       RequestModel.fromMap(json.decode(source));
+}
+
+class RequestUserModel {
+  final String name;
+  final String phone;
+  final AddressModel address;
+
+  RequestUserModel({
+    this.name,
+    this.phone,
+    this.address,
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'phone': phone,
+      'address': address?.toMap(),
+    };
+  }
+
+  factory RequestUserModel.fromMap(Map<String, dynamic> map) {
+    if (map == null) return null;
+
+    return RequestUserModel(
+      name: map['name'],
+      phone: map['phone'],
+      address: AddressModel.fromMap(map['address']),
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory RequestUserModel.fromJson(String source) =>
+      RequestUserModel.fromMap(json.decode(source));
+}
+
+class RequestOrderModel {
+  ProductModel product;
+  int amount;
+  String message;
+  double value;
+  
+  RequestOrderModel({
+    this.product,
+    this.amount,
+    this.message,
+    this.value,
+  });
+  
 }

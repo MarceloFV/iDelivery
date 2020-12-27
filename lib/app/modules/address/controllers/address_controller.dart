@@ -1,16 +1,11 @@
-import 'package:delivery_app/app/data/models/user.dart';
+import 'package:delivery_app/app/data/models/address.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddressController extends GetxController {
-  //TODO: Implement AdressController
 
-  Address currentAddress;
-  Address newAdress;
-//   bairro
-// numero
-// cep
-// rua
+  AddressModel currentAddress;
+  AddressModel newAddress;
 
   TextEditingController bairroController = TextEditingController();
   TextEditingController numeroController = TextEditingController();
@@ -24,7 +19,7 @@ class AddressController extends GetxController {
 
   @override
   void onInit() {
-    currentAddress = Get.arguments['adress'];
+    currentAddress = Get.arguments['address'];
 
     super.onInit();
   }
@@ -36,7 +31,7 @@ class AddressController extends GetxController {
   }
 
   onConfirmPressed() {
-    Address adress = Address(
+    AddressModel adress = AddressModel(
       bairro: bairroController.text,
       numero: numeroController.text,
       rua: ruaController.text,
@@ -46,5 +41,5 @@ class AddressController extends GetxController {
   }
 }
 
-Address mockedAdress = Address(
+AddressModel mockedAdress = AddressModel(
     bairro: 'Centro', numero: '1', cep: '39890-000', rua: 'Praça paris');

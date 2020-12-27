@@ -11,6 +11,6 @@ class CartBinding extends Bindings {
     if (Get.isRegistered<CartController>())
       Get.find<CartController>();
     else
-      Get.put(CartController(repository: RequestRepository(provider: RequestProvider(firestore: FirebaseFirestore.instance))), permanent: true);
+      Get.put(CartController(requestRepository: RequestRepository(provider: RequestProvider(firestore: FirebaseFirestore.instance))), permanent: true);
   }
 }

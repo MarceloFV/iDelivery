@@ -15,15 +15,14 @@ void main(List<String> args) async {
 
   const useFirebaseEmulator = true;
   const isVirtualDevice = false;
-  String host = isVirtualDevice ? '10.0.0.2' : '192.168.1.101:5003';
+  String host = isVirtualDevice ? '10.0.0.2:9090' : '192.168.1.101:9090';
 
-  // if (isVirtualDevice)
   if (kDebugMode && useFirebaseEmulator)
-    FirebaseFirestore.instance.settings = Settings(
-      host: host,
-      sslEnabled: false,
-      persistenceEnabled: false,
-    );
+  FirebaseFirestore.instance.settings = Settings(
+    host: host,
+    sslEnabled: false,
+    persistenceEnabled: false,
+  );
   runApp(
     GetMaterialApp(
       defaultTransition: Transition.rightToLeft,

@@ -1,14 +1,19 @@
+import 'package:delivery_app/app/data/models/address.dart';
 import 'package:delivery_app/app/data/models/order.dart';
 import 'package:delivery_app/app/data/models/product.dart';
+import 'package:delivery_app/app/data/models/store.dart';
 import 'package:delivery_app/app/data/models/user.dart';
 import 'package:delivery_app/app/data/repository/request_repository.dart';
 import 'package:delivery_app/app/routes/app_pages.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:get/get.dart';
 
 class CartController extends GetxController {
-  final RequestRepository repository;
-  CartController({this.repository});
+  final RequestRepository requestRepository;
+  CartController({
+    this.requestRepository,
+  });
 
   final _itemAmount = 0.obs;
 
@@ -22,23 +27,26 @@ class CartController extends GetxController {
   final _finalValue = 0.0.obs;
   final _shipValue = 0.0.obs;
 
+  final _requestSent = false.obs;
+  bool get requestSent => _requestSent.value;
+
   double get finalValue => _finalValue.value;
   double get shipValue => _shipValue.value;
 
   Worker worker;
 
   final _user = UserModel().obs;
+  final _address = AddressModel().obs;
 
-  final _adress = Address().obs;
 
-  String get userAdress => (_adress.value != null)
-      ? "${_adress.value?.rua}, nº ${_adress.value?.numero}, ${_adress.value?.bairro}, ${_adress.value?.cep}"
+  String get userAddress => (_address.value != null)
+      ? "${_address.value?.rua}, nº ${_address.value?.numero}, ${_address.value?.bairro}, ${_address.value?.cep}"
       : 'Adicionar endereço';
 
   @override
   void onInit() {
-    _fetchUser();
-    _adress.value = _user.value.address;
+    _user.value = Get.arguments['user'];
+    _address.value = _user.value.address;
     worker = ever(_orderList, onOrderListChanged);
     super.onInit();
   }
@@ -54,15 +62,11 @@ class CartController extends GetxController {
   //   _shipValue.value += product.storeShipPrice;
   // }
 
-  void onAdressPressed() async {
+  void onAddressPressed() async {
     var val =
-        await Get.toNamed(Routes.ADRESS, arguments: {'adress': _adress.value});
+        await Get.toNamed(Routes.ADDRESS, arguments: {'address': _address.value});
 
-    if (val != null) _adress.value = val;
-  }
-
-  _fetchUser() {
-    _user.value = Get.arguments['user'];
+    if (val != null) _address.value = val;
   }
 
   onOrderListChanged(nOrderList) {
@@ -71,11 +75,11 @@ class CartController extends GetxController {
     _finalValue.value = total + shipValue;
   }
 
-  void addProductToCart(ProductModel product, String message, int amount) {
+  void addProductToCart(ProductModel product, String message, int amount, StoreModel store) {
     if (_productList.contains(product)) {
       _addExistingProduct(product, amount);
     } else {
-      _addNewProduct(product, message, amount);
+      _addNewProduct(product, message, amount, store);
     }
   }
 
@@ -92,12 +96,13 @@ class CartController extends GetxController {
     orderList[index].value += product.value * amount;
   }
 
-  _addNewProduct(ProductModel product, String message, int amount) {
+  _addNewProduct(ProductModel product, String message, int amount, StoreModel store) {
     OrderModel order = OrderModel(
       product: product,
       amount: amount,
       message: message,
       value: (product.value * amount),
+      store: store
     );
     orderList.add(order);
     // _updateShipValue(product);
@@ -139,4 +144,36 @@ class CartController extends GetxController {
   //   repository.add(orderList, null);
   //   print('Order confirmada');
   // }
+
+  onConfirmOrderPressed() async {
+    if (orderList.isEmpty)
+      return Get.snackbar(
+        'Nenhum produto',
+        'Por favor adicionar produtos',
+        backgroundColor: Colors.red,
+        snackPosition: SnackPosition.BOTTOM,
+        dismissDirection: SnackDismissDirection.HORIZONTAL,
+      );
+    // _requestSent.toggle();
+    //TODO: Implement to send request
+    await requestRepository.send(orderList, _user.value);
+
+    Get.snackbar(
+      'Pedido enviado',
+      'Acesse a pagina de pedidos para acompanhar',
+      snackPosition: SnackPosition.BOTTOM,
+      dismissDirection: SnackDismissDirection.HORIZONTAL,
+    );
+  }
+
+  onRequestPagePressed() {
+    //TODO: Navigate to RequestPage
+    Get.snackbar(
+      'Aguarde',
+      'Acesse a pagina de pedidos para acompanhar',
+      snackPosition: SnackPosition.BOTTOM,
+      dismissDirection: SnackDismissDirection.HORIZONTAL,
+    );
+    // _requestSent.toggle();
+  }
 }

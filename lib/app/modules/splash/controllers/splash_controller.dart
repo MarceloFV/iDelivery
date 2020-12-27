@@ -27,7 +27,7 @@ class SplashController extends GetxController {
   getUser(bool val) async {
     if (!val) return Get.offAllNamed(Routes.LOGIN);
 
-    String uid = authRepository.getUID();
+    String uid = authRepository.getUID(); // TODO: Essa funçao ta bugando, recebendo email deletado
     var user = await userRepository.getCurrentUser(uid);
 
 //TODO: Implement case where the user is null cause they tryed to login using store email

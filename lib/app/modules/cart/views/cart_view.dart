@@ -23,10 +23,12 @@ class CartView extends GetView<CartController> {
   _body() => ListView(
         padding: EdgeInsets.symmetric(horizontal: 24),
         children: [
-          Obx(() => AdressSection(
-                adress: controller.userAdress,
-                onAdressPressed: controller.onAdressPressed,
-              )),
+          Obx(
+            () => AdressSection(
+              adress: controller.userAddress,
+              onAdressPressed: controller.onAddressPressed,
+            ),
+          ),
           SizedBox(
             height: 24,
           ),
@@ -55,12 +57,14 @@ class CartView extends GetView<CartController> {
                   SizedBox(
                     height: 25,
                   ),
-                  CustomBlueButton(
-                    text: 'Confirmar pedido',
-                    function: (){},
-                    // function: controller.onConfirmOrderPressed,
-                    //TODO: Implement confirmOrder
-                  ),
+                  Obx(() => CustomBlueButton(
+                        text: controller.requestSent
+                            ? 'Acompanhar pedido'
+                            : 'Confirmar pedido',
+                        function: controller.requestSent
+                            ? controller.onRequestPagePressed
+                            : controller.onConfirmOrderPressed,
+                      )),
                 ],
               )
             ],

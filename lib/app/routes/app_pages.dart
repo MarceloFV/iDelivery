@@ -52,7 +52,7 @@ class AppPages {
       binding: CartBinding(),
     ),
     GetPage(
-      name: Routes.ADRESS, 
+      name: Routes.ADDRESS, 
       page:()=> AddressView(), 
       binding: AddressBinding(),
     ),

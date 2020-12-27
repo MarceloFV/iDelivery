@@ -21,12 +21,19 @@ class OrderItem extends StatelessWidget {
           child: ExpansionTile(
             leading: ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: Image.network(
-                order.product.imgUrl,
-                height: 60,
-                width: 60,
-                fit: BoxFit.cover,
-              ),
+              child: (order.product.imgUrl != null)
+                  ? Image.network(
+                      order.product.imgUrl,
+                      height: 60,
+                      width: 60,
+                      fit: BoxFit.cover,
+                    )
+                  : Image.asset(
+                      'assets/images/not-found.jpg',
+                      height: 60,
+                      width: 60,
+                      fit: BoxFit.cover,
+                    ),
             ),
             title: Text(
               order.product.title,

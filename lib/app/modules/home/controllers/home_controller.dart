@@ -36,8 +36,6 @@ class HomeController extends GetxController {
     user = Get.arguments['user'];
     _categories = categoryList;
     _fetchStores();
-    // _fetchFavoritesProducts();
-    // _fetchPopularProducts();
     super.onInit();
   }
 
@@ -45,14 +43,6 @@ class HomeController extends GetxController {
     stores.assignAll(await storeRepository.getStores());
   }
 
-  // _fetchFavoritesProducts() async {
-  //   favoriteProducts
-  //       .assignAll(await productRepository.getFavoriteProduct(user));
-  // }
-
-  // _fetchPopularProducts() async {
-  //   popularProducts.assignAll(await productRepository.getPopularProducts());
-  // }
 
   onProductPressed(ProductModel product) {
     Get.toNamed(Routes.PRODUCT, arguments: {'product': product, 'user': user});
@@ -75,7 +65,6 @@ class HomeController extends GetxController {
   }
 
   onStorePressed(StoreModel store) {
-    Get.toNamed(Routes.STORE, arguments: {'store': store, 'user':user});
-    print(store.title);
+    Get.toNamed(Routes.STORE, arguments: {'store': store, 'user': user});
   }
 }
