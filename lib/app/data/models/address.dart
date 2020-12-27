@@ -33,4 +33,9 @@ class AddressModel {
 
   factory AddressModel.fromJson(String source) =>
       AddressModel.fromMap(json.decode(source));
+
+  @override
+  String toString() {
+    return 'AddressModel(bairro: $bairro, rua: $rua, numero: $numero, cep: $cep)';
+  }
 }

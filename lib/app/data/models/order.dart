@@ -61,10 +61,6 @@ class OrderModel {
     );
   }
 
-  @override
-  String toString() {
-    return 'OrderModel(product: $product, amount: $amount, message: $message, value: $value, store: $store)';
-  }
 
   @override
   bool operator ==(Object o) {
@@ -85,5 +81,10 @@ class OrderModel {
       message.hashCode ^
       value.hashCode ^
       store.hashCode;
+  }
+
+  @override
+  String toString() {
+    return 'OrderModel(product: $product, amount: $amount, message: $message, value: $value, store: $store)';
   }
 }

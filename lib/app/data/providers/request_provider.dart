@@ -22,13 +22,31 @@ class RequestProvider {
   RequestStatus _requestStatus;
   RequestStatus get requestStatus => _requestStatus;
 
+  mockedSend(List<OrderModel> orderList, UserModel user) async {}
+
   Future<void> send(List<OrderModel> orderList, UserModel user) async {
-    var map = _sortOrders(orderList);
-    print(map);
-    RequestModel request = RequestModel(
-      orders: orderList,
-      // user: user,
-    );
+    List<RequestModel> requestList = List();
+    RequestUserModel requestUser = RequestUserModel(
+        address: user.address, name: user.name, phone: user.phoneNumber);
+    var map = sortOrders(orderList);
+    map.keys.forEach((store) {
+      var request = RequestModel(
+        orders: map[store],
+        user: requestUser,
+        store: store,
+      );
+      requestList.add(request);
+    });
+
+
+    requestList.forEach((request) {
+      request.store.reference.collection(collectionPath).add(request.toMap());
+    });
+
+    // RequestModel request = RequestModel(
+    //   orders: orderList,
+    //   // user: user,
+    // );
 
     // orderList.first.store.reference
     //     .collection(collectionPath)
@@ -44,7 +62,8 @@ class RequestProvider {
   //     return _sendMultipleRequests(requestList);
   // }
 
-  _sortOrders(List<OrderModel> orderList) {
+  Map<StoreModel, List<RequestOrderModel>> sortOrders(
+      List<OrderModel> orderList) {
 /*
  RequestOrderModel({
     this.product,
@@ -65,39 +84,17 @@ class RequestProvider {
 */
 
     Map<StoreModel, List<RequestOrderModel>> mapa = Map();
-
-    orderList.forEach((model) {
-      var request = RequestOrderModel(
-        amount: model.amount,
-        product: model.product,
-        message: model.message,
-        value: model.value,
-      );
-      if (!mapa.containsKey(mapa[model.store])) {
-        mapa[model.store] = [];
-        print(mapa);
+    orderList.forEach((order) {
+      if (!mapa.containsKey(order.store)) {
+        mapa[order.store] = List();
       }
-      mapa[model.store].add(request);
+      mapa[order.store].add(RequestOrderModel(
+        amount: order.amount,
+        message: order.message,
+        product: order.product,
+        value: order.value,
+      ));
     });
-
-    // List idList = [];
-
-    // orderList.forEach((order) {
-    //   var id = order.store;
-    //   if (!idList.contains(id)) idList.add(id);
-    // });
-
-    // idList.forEach((id) {
-    //   RequestOrderModel request = RequestOrderModel();
-    //   orderList.forEach((order) {
-    //     var orderId = order.store;
-    //     if (id == orderId) {
-    //       request.orders.add(order);
-    //     }
-    //   });
-
-    //   list.add(request);
-    // });
     return mapa;
   }
 

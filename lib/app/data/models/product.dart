@@ -61,6 +61,13 @@ class ProductModel {
       reference: reference ?? this.reference,
     );
   }
+
+ 
+
+  @override
+  String toString() {
+    return 'ProductModel(imgUrl: $imgUrl, title: $title, description: $description, value: $value, reference: $reference)';
+  }
 }
 
 enum CategoryType {

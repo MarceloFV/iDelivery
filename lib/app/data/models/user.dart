@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:delivery_app/app/data/models/address.dart';
 
 class UserModel {
@@ -54,7 +55,7 @@ Map<String, dynamic> toMap() {
 
   @override
   String toString() {
-    return "'name': $name, 'adress': $address 'email': $email, 'phoneNumber' : $phoneNumber";
+    return 'UserModel(name: $name, email: $email, phoneNumber: $phoneNumber, cpf: $cpf, address: $address, reference: $reference)';
   }
 
   UserModel copyWith({

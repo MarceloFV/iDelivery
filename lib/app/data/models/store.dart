@@ -62,29 +62,25 @@ class StoreModel {
     );
   }
 
+
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-
+  
     return o is StoreModel &&
-        o.imgUrl == imgUrl &&
-        o.title == title &&
-        o.phoneNumber == phoneNumber &&
-        o.shipPrice == shipPrice &&
-        o.reference == reference;
+      o.imgUrl == imgUrl &&
+      o.title == title &&
+      o.phoneNumber == phoneNumber &&
+      o.shipPrice == shipPrice &&
+      o.reference.id == reference.id;
   }
 
   @override
   int get hashCode {
     return imgUrl.hashCode ^
-        title.hashCode ^
-        phoneNumber.hashCode ^
-        shipPrice.hashCode ^
-        reference.hashCode;
-  }
-
-  @override
-  String toString() {
-    return 'StoreModel(imgUrl: $imgUrl, title: $title, phoneNumber: $phoneNumber, shipPrice: $shipPrice, reference: $reference)';
+      title.hashCode ^
+      phoneNumber.hashCode ^
+      shipPrice.hashCode ^
+      reference.id.hashCode;
   }
 }
