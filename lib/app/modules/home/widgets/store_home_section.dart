@@ -1,10 +1,8 @@
-
 import 'package:delivery_app/app/data/models/store.dart';
 import 'package:delivery_app/app/modules/home/widgets/store_card.dart';
 import 'package:delivery_app/app/modules/home/widgets/topic_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 
 //TODO: Provavelmente vai bugar tudo
 class StoreHomeSection extends StatelessWidget {
@@ -53,14 +51,13 @@ class StoreHomeSection extends StatelessWidget {
         showList
             ? Obx(
                 () => Column(
-                  children: stores
-                      .map(
-                        (StoreModel store) => StoreCard(
-                          store: store,
-                        ),
-                      )
-                      .toList(),
-                ),
+                    children: stores
+                        .map(
+                          (StoreModel store) => StoreCard(
+                            store: store,
+                          ),
+                        )
+                        .toList()),
               )
             : Container(),
       ],

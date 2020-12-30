@@ -9,7 +9,7 @@ class StoreProvider {
   StoreProvider({@required this.firestore});
 
   Future<List<StoreModel>> getStores() async {
-    var query = await firestore.collection(collectionPath).get();
+    var query = await firestore.collection(collectionPath).orderBy('isOpen', descending: true).get();
     List<StoreModel> storeList = [];
     query.docs.forEach((snap) {
       storeList.add(StoreModel.fromDocumentSnapshot(snap));
