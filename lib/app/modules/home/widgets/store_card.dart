@@ -58,15 +58,18 @@ class StoreCard extends StatelessWidget {
             ),
           ],
         ),
-        trailing: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Text(
-              controller.maskedProductValue(store.shipPrice),
-              style: GoogleFonts.markaziText(fontSize: 16),
-              // style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
-            )
-          ],
+        trailing: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Icon(Icons.local_shipping),
+              Text(
+                controller.maskedProductValue(store.shipPrice),
+                style: GoogleFonts.markaziText(fontSize: 16),
+                // style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+              )
+            ],
+          ),
         ),
       ),
     );
